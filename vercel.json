@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; img-src 'self' data: https://thailand.generation.org/wp-content/uploads/2024/08/Final-Junior-Software-Developer.png;"
+        }
+      ]
+    }
+  ]
+}
