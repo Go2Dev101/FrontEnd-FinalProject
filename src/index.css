@@ -1,1 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: "Manrope", sans-serif;
+  }
+}
+
+@theme {
+  --color-background-50: #fff8ed;
+  --color-background-100: #ffeac7;
+  --color-background-200: #fedbaa;
+  --color-background-300: #fdc174;
+  --color-primary-700: #607714;
+  --color-primary-800: #4d5e16;
+  --color-primary-900: #394614;
+  --color-primary-950: #212c07;
+  --color-secondary-200: #dcdcdc;
+  --color-secondary-300: #bdbdbd;
+  --color-secondary-400: #989898;
+  --color-secondary-500: #7c7c7c;
+  --color-tertiary-300: #ffd346;
+  --color-tertiary-400: #ffbe1b;
+  --color-tertiary-500: #f59500;
+  --color-tertiary-600: #e27300;
+  --color-tertiary-700: #bb4e02;
+}
