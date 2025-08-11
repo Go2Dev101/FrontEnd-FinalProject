@@ -1,4 +1,6 @@
-export const Menu = () => {
+import React from 'react'
+
+function Menu() {
   return (
     <div className="bg-background-100 px-8 py-6">
       <ul className="flex gap-4">
@@ -10,3 +12,5 @@ export const Menu = () => {
     </div>
   );
 };
+
+export default Menu;
