@@ -1,5 +1,15 @@
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer>
+      <div></div>
+      <div>
+        <ul>
+          <li></li>
+        </ul>
+        <p>Home</p>
+        <p>Menu</p>
+        <p>Contact Us</p>
+      </div>
+    </footer>
   )
 }

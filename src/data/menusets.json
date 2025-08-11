@@ -1,0 +1,93 @@
+[
+  {
+    "_id": "ms_1001",
+    "title": "Salmon Clean Set",
+    "slug": "salmon-clean-set",
+    "description": "เซ็ตแซลมอนย่างซอสเทอริยากิ + ข้าวกล้อง + สลัดผักสด",
+    "priceTHB": 259,
+    "images": [
+      "/images/menus/salmon-1.jpg"
+    ],
+    "tags": [
+      "high-protein",
+      "omega-3",
+      "low-sugar"
+    ],
+    "kcal": 520,
+    "availability": {
+      "inStock": true
+    }
+  },
+  {
+    "_id": "ms_1002",
+    "title": "Chicken Breast Fit",
+    "slug": "chicken-breast-fit",
+    "description": "อกไก่ซูวี + ควินัว + บร็อคโคลี่นึ่ง",
+    "priceTHB": 199,
+    "images": [
+      "/images/menus/chicken-1.jpg"
+    ],
+    "tags": [
+      "high-protein",
+      "gluten-free"
+    ],
+    "kcal": 450,
+    "availability": {
+      "inStock": true
+    }
+  },
+  {
+    "_id": "ms_1003",
+    "title": "Tofu Vegan Bowl",
+    "slug": "tofu-vegan-bowl",
+    "description": "เต้าหู้ย่างซอสโชยุ + ข้าวกล้อง + ผักรวม",
+    "priceTHB": 179,
+    "images": [
+      "/images/menus/tofu-1.jpg"
+    ],
+    "tags": [
+      "vegan",
+      "plant-based"
+    ],
+    "kcal": 430,
+    "availability": {
+      "inStock": true
+    }
+  },
+  {
+    "_id": "ms_1004",
+    "title": "Beef Teriyaki Lean",
+    "slug": "beef-teriyaki-lean",
+    "description": "สเต๊กเนื้อซอสเทอริยากิ + มันหวานอบ + หน่อไม้ฝรั่ง",
+    "priceTHB": 289,
+    "images": [
+      "/images/menus/beef-1.jpg"
+    ],
+    "tags": [
+      "high-iron",
+      "chef-special"
+    ],
+    "kcal": 610,
+    "availability": {
+      "inStock": true
+    }
+  },
+  {
+    "_id": "ms_1005",
+    "title": "Shrimp Garlic Brown Rice",
+    "slug": "shrimp-garlic-brown-rice",
+    "description": "กุ้งกระเทียม + ข้าวกล้อง + สลัดคีนัว",
+    "priceTHB": 239,
+    "images": [
+      "/images/menus/shrimp-1.jpg"
+    ],
+    "tags": [
+      "low-fat",
+      "quick"
+    ],
+    "kcal": 500,
+    "availability": {
+      "inStock": true
+    }
+  }
+]
