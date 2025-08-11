@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Menu } from "./views/menu/Menu";
+import { MenuSet } from "./views/menu/MenuSet";
 
 
 const router = createBrowserRouter([
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Menu />,
+        element: <MenuSet />,
       },
     ],
   },
