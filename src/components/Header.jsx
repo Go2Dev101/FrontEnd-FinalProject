@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 
 export const Header = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className=" bg-gray-100 flex flex-col">
       <nav className="bg-primary-900 text-white px-16 py-4 shadow-md flex justify-between items-center">
         <div>
           <Link to='/' className=" hover:text-amber-400 flex  items-center gap-1 w-4 h-4 sm:w-6 sm:h-6 lg:w-6 lg:h-6">
@@ -21,9 +21,6 @@ export const Header = () => {
           <li><Link to='/profile' className=" hover:text-amber-400"><User className="w-4 h-4 sm:w-6 sm:h-6 lg:w-6 lg:h-6" /></Link></li>
         </ul>
       </nav>
-      <div>
-        <Outlet />
-      </div>
     </div>
   )
 }

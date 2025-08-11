@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { MenuSet } from "./views/menu/MenuSet";
+import { OrderSuccess } from "./views/checkout/OrderSuccess";
 import { Home } from "./views/Home";
 
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path:"profile",
-        element:<MenuSet />,
+        element:<OrderSuccess />,
       },
     ],
   },
