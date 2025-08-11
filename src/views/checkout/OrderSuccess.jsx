@@ -52,9 +52,11 @@ export const OrderSuccess = () => {
                         </div>
                     </div>
                 </section>
-                <div className="mt-3 mb-5 flex flex-col justify-center">
-                <Button variant="green">Click me</Button>
-                </div>
+                <section className="px-10 py-2 bg-white max-w-160  h-fit w-full text-center ">
+                    <div>
+                        <Button className='w-full' variant="green">Back To Menu</Button>
+                    </div>
+                </section>
             </div>
         </Boxer>
     )
