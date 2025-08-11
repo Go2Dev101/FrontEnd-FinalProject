@@ -1,5 +1,3 @@
-import { Tag } from "./Tag"
-
 export const MenuCard = () => {
   return (
     <div className="rounded-lg max-w-80 bg-white">
@@ -9,8 +7,6 @@ export const MenuCard = () => {
             <p className="text-sm text-secondary-400"></p>
         </div>
         <div>
-            <Tag/>
-            <Tag icon={true} text={"220kcal"}/>
         </div>
     </div>
   )
