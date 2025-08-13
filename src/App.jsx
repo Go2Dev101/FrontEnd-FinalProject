@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { MenuSet } from "./views/menu/MenuSet";
 import { OrderSuccess } from "./views/checkout/OrderSuccess";
+import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 // import { Home } from "./views/Home";
 
 
@@ -17,8 +18,12 @@ const router = createBrowserRouter([
         element:<MenuSet />,
       },
       {
-        path:"menu",
+        path:"menuset",
         element:<MenuSet />,
+      },
+      {
+        path:"menuset/:menuSetId",
+        element:<MenuSetDetail />,
       },
       {
         path:"contact",
