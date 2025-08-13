@@ -2,6 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dumbbell, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { navigation } from "../utils/navigation";
 
 export const MenuCard = ({
   name,
@@ -11,12 +13,14 @@ export const MenuCard = ({
   kcal,
   price,
   mode = "menu",
+  menuId,
 }) => {
   const modes = {
     menu: { seeMore: true, addMenu: false, orderNow: true },
     landing: { seeMore: false, addMenu: false, orderNow: true },
     addMenu: { seeMore: true, addMenu: true, orderNow: false },
   };
+  const navigate = useNavigate();
   return (
     <Card className="max-w-80 w-full gap-0">
       <img src={img.url} alt={img.alt} className="rounded-t-xl h-60 w-full" />
@@ -39,6 +43,7 @@ export const MenuCard = ({
         <div className="flex gap-3 justify-center w-full">
           {modes[mode].seeMore && (
             <Button
+              onClick={() => navigation(navigate,"menuset",menuId)}
               size="md"
               className="bg-secondary-500 hover:bg-secondary-500/80 text-white w-1/2"
             >

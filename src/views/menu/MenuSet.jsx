@@ -15,6 +15,7 @@ export const MenuSet = () => {
             category={menu.category}
             price={menu.priceTHB}
             kcal={menu.kcal}
+            menuId={menu.id}
           />
         ))}
       </Menu>
