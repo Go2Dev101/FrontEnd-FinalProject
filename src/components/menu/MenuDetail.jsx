@@ -8,6 +8,8 @@ import { Minus, Plus, MoveLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigation } from "../../utils/navigation";
 import { InfoBar } from "./InfoBar";
+import { Ingredeints } from "./Ingredeints";
+import { Information } from "./Information";
 
 export const MenuDetail = ({ path,mode = "menu" }) => {
   const modes = {
@@ -40,6 +42,8 @@ export const MenuDetail = ({ path,mode = "menu" }) => {
           <p className="text-xl sm:text-2xl font-medium">200 THB</p>
           <Tag category={"22"} kcal={"2222"} />
           <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
+          {menuInfoBar === "info" && <Information/>}
+          {menuInfoBar === "ingre" && <Ingredeints/>}
           {menuInfoBar === "nutri" && <Nutrition />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
             <div className="p-2 rounded-full border bg-white flex w-31 justify-between items-center">
