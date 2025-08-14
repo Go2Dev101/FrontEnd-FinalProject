@@ -18,7 +18,7 @@ export const menuSet = [
     kcal: 520,
   },
   {
-    id: "ms_1001",
+    id: "ms_1002",
     title: "Salmon Clean Set",
     slug: "salmon-clean-set",
     description: "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minut how to make the best smoothie bowl recipe with 5 ingredients in 5 minut",
@@ -36,7 +36,7 @@ export const menuSet = [
     kcal: 520,
   },
   {
-    id: "ms_1002",
+    id: "ms_1003",
     title: "Salmon Clean Set",
     slug: "salmon-clean-set",
     description: "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minut how to make the best smoothie bowl recipe with 5 ingredients in 5 minut",
