@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Boxer } from "../Boxer";
-import { InfoBar } from "./infoBar";
+
 import { Nutrition } from "./Nutrition";
 import { Tag } from "./Tag";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, MoveLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigation } from "../../utils/navigation";
+import { InfoBar } from "./InfoBar";
 
 export const MenuDetail = ({ path,mode = "menu" }) => {
   const modes = {
@@ -38,7 +39,7 @@ export const MenuDetail = ({ path,mode = "menu" }) => {
           <h1 className="text-2xl sm:text-4xl font-bold">Spaghetti bologness</h1>
           <p className="text-xl sm:text-2xl font-medium">200 THB</p>
           <Tag category={"22"} kcal={"2222"} />
-          <InfoBar onClick={handleMenuInfoBar} infoBar={menuInfoBar} />
+          <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
           {menuInfoBar === "nutri" && <Nutrition />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
             <div className="p-2 rounded-full border bg-white flex w-31 justify-between items-center">
