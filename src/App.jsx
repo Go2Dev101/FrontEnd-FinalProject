@@ -46,6 +46,10 @@ const router = createBrowserRouter([
         path: "ordersummary",
         element: <OrderSummary />,
       },
+      {
+        path:"delivery",
+        element:<DeliveryAddressForm />,
+      },
     ],
   },
 ]);
