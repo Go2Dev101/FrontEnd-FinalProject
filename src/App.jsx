@@ -4,7 +4,7 @@ import { MenuSet } from "./views/menu/MenuSet";
 import { OrderSuccess } from "./views/checkout/OrderSuccess";
 import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 import { OrderSummary } from "./views/checkout/OrderSummary";
-import DeliveryAddressForm from "./views/checkout/DeliveryAddressForm";
+import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
