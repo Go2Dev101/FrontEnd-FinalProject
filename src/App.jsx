@@ -3,6 +3,7 @@ import { Layout } from "./components/Layout";
 import { MenuSet } from "./views/menu/MenuSet";
 import { OrderSuccess } from "./views/checkout/OrderSuccess";
 import { MenuSetDetail } from "./views/menu/MenuSetDetail";
+import { OrderSummary } from "./views/checkout/OrderSummary";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -11,9 +12,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: (
       <div className="min-h-screen bg-background-100 flex justify-center items-center">
-        <h1 className="text-7xl font-bold">
-          404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧
-        </h1>
+        <h1 className="text-7xl font-bold">404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧</h1>
       </div>
     ),
     children: [
@@ -41,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <OrderSuccess />,
+      },
+      {
+        path: "ordersummary",
+        element: <OrderSummary />,
       },
     ],
   },
