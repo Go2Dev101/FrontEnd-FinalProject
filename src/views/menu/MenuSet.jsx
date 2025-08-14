@@ -1,11 +1,11 @@
-import { Menu } from "../../components/Menu";
+import { Menu } from "../../components/menu/Menu";
 import { MenuCard } from "../../components/MenuCard";
 import { menuSet } from "../../data/menuSet";
 
 export const MenuSet = () => {
   return (
-    <div>
-      <Menu className="flex flex-col sm:flex-row gap-6 flex-wrap">
+    <>
+      <Menu className="flex flex-row gap-6 flex-wrap justify-center md:justify-start">
         {menuSet.map((menu) => (
           <MenuCard
             key={menu.id}
@@ -19,6 +19,6 @@ export const MenuSet = () => {
           />
         ))}
       </Menu>
-    </div>
+    </>
   );
 };

@@ -1,5 +1,11 @@
+import { Boxer } from "../../components/Boxer";
+import { MenuDetail } from "../../components/menu/MenuDetail";
+import { Tag } from "../../components/menu/Tag";
+
 export const MenuSetDetail = () => {
   return (
-    <div>MenuSetDetail</div>
-  )
-}
+    <>
+      <MenuDetail path={"menuset"} />
+    </>
+  );
+};

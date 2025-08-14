@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dumbbell, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { navigation } from "../utils/navigation";
+import { navigationDetail } from "../utils/navigation";
 
 export const MenuCard = ({
   name,
@@ -43,7 +43,7 @@ export const MenuCard = ({
         <div className="flex gap-3 justify-center w-full">
           {modes[mode].seeMore && (
             <Button
-              onClick={() => navigation(navigate,"menuset",menuId)}
+              onClick={() => navigationDetail(navigate,"menuset",menuId)}
               size="md"
               className="bg-secondary-500 hover:bg-secondary-500/80 text-white w-1/2"
             >
