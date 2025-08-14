@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Boxer } from "../Boxer";
-
 import { Nutrition } from "./Nutrition";
 import { Tag } from "./Tag";
 import { Button } from "@/components/ui/button";
@@ -10,55 +9,77 @@ import { navigation } from "../../utils/navigation";
 import { InfoBar } from "./InfoBar";
 import { Ingredeints } from "./Ingredeints";
 import { Information } from "./Information";
+import { MessageContext } from "../../context/MessageContext";
 
-export const MenuDetail = ({ path,mode = "menu" }) => {
+export const MenuDetail = ({ path, mode = "menu", menu }) => {
   const modes = {
     menu: { addCart: true, addMenu: false, orderNow: true },
     addMenu: { addCart: false, addMenu: true, orderNow: false },
   };
   const [menuInfoBar, setMenuInfoBar] = useState("info");
+  const [menuQuantity, setMenuQuantity] = useState(1);
+
+  const navigate = useNavigate();
+
+  const { orders, handleCart, handleOrders } = useContext(MessageContext);
+  const menuOrder = orders.find((menu) => menu.menuId === menu.id);
+  console.log("", menuOrder);
 
   const handleMenuInfoBar = (e) => {
     setMenuInfoBar(e);
   };
-  const navigate = useNavigate();
 
   return (
     <Boxer className="flex justify-center">
       <div className="flex flex-col lg:flex-row max-w-300 w-full">
-        <section onClick={() => navigation(navigate,path)} className="lg:absolute left-16 flex gap-1 mb-5 cursor-pointer">
+        <section
+          onClick={() => navigation(navigate, path)}
+          className="lg:absolute left-16 flex gap-1 mb-5 cursor-pointer"
+        >
           <MoveLeft />
           <p>Back to menu</p>
         </section>
         <section className="flex-1/2 flex items-center justify-center mb-6 lg:mb-0">
-          <img
-            src="/img/manuSet3Day.png"
-            alt=""
-            className="max-w-133 w-full aspect-square rounded-4xl"
-          />
+          {menu.images.url !== "" ? (
+            <img
+              src={menu.images.url}
+              alt={menu.images.alt}
+              className="max-w-133 w-full aspect-square rounded-4xl"
+            />
+          ) : (
+            <span className="max-w-133 w-full aspect-square rounded-4xl bg-secondary-200 animate-pulse"></span>
+          )}
         </section>
         <section className="sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
-          <h1 className="text-2xl sm:text-4xl font-bold">Spaghetti bologness</h1>
-          <p className="text-xl sm:text-2xl font-medium">200 THB</p>
-          <Tag category={"22"} kcal={"2222"} />
+          <h1 className="text-2xl sm:text-4xl font-bold">{menu.title}</h1>
+          <p className="text-xl sm:text-2xl font-medium">{menu.priceTHB} THB</p>
+          <Tag category={menu.category} kcal={menu.kcal} />
           <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
-          {menuInfoBar === "info" && <Information/>}
-          {menuInfoBar === "ingre" && <Ingredeints/>}
+          {menuInfoBar === "info" && <Information />}
+          {menuInfoBar === "ingre" && <Ingredeints />}
           {menuInfoBar === "nutri" && <Nutrition />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
             <div className="p-2 rounded-full border bg-white flex w-31 justify-between items-center">
-              <span className="w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center">
+              <span
+                onClick={() => setMenuQuantity(menuQuantity - 1)}
+                className={`w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center cursor-pointer ${
+                  menuQuantity === 1 && "pointer-events-none opacity-80"
+                }`}
+              >
                 <Minus />
               </span>
-              <p>5</p>
-              <span className="w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center">
+              <p>{menuQuantity}</p>
+              <span
+                onClick={() => setMenuQuantity(menuQuantity + 1)}
+                className="w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center cursor-pointer"
+              >
                 <Plus />
               </span>
             </div>
             <div className="flex gap-3 justify-center">
               {modes[mode].addCart && (
                 <Button
-                  //   onClick={() => navigation(navigate,"menuset",menuId)}
+                  onClick={() => handleCart(menu.id,menuQuantity)}
                   size="md"
                   className="w-32"
                 >
@@ -67,6 +88,7 @@ export const MenuDetail = ({ path,mode = "menu" }) => {
               )}
               {modes[mode].orderNow && (
                 <Button
+                onClick={() => {handleOrders(navigate,menu.id,menuQuantity)}}
                   size="md"
                   className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
                 >

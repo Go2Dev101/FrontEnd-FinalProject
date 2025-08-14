@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Dumbbell, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigationDetail } from "../utils/navigation";
+import { useContext } from "react";
+import { MessageContext } from "../context/MessageContext";
 
 export const MenuCard = ({
   name,
@@ -21,6 +23,8 @@ export const MenuCard = ({
     addMenu: { seeMore: true, addMenu: true, orderNow: false },
   };
   const navigate = useNavigate();
+  
+    const { handleOrders } = useContext(MessageContext);
   return (
     <Card className="max-w-80 w-full gap-0">
       <img src={img.url} alt={img.alt} className="rounded-t-xl h-60 w-full" />
@@ -52,6 +56,7 @@ export const MenuCard = ({
           )}
           {modes[mode].orderNow && (
             <Button
+            onClick={() => {handleOrders(navigate,menuId,1,"")}}
               size="md"
               className="bg-tertiary-500 hover:bg-tertiary-500/90 w-1/2"
             >
