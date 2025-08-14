@@ -39,7 +39,7 @@ export const Header = () => {
     </Link>
   </li>
   <li>
-    <Link to="/menu" className="hover:text-amber-400 block">
+    <Link to="/menuset" className="hover:text-amber-400 block">
       Menu
     </Link>
   </li>
