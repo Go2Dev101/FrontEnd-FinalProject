@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { MenuSet } from "./views/menu/MenuSet";
 import { OrderSuccess } from "./views/checkout/OrderSuccess";
+import DeliveryAddressForm from "./views/checkout/DeliveryAddressForm";
 // import { Home } from "./views/Home";
 
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path:"contact",
-        element:<MenuSet />,
+        element:<DeliveryAddressForm />,
       },
       {
         path:"cart",
