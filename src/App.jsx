@@ -5,37 +5,42 @@ import { OrderSuccess } from "./views/checkout/OrderSuccess";
 import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 // import { Home } from "./views/Home";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <div>404</div>,
+    errorElement: (
+      <div className="min-h-screen bg-background-100 flex justify-center items-center">
+        <h1 className="text-7xl font-bold">
+          404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧
+        </h1>
+      </div>
+    ),
     children: [
       {
         path: "/",
         // element: <Home />,
-        element:<MenuSet />,
+        element: <MenuSet />,
       },
       {
-        path:"menuset",
-        element:<MenuSet />,
+        path: "menuset",
+        element: <MenuSet />,
       },
       {
-        path:"menuset/:menuSetId",
-        element:<MenuSetDetail />,
+        path: "menuset/:menuSetId",
+        element: <MenuSetDetail />,
       },
       {
-        path:"contact",
-        element:<MenuSet />,
+        path: "contact",
+        element: <MenuSet />,
       },
       {
-        path:"cart",
-        element:<MenuSet />,
+        path: "cart",
+        element: <MenuSet />,
       },
       {
-        path:"profile",
-        element:<OrderSuccess />,
+        path: "profile",
+        element: <OrderSuccess />,
       },
     ],
   },
