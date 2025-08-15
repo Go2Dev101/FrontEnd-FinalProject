@@ -6,6 +6,8 @@ import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 import { OrderSummary } from "./views/checkout/OrderSummary";
 import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
 import { Login } from "./views/Authentication/Login";
+import { AdminDashboard } from "./views/admin/AdminDashboard";
+import { AdminNavbar } from "./views/admin/AdminNavbar";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -32,8 +34,8 @@ const router = createBrowserRouter([
         element: <MenuSetDetail />,
       },
       {
-        path:"contact",
-        element:<DeliveryAddressForm />,
+        path: "contact",
+        element: <DeliveryAddressForm />,
       },
       {
         path: "cart",
@@ -41,19 +43,25 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <OrderSuccess />,
+        // element: <OrderSuccess />,
+        element: (
+          <div className="flex">
+            <AdminNavbar />
+            <AdminDashboard />
+          </div>
+        ),
       },
       {
         path: "ordersummary",
         element: <OrderSummary />,
       },
       {
-        path:"delivery",
-        element:<DeliveryAddressForm />,
+        path: "delivery",
+        element: <DeliveryAddressForm />,
       },
       {
-        path:"login",
-        element:<Login />,
+        path: "login",
+        element: <Login />,
       },
     ],
   },
