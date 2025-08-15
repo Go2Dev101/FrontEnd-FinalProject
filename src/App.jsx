@@ -5,6 +5,7 @@ import { OrderSuccess } from "./views/checkout/OrderSuccess";
 import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 import { OrderSummary } from "./views/checkout/OrderSummary";
 import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
+import { Login } from "./views/Authentication/Login";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path:"delivery",
         element:<DeliveryAddressForm />,
+      },
+      {
+        path:"login",
+        element:<Login />,
       },
     ],
   },
