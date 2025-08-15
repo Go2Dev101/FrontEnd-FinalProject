@@ -4,8 +4,14 @@ import { SquarePen } from "lucide-react";
 import { ProgressBar } from "../../components/ProgressBar";
 import { CheckOutHeader } from "../../components/CheckOutHeader";
 import { Button } from "@/components/ui/button";
+import { OrderTotal } from "../../components/OrderTotal";
+import { useState } from "react";
 
-const DeliveryAddressForm = () => {
+export const DeliveryAddressForm = () => {
+  const [edit,setEdit] = useState(false);
+
+
+
   return (
     <>
       <Boxer>
@@ -26,59 +32,38 @@ const DeliveryAddressForm = () => {
                 </Button>
                 <Button
                   size={"sm"}
-                  className="max-w-75 w-full bg-white text-primary-700 hover:bg-secondary-200/50"
+                  className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
                 >
                   Pickup Point
                 </Button>
               </div>
               <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                <div className="flex justify-between gap-6 text-2xl font-bold">
+                <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
                   <p>Name</p>
                   <p>Tel :091-234-5678 </p>
                 </div>
-                <p className="text-xl">
+                <p className="text-xl text-primary-700">
                   51/233 M.5 T.Bangyai A.Bangyai Nonthaburi
                 </p>
 
-                <Link to="/edit" className=" hover:text-amber-400 ">
-                  <SquarePen className="ml-auto" />
-                </Link>
+                
+                  
+                
+                  <SquarePen 
+                  onClick ={() => setEdit(true)}
+                  className="ml-auto hover:text-primary-900 text-primary-700"/>
+                
               </div>
             </div>
           </div>
-          <div className="max-w-124 flex-1/2   bg-white flex flex-col mb-3 p-8 rounded-xl">
-            <h2 className="font-bold text-4xl text-primary-700">Order Total</h2>
-            <div className="gap-y-3  text-primary-800 text-2xl">
-              <div className="flex justify-between">
-                <p>14-days meal set</p>
-                <p>4200 THB</p>
-              </div>
-              <div className="flex justify-between">
-                <p>Delivery Free</p>
-                <p>200 THB</p>
-              </div>
-              <div className="flex justify-between  border-black border-b-2">
-                <p>Tax</p>
-                <p className="mb-10 ">100 THB</p>
-              </div>
-            </div>
-            <div className="flex justify-between font-bold text-3xl text-primary-700 py-2 mb-16">
-              <p>Total</p>
-              <p>4300 THB</p>
-            </div>
-
-            <button className="bg-primary-700 text-white rounded-3xl cursor-pointer px-4 shadow-gray-500 font-bold">
-              Proceed Payment
-            </button>
-            <button className="bg-white text-primary-700 rounded-3xl cursor-pointer px-4 mt-7 shadow-gray-500 font-bold">
-              Back
-            </button>
-            <div className="border-dotted text-4xl text-center">ADS area</div>
-          </div>
+          <OrderTotal />
         </section>
       </Boxer>
+      {edit && <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
+      <OrderTotal />
+      </div>}
     </>
   );
 };
 
-export default DeliveryAddressForm;
+
