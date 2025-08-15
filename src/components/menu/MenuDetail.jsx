@@ -3,13 +3,15 @@ import { Boxer } from "../Boxer";
 import { Nutrition } from "./Nutrition";
 import { Tag } from "./Tag";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, MoveLeft } from "lucide-react";
+import { Plus, MoveLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigation } from "../../utils/navigation";
 import { InfoBar } from "./InfoBar";
 import { Ingredeints } from "./Ingredeints";
 import { Information } from "./Information";
 import { MessageContext } from "../../context/MessageContext";
+import { QuantityInput } from "../QuantityInput";
+import { handleCounter } from "../../utils/handle";
 
 export const MenuDetail = ({ path, mode = "menu", menu }) => {
   const modes = {
@@ -21,9 +23,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
 
   const navigate = useNavigate();
 
-  const { orders, handleCart, handleOrders } = useContext(MessageContext);
-  const menuOrder = orders.find((menu) => menu.menuId === menu.id);
-  console.log("", menuOrder);
+  const { handleCart, handleOrders } = useContext(MessageContext);
 
   const handleMenuInfoBar = (e) => {
     setMenuInfoBar(e);
@@ -59,27 +59,20 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
           {menuInfoBar === "ingre" && <Ingredeints />}
           {menuInfoBar === "nutri" && <Nutrition />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
-            <div className="p-2 rounded-full border bg-white flex w-31 justify-between items-center">
-              <span
-                onClick={() => setMenuQuantity(menuQuantity - 1)}
-                className={`w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center cursor-pointer ${
-                  menuQuantity === 1 && "pointer-events-none opacity-80"
-                }`}
-              >
-                <Minus />
-              </span>
-              <p>{menuQuantity}</p>
-              <span
-                onClick={() => setMenuQuantity(menuQuantity + 1)}
-                className="w-8 h-8 rounded-full bg-secondary-200 flex justify-center items-center cursor-pointer"
-              >
-                <Plus />
-              </span>
-            </div>
+            <QuantityInput
+              onClickMinus={() =>
+                handleCounter(setMenuQuantity, menuQuantity, "minus")
+              }
+              onClickPlus={() =>
+                handleCounter(setMenuQuantity, menuQuantity, "plus")
+              }
+              quantity={menuQuantity}
+              mode="menu"
+            />
             <div className="flex gap-3 justify-center">
               {modes[mode].addCart && (
                 <Button
-                  onClick={() => handleCart(menu.id,menuQuantity)}
+                  onClick={() => handleCart(menu.id, menuQuantity)}
                   size="md"
                   className="w-32"
                 >
@@ -88,7 +81,9 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
               )}
               {modes[mode].orderNow && (
                 <Button
-                onClick={() => {handleOrders(navigate,menu.id,menuQuantity)}}
+                  onClick={() => {
+                    handleOrders(navigate, menu.id, menuQuantity);
+                  }}
                   size="md"
                   className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
                 >
