@@ -4,11 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* @layer base {
+@layer base {
   html {
     font-family: "Manrope", sans-serif;
   }
-} */
+}
 
 @theme {
   --color-background-50: #fff8ed;
