@@ -7,6 +7,6 @@ import { MessageProvider } from './context/MessageProvider.jsx'
 createRoot(document.getElementById('root')).render(
   <MessageProvider>
     <App />
-    <Toaster />
+    <Toaster position="top-right"/>
   </MessageProvider>,
 )

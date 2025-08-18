@@ -3,6 +3,7 @@ import { BoxerAuth } from "../../components/BoxerAuth";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
+// import { toast } from "sonner"
 // import axios from "axios";
 
 export const Login = () => {
@@ -15,6 +16,7 @@ export const Login = () => {
     e.preventDefault();
     // const respon = await axios.post(`http://localhost:3000/api/user/login`, login);
     // console.log(respon);
+    // toast(respon.data.message || respon.data);
   };
 
   return (
@@ -23,7 +25,7 @@ export const Login = () => {
         <h1 className="text-3xl font-bold text-center">Login</h1>
         <form
           onSubmit={handleLogin}
-          className="flex flex-col items-center w-full"
+          className="flex flex-col max-w-103 w-full gap-4 mx-auto"
         >
           <label className="w-full">
             <p className="font-medium">Email</p>
@@ -35,7 +37,6 @@ export const Login = () => {
               placeholder="example@example.com"
               required
             />
-            <input placeholder="" />
           </label>
           <label className="w-full">
             <p className="font-medium">Password</p>
@@ -49,8 +50,14 @@ export const Login = () => {
               required
             />
           </label>
-          <p></p>
-          <Button type="submit" size="md" className="w-fit px-8 mt-8">
+          <Button
+            type="submit"
+            size="md"
+            className={`w-fit px-8 mt-8 mx-auto ${
+              Object.values(login).some((value) => value.trim() === "") &&
+              "bg-primary-700/60 pointer-events-none"
+            }`}
+          >
             Login
           </Button>
         </form>
