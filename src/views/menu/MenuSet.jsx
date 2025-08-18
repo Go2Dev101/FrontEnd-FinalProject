@@ -14,7 +14,7 @@ export const MenuSet = () => {
             img={menu.images}
             category={menu.category}
             price={menu.priceTHB}
-            kcal={menu.kcal}
+            kcal={menu.nutritionFacts.kcal}
             menuId={menu.id}
           />
         ))}

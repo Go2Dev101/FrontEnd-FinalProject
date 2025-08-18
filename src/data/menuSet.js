@@ -10,12 +10,19 @@ export const menuSet = [
       alt:"manu Set 3 Day"
     },
     category:"Shrimp",
-    tags: [
-      "high-protein",
-      "omega-3",
-      "low-sugar"
-    ],
-    kcal: 520,
+    ingredients:"",
+    nutritionFacts:{
+      kcal:520,
+      gTotalFat:21,
+      gSaturatesFat:4,
+      gTransFat:0,
+      mgCholesterol:0,
+      mgSodium:120,
+      gTotalCarb:14,
+      gFiber:9,
+      gSugars:6,
+      gProtein:36
+    },
   },
   {
     id: "ms_1002",
@@ -28,12 +35,19 @@ export const menuSet = [
       alt:"manu Set 3 Day"
     },
     category:"Shrimp",
-    tags: [
-      "high-protein",
-      "omega-3",
-      "low-sugar"
-    ],
-    kcal: 520,
+    ingredients:"",
+    nutritionFacts:{
+      kcal:520,
+      gTotalFat:21,
+      gSaturatesFat:4,
+      gTransFat:0,
+      mgCholesterol:0,
+      mgSodium:120,
+      gTotalCarb:14,
+      gFiber:9,
+      gSugars:6,
+      gProtein:36
+    },
   },
   {
     id: "ms_1003",
@@ -46,11 +60,18 @@ export const menuSet = [
       alt:"manu Set 3 Day"
     },
     category:"Shrimp",
-    tags: [
-      "high-protein",
-      "omega-3",
-      "low-sugar"
-    ],
-    kcal: 520,
+    ingredients:"",
+    nutritionFacts:{
+      kcal:520,
+      gTotalFat:21,
+      gSaturatesFat:4,
+      gTransFat:0,
+      mgCholesterol:0,
+      mgSodium:120,
+      gTotalCarb:14,
+      gFiber:9,
+      gSugars:6,
+      gProtein:36
+    },
   },
 ]

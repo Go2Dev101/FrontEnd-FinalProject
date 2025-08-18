@@ -44,7 +44,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
             <img
               src={menu.images.url}
               alt={menu.images.alt}
-              className="max-w-133 w-full aspect-square rounded-4xl"
+              className="max-w-133 w-full aspect-square rounded-2xl"
             />
           ) : (
             <span className="max-w-133 w-full aspect-square rounded-4xl bg-secondary-200 animate-pulse"></span>
@@ -53,11 +53,11 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
         <section className="sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
           <h1 className="text-2xl sm:text-4xl font-bold">{menu.title}</h1>
           <p className="text-xl sm:text-2xl font-medium">{menu.priceTHB} THB</p>
-          <Tag category={menu.category} kcal={menu.kcal} />
+          <Tag category={menu.category} kcal={menu.nutritionFacts.kcal} />
           <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
           {menuInfoBar === "info" && <Information />}
           {menuInfoBar === "ingre" && <Ingredeints />}
-          {menuInfoBar === "nutri" && <Nutrition />}
+          {menuInfoBar === "nutri" && <Nutrition nutritionFacts={menu.nutritionFacts} />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
             <QuantityInput
               onClickMinus={() =>
