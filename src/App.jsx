@@ -6,6 +6,7 @@ import { MenuSetDetail } from "./views/menu/MenuSetDetail";
 import { OrderSummary } from "./views/checkout/OrderSummary";
 import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
 import { Login } from "./views/Authentication/Login";
+import { Signup } from "./views/Authentication/Signup";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path:"login",
         element:<Login />,
+      },
+      {
+        path:"signup",
+        element:<Signup />,
       },
     ],
   },
