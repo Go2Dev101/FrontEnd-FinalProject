@@ -3,20 +3,29 @@ import { BoxerAuth } from "../../components/BoxerAuth";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
-// import { toast } from "sonner"
-// import axios from "axios";
+import { toast } from "sonner"
+import axios from "axios";
+import cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    // const respon = await axios.post(`http://localhost:3000/api/user/login`, login);
-    // console.log(respon);
-    // toast(respon.data.message || respon.data);
+    const respon = await axios.post(`http://localhost:3000/api/user/login`, login);
+    console.log(respon);
+    toast(respon.data.message || respon.data);
+    if(respon.data.token){
+      cookies.set("token",respon.data.token,{ expires: 1 })
+      navigate("/")
+    }
+    
   };
 
   return (

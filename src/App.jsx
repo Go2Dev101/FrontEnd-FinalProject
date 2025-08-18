@@ -7,6 +7,7 @@ import { OrderSummary } from "./views/checkout/OrderSummary";
 import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
 import { Login } from "./views/Authentication/Login";
 import { Signup } from "./views/Authentication/Signup";
+import { ProtectedRoute } from "./router/ProtectedRoute";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -33,8 +34,8 @@ const router = createBrowserRouter([
         element: <MenuSetDetail />,
       },
       {
-        path:"contact",
-        element:<DeliveryAddressForm />,
+        path: "contact",
+        element: <DeliveryAddressForm />,
       },
       {
         path: "cart",
@@ -46,19 +47,23 @@ const router = createBrowserRouter([
       },
       {
         path: "ordersummary",
-        element: <OrderSummary />,
+        element: (
+          <ProtectedRoute>
+            <OrderSummary />
+          </ProtectedRoute>
+        ),
       },
       {
-        path:"delivery",
-        element:<DeliveryAddressForm />,
+        path: "delivery",
+        element: <DeliveryAddressForm />,
       },
       {
-        path:"login",
-        element:<Login />,
+        path: "login",
+        element: <Login />,
       },
       {
-        path:"signup",
-        element:<Signup />,
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },
