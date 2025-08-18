@@ -3,6 +3,7 @@ import { BoxerAuth } from "../../components/BoxerAuth";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
+// import axios from "axios";
 
 export const Login = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
@@ -10,10 +11,12 @@ export const Login = () => {
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    // const respon = await axios.post(`http://localhost:3000/api/user/login`, login);
+    // console.log(respon);
   };
-  console.log(login);
+
   return (
     <BoxerAuth>
       <Card className="py-18 px-6 text-primary-900 max-w-124 w-full bg-background-50">
@@ -42,10 +45,11 @@ export const Login = () => {
               name="password"
               value={login.password}
               placeholder="Enter your password"
-              minlength="8"
+              minLength="8"
               required
             />
           </label>
+          <p></p>
           <Button type="submit" size="md" className="w-fit px-8 mt-8">
             Login
           </Button>
