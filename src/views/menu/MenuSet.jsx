@@ -10,7 +10,7 @@ export const MenuSet = () => {
           <MenuCard
             key={menu.id}
             name={menu.title}
-            detail={menu.description}
+            detail={menu.information.description}
             img={menu.images}
             category={menu.category}
             price={menu.priceTHB}

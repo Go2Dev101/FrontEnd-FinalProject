@@ -44,7 +44,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
             <img
               src={menu.images.url}
               alt={menu.images.alt}
-              className="max-w-133 w-full aspect-square rounded-2xl"
+              className="max-w-133 w-full aspect-square object-cover rounded-2xl"
             />
           ) : (
             <span className="max-w-133 w-full aspect-square rounded-4xl bg-secondary-200 animate-pulse"></span>
@@ -55,7 +55,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
           <p className="text-xl sm:text-2xl font-medium">{menu.priceTHB} THB</p>
           <Tag category={menu.category} kcal={menu.nutritionFacts.kcal} />
           <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
-          {menuInfoBar === "info" && <Information />}
+          {menuInfoBar === "info" && <Information information={menu.information} />}
           {menuInfoBar === "ingre" && <Ingredeints />}
           {menuInfoBar === "nutri" && <Nutrition nutritionFacts={menu.nutritionFacts} />}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">

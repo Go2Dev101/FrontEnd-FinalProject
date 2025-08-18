@@ -27,7 +27,7 @@ export const MenuCard = ({
     const { handleOrders } = useContext(MessageContext);
   return (
     <Card className="max-w-80 w-full gap-0">
-      <img src={img.url} alt={img.alt} className="rounded-t-xl h-60 w-full" />
+      <img src={img.url} alt={img.alt} className="rounded-t-xl h-60 w-full object-cover" />
       <div className="flex flex-col gap-3 p-5 w-full">
         <div>
           <p className="text-xl font-medium text-primary-900 mb-1">{name}</p>
