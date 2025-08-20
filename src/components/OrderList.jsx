@@ -2,7 +2,8 @@ import React from "react";
 import { Card } from "./ui/card";
 import { OrderCounter } from "./OrderCounter";
 
-export const OrderList = () => {
+export const OrderList = ({data}) => {
+  console.log(data)
   return (
     <>
       <div className="flex flex-col w-full">
@@ -19,7 +20,7 @@ export const OrderList = () => {
               >
                 <p className="text-2xl">14 Days meal set</p>
                 <p>Delivery Date: 5-12 July</p>
-                <p className="text-2xl">4200.00 THB</p>
+                <p className="text-2xl">{data.priceTHB} THB</p>
               </div>
               <div id="Count">
                 <OrderCounter />
