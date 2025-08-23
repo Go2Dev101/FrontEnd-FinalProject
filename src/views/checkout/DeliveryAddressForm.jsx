@@ -8,9 +8,7 @@ import { OrderTotal } from "../../components/OrderTotal";
 import { useState } from "react";
 
 export const DeliveryAddressForm = () => {
-  const [edit,setEdit] = useState(false);
-
-
+  const [edit, setEdit] = useState(false);
 
   return (
     <>
@@ -46,12 +44,36 @@ export const DeliveryAddressForm = () => {
                   51/233 M.5 T.Bangyai A.Bangyai Nonthaburi
                 </p>
 
-                
-                  
-                
-                  <SquarePen 
-                  onClick ={() => setEdit(true)}
-                  className="ml-auto hover:text-primary-900 text-primary-700"/>
+                <SquarePen
+                  onClick={() => setEdit(true)}
+                  className="ml-auto hover:text-primary-900 text-primary-700"
+                />
+              </div>
+              {/* Pick up point */}
+              <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
+                <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
+                  <p>Select 1 Pickup Point</p>
+                  <div className="flex gap-3 flex-wrap sm:">
+                    <Button className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80">
+                      Chula Hospital
+                    </Button>
+                    <Button className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80">
+                      Udom Suksa School
+                    </Button>
+                    <Button className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80">
+                      The Tree Condo
+                    </Button>
+                    <Button className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80">
+                      MRT Samyan
+                    </Button>
+                    <Button
+                      onClick={() => setEdit(true)}
+                      className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
+                    >
+                      The One Building
+                    </Button>
+                  </div>
+                </div>
                 
               </div>
             </div>
@@ -59,11 +81,12 @@ export const DeliveryAddressForm = () => {
           <OrderTotal />
         </section>
       </Boxer>
-      {edit && <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
-      <OrderTotal />
-      </div>}
+      {/* pop-up address */}
+      {edit && (
+        <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
+          <OrderTotal />
+        </div>
+      )}
     </>
   );
 };
-
-
