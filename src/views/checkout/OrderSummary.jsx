@@ -9,6 +9,7 @@ import { OrderTotal } from "../../components/OrderTotal";
 
 export const OrderSummary = () => {
   const { orders } = useContext(MessageContext);
+
   return (
     <>
       <Boxer>
