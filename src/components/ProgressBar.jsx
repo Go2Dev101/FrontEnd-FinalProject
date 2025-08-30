@@ -22,7 +22,7 @@ export const ProgressBar = ({path}) => {
               <div className="w-11 h-11 rounded-full border-3 border-primary-900 bg-background-50 z-1 "></div>
               <p className="font-bold text-primary-800 text-center">Payment</p>
             </div>
-            <div className="w-3/4 h-1 mt-5 bg-primary-900 absolute left-9"></div>
+            <div className="w-3/4 h-1 mt-5 bg-primary-900 absolute left-10"></div>
           </div>
         </div>
       </div>
