@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { X } from 'lucide-react';
+import { X } from "lucide-react";
 
 const pickUpPoints = [
   "Chula Hospital",
@@ -27,8 +27,34 @@ const pickUpPoints = [
 ];
 export const DeliveryAddressForm = () => {
   const [edit, setEdit] = useState(true);
-  // const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [user, setUser] = useState({
+    streetAddress: "",
+    subDistrict: "",
+    district: "",
+    postalCode: "",
+    phoneNumber: "",
+  });
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(API, user);
+      await fetchUsers();
+      // Reset the form
+      setUser({
+        streetAddress: "",
+        subDistrict: "",
+        district: "",
+        postalCode: "",
+        phoneNumber: "",
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
   return (
     <>
       <Boxer>
@@ -59,14 +85,14 @@ export const DeliveryAddressForm = () => {
                   <p>Name</p>
                   <p>Tel :091-234-5678 </p>
                 </div>
-                <p className="text-xl text-primary-700">{deliveryAddress}</p>
+                <p className="text-xl text-primary-700">55</p>
 
                 <SquarePen
                   onClick={() => setEdit(true)}
                   className="ml-auto hover:text-primary-900 text-primary-700"
                 />
               </div>
-              {/* Pick up point */}
+              /* Pick up point */
               <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
                 <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
                   <p>Select 1 Pickup Point</p>
@@ -90,73 +116,84 @@ export const DeliveryAddressForm = () => {
       {/* pop-up address */}
       {edit && (
         <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
-          {/* <div className="max-w-124 w-full bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
-            <label>House Number</label>
-            <textarea
-              name=""
-              id=""
-              className="bg-red-300 text-green-200"
-            ></textarea>
-            <label>Subdistrict</label>
-            <textarea
-              name=""
-              id=""
-              className="bg-red-300 text-green-200"
-            ></textarea>
-            <label>Kwange</label>
-            <textarea
-              name=""
-              id=""
-              className="bg-red-300 text-green-200"
-            ></textarea>
-            <label>Zip code</label>
-            <textarea
-              name=""
-              id=""
-              className="bg-red-300 text-green-200"
-            ></textarea> */}
           <Card className="w-full max-w-sm p-3">
             <CardHeader>
-              <CardTitle className="text-2xl">
-                Edit Delivery Address
-                </CardTitle>
+              <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
               {/* <CardDescription>
                 Enter your email below to login to your account
               </CardDescription> */}
               <CardAction>
-                <X onClick={() =>  setEdit(false) }
-                  className="cursor-pointer"/>
+                <X onClick={() => setEdit(false)} className="cursor-pointer" />
               </CardAction>
             </CardHeader>
             <CardContent>
               <form>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
-                    <label htmlFor="email">Street address</label>
-                    <Input
-                      
-                      type="address"
-                      placeholder="House Number and street name"
-                      required
-                    />
+                    <label>
+                      <p>Street address</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.streetAddress}
+                        name="streetAddress"
+                        type="text"
+                        placeholder="House Number and street name"
+                        required
+                      />
+                    </label>
                   </div>
                   <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <label htmlFor="password">Sub-District</label>
-                    </div>
-                    <Input id="password" type="password" required />
+                    <label>
+                      <p>Sub-District</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.subDistrict}
+                        name="subDistrict"
+                        type="text"
+                        required
+                      />
+                    </label>
                   </div>
                   <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <label htmlFor="password">District</label>
-                    </div>
-                    <Input id="password" type="password" required />
+                    <label>
+                      <p>District</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.district}
+                        name="district"
+                        type="text"
+                        required
+                      />
+                    </label>
                   </div>
                   <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <label htmlFor="password">Postcode</label>
-                    </div>
-                    <Input id="password" type="numeric" required />
+                    <label>
+                      <p>Postal code</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.postalCode}
+                        name="postalCode"
+                        type="text"
+                        required
+                        maxLength={5}
+                        pattern="1\d{4}"
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-2">
+                    <label>
+                      <p>Phone Number</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.phoneNumber}
+                        name="phoneNumber"
+                        type="tel"
+                        required
+                        placeholder="0812345678"
+                        maxLength={10}
+                        pattern="0\d{9}"
+                      />
+                    </label>
                   </div>
                 </div>
               </form>
@@ -170,7 +207,6 @@ export const DeliveryAddressForm = () => {
               </Button>
             </CardFooter>
           </Card>
-          {/* </div> */}
         </div>
       )}
     </>
