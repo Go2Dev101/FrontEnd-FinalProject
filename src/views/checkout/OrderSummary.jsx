@@ -5,7 +5,7 @@ import { ProgressBar } from "../../components/cart/ProgressBar";
 import { OrderList } from "../../components/cart/OrderList";
 import { MessageContext } from "../../context/MessageContext";
 import { menuSet } from "../../data/menuSet";
-import { OrderTotal } from "../../components/OrderTotal";
+import { OrderTotal } from "../../components/cart/OrderTotal";
 
 export const OrderSummary = () => {
   const { orders, handleDelete } = useContext(MessageContext);
