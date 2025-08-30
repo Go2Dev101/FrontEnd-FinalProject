@@ -5,6 +5,8 @@ import { ProgressBar } from "../../components/ProgressBar";
 import { OrderList } from "../../components/OrderList";
 import { MessageContext } from "../../context/MessageContext";
 import { menuSet } from "../../data/menuSet";
+import { OrderTotal } from "../../components/OrderTotal";
+
 
 export const OrderSummary = () => {
   const { orders } = useContext(MessageContext);
