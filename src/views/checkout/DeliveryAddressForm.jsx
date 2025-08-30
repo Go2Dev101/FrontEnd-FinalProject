@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Boxer } from "../../components/Boxer";
 import { SquarePen } from "lucide-react";
-import { ProgressBar } from "../../components/cart/ProgressBar";
-import { CheckOutHeader } from "../../components/cart/CheckOutHeader";
+import { ProgressBar } from "../../components/ProgressBar";
+import { CheckOutHeader } from "../../components/CheckOutHeader";
 import { Button } from "@/components/ui/button";
-import { OrderTotal } from "../../components/cart/OrderTotal";
+import { OrderTotal } from "../../components/OrderTotal";
 import { useState } from "react";
 import {
   Card,
@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { X } from "lucide-react";
+import { X } from 'lucide-react';
 
 const pickUpPoints = [
   "Chula Hospital",
@@ -59,7 +59,7 @@ export const DeliveryAddressForm = () => {
                   <p>Name</p>
                   <p>Tel :091-234-5678 </p>
                 </div>
-                <p className="text-xl text-primary-700">deliveryAddress</p>
+                <p className="text-xl text-primary-700">{deliveryAddress}</p>
 
                 <SquarePen
                   onClick={() => setEdit(true)}
@@ -117,12 +117,15 @@ export const DeliveryAddressForm = () => {
             ></textarea> */}
           <Card className="w-full max-w-sm p-3">
             <CardHeader>
-              <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
+              <CardTitle className="text-2xl">
+                Edit Delivery Address
+                </CardTitle>
               {/* <CardDescription>
                 Enter your email below to login to your account
               </CardDescription> */}
               <CardAction>
-                <X onClick={() => setEdit(false)} className="cursor-pointer" />
+                <X onClick={() =>  setEdit(false) }
+                  className="cursor-pointer"/>
               </CardAction>
             </CardHeader>
             <CardContent>
@@ -131,6 +134,7 @@ export const DeliveryAddressForm = () => {
                   <div className="grid gap-2">
                     <label htmlFor="email">Street address</label>
                     <Input
+                      
                       type="address"
                       placeholder="House Number and street name"
                       required
