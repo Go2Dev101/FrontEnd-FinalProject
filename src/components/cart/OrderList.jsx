@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "./ui/card";
+import { Card } from "../ui/card";
 import { Trash2 } from "lucide-react";
 import { QuantityInput } from "./QuantityInput";
 import { useState } from "react";

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { CheckOutHeader } from "../../components/CheckOutHeader";
+import { CheckOutHeader } from "../../components/cart/CheckOutHeader";
 import { Boxer } from "../../components/Boxer";
-import { ProgressBar } from "../../components/ProgressBar";
-import { OrderList } from "../../components/OrderList";
+import { ProgressBar } from "../../components/cart/ProgressBar";
+import { OrderList } from "../../components/cart/OrderList";
 import { MessageContext } from "../../context/MessageContext";
 import { menuSet } from "../../data/menuSet";
 import { OrderTotal } from "../../components/OrderTotal";
