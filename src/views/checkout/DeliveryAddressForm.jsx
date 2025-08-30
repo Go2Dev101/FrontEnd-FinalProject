@@ -27,7 +27,7 @@ const pickUpPoints = [
 ];
 export const DeliveryAddressForm = () => {
   const [edit, setEdit] = useState(true);
-  const [deliveryAddress, setDeliveryAddress] = useState("");
+  // const [deliveryAddress, setDeliveryAddress] = useState("");
 
   return (
     <>
