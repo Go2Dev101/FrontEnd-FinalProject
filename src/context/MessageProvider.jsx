@@ -6,38 +6,75 @@ export const MessageProvider = ({ children }) => {
 
   // Read data from local storage
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      setOrders(JSON.parse(localStorage.getItem("cart")));
+    try {
+      const raw = localStorage.getItem("cart");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) setOrders(parsed);
+      }
+    } catch (err) {
+      console.error("Parse cart error:", err);
     }
   }, []);
 
   // Set data at local storage when orders have change
   useEffect(() => {
-    if (orders.length > 0) {
+    try {
       localStorage.setItem("cart", JSON.stringify(orders));
+    } catch (err) {
+      console.error("Write cart error:", err);
     }
   }, [orders]);
 
-  const handleCart = (menuId, quantity, deliveryDate) => {
-    const menu = orders.find((menu) => menu.menuId === menuId);
-    console.log(menu === true, menu === false, typeof menu);
-    if (typeof menu === "object") {
-      menu.quantity += quantity || 1;
-      setOrders([...orders]);
-    } else {
-      setOrders([
-        ...orders,
-        { menuId: menuId, quantity: quantity || 1, deliveryDate: deliveryDate },
-      ]);
-    }
+  // เพิ่ม/อัปเดตสินค้าในตะกร้า
+  // const handleCart = (menuId, quantity = 1, deliveryDate) => {
+  //   const menu = orders.find((menu) => menu.menuId === menuId);
+  //   console.log(menu === true, menu === false, typeof menu);
+  //   if (typeof menu === "object") {
+  //     menu.quantity += quantity || 1;
+  //     setOrders([...orders]);
+  //   } else {
+  //     setOrders([
+  //       ...orders,
+  //       { menuId: menuId, quantity: quantity || 1, deliveryDate: deliveryDate },
+  //     ]);
+  //   }
+  // };
+  const handleCart = (menuId, quantity = 1, deliveryDate) => {
+    setOrders((previousOrders) => {
+      const index = previousOrders.findIndex(
+        (item) => item.menuId === menuId && item.deliveryDate === deliveryDate
+      );
+      if (index !== -1) {
+        const next = [...previousOrders];
+        next[index] = {
+          ...next[index],
+          quantity: next[index].quantity + quantity,
+        };
+        return next;
+      }
+      return [...previousOrders, { menuId, deliveryDate, quantity }];
+    });
   };
 
+  // ใช้เวลาสั่งซื้อแล้วพาไปหน้า summary
   const handleOrders = (navigate, menuId, quantity, deliveryDate) => {
     handleCart(menuId, quantity, deliveryDate);
     navigate("/ordersummary");
   };
+
+  // ลบออกจากตะกร้า
+  const handleDelete = (menuId, deliveryDate) => {
+    setOrders((previousOrders) =>
+      previousOrders.filter(
+        (item) =>
+          !(item.menuId === menuId && item.deliveryDate === deliveryDate)
+      )
+    );
+  };
+
   return (
-    <MessageContext value={{ orders, handleOrders, handleCart }}>
+    <MessageContext value={{ orders, handleOrders, handleCart, handleDelete }}>
       {children}
     </MessageContext>
   );

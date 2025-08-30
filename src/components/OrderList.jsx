@@ -4,12 +4,13 @@ import { Trash2 } from "lucide-react";
 import { QuantityInput } from "./QuantityInput";
 import { useState } from "react";
 
-export const OrderList = ({ data }) => {
+export const OrderList = ({ data, orderId, onDelete }) => {
   const [qty, setQty] = useState(1);
+
   console.log(data);
   return (
     <>
-      <div className="">
+      <div>
         <Card className="w-full p-4">
           <div id="OrderItems" className="flex justify-around items-center">
             <div className="flex gap-10 items-center">
@@ -33,9 +34,14 @@ export const OrderList = ({ data }) => {
                   mode="menu"
                 />
               </div>
-              <div>
+              <button
+                onClick={() => onDelete(orderId)}
+                className="p-2 rounded-full hover:bg-red-100"
+                aria-label="remove item"
+                title="Remove from cart"
+              >
                 <Trash2 />
-              </div>
+              </button>
             </div>
           </div>
         </Card>
