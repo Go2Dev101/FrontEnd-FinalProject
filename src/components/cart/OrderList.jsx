@@ -4,7 +4,10 @@ import { Trash2 } from "lucide-react";
 import { QuantityInput } from "./QuantityInput";
 import { useState } from "react";
 
-export const OrderList = ({ data, orderId, onDelete }) => {
+export const OrderList = ({ data, 
+  // orderId, 
+  // onDelete 
+}) => {
   const [qty, setQty] = useState(1);
 
   console.log(data);
@@ -35,7 +38,7 @@ export const OrderList = ({ data, orderId, onDelete }) => {
                 />
               </div>
               <button
-                onClick={() => onDelete(orderId)}
+                // onClick={() => onDelete(orderId)}
                 className="p-2 rounded-full hover:bg-red-100"
                 aria-label="remove item"
                 title="Remove from cart"

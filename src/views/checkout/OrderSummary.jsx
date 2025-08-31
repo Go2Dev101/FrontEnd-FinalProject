@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { CheckOutHeader } from "../../components/cart/CheckOutHeader";
 import { Boxer } from "../../components/Boxer";
 import { ProgressBar } from "../../components/cart/ProgressBar";
 import { OrderList } from "../../components/cart/OrderList";
 import { MessageContext } from "../../context/MessageContext";
-import { menuSet } from "../../data/menuSet";
+// import { menuSet } from "../../data/menuSet";
 import { OrderTotal } from "../../components/cart/OrderTotal";
 
 export const OrderSummary = () => {
-  const { orders, handleDelete } = useContext(MessageContext);
+  // const { orders, 
+  //   handleDelete 
+  // } = useContext(MessageContext);
 
   return (
     <>
@@ -23,7 +25,7 @@ export const OrderSummary = () => {
 
         <section id="main" className="flex justify-center gap-6">
           <div id="orderManagement" className="w-1/2">
-            {orders && orders.length > 0 ? (
+            {/* {orders && orders.length > 0 ? (
               orders.map((order) => {
                 const menu = menuSet.find((m) => m.id === order.menuId);
                 if (!menu) return null;
@@ -35,14 +37,14 @@ export const OrderSummary = () => {
                 };
 
                 return (
-                  <OrderList
-                    key={`${order.menuId}__${order.deliveryDate || "N/A"}`}
-                    data={dataForRow}
-                    orderId={order.id}
-                    onDelete={() =>
-                      handleDelete(order.menuId, order.deliveryDate)
-                    }
-                  />
+                  // <OrderList
+                  //   key={`${order.menuId}__${order.deliveryDate || "N/A"}`}
+                  //   data={dataForRow}
+                    // orderId={order.id}
+                    // onDelete={() =>
+                    //   handleDelete(order.menuId, order.deliveryDate)
+                    // }
+                  // />
                 );
               })
             ) : (
@@ -53,11 +55,11 @@ export const OrderSummary = () => {
                   order.🍽️
                 </p>
               </div>
-            )}
+            )} */}
           </div>
 
           <div id="orderTotal" className="w-1/3">
-            {orders && orders.length > 0 ? <OrderTotal /> : null}
+            {/* {orders && orders.length > 0 ? <OrderTotal /> : null} */}
           </div>
         </section>
       </Boxer>

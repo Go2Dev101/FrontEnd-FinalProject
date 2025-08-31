@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 
 export const OrderTotal = ({ data }) => {
+  console.log(data);
   return (
     <>
       <div className="max-w-124 w-full bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
