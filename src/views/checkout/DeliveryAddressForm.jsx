@@ -38,23 +38,23 @@ export const DeliveryAddressForm = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(API, user);
-      await fetchUsers();
-      // Reset the form
-      setUser({
-        streetAddress: "",
-        subDistrict: "",
-        district: "",
-        postalCode: "",
-        phoneNumber: "",
-      });
-    } catch (error) {
-      console.error("Error creating user:", error);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post(API, user);
+  //     await fetchUsers();
+  //     // Reset the form
+  //     setUser({
+  //       streetAddress: "",
+  //       subDistrict: "",
+  //       district: "",
+  //       postalCode: "",
+  //       phoneNumber: "",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error creating user:", error);
+  //   }
+  // };
   return (
     <>
       <Boxer>
