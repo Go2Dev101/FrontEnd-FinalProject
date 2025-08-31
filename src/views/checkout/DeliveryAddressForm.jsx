@@ -29,6 +29,23 @@ export const DeliveryAddressForm = () => {
   const [edit, setEdit] = useState(true);
   // const [deliveryAddress, setDeliveryAddress] = useState("");
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post(API, user);
+  //     await fetchUsers();
+  //     // Reset the form
+  //     setUser({
+  //       streetAddress: "",
+  //       subDistrict: "",
+  //       district: "",
+  //       postalCode: "",
+  //       phoneNumber: "",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error creating user:", error);
+  //   }
+  // };
   return (
     <>
       <Boxer>
@@ -59,7 +76,7 @@ export const DeliveryAddressForm = () => {
                   <p>Name</p>
                   <p>Tel :091-234-5678 </p>
                 </div>
-                <p className="text-xl text-primary-700">{deliveryAddress}</p>
+                <p className="text-xl text-primary-700">555</p>
 
                 <SquarePen
                   onClick={() => setEdit(true)}
