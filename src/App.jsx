@@ -8,12 +8,19 @@ import { DeliveryAddressForm } from "./views/checkout/DeliveryAddressForm";
 import { Login } from "./views/Authentication/Login";
 import { AdminDashboard } from "./views/admin/AdminDashboard";
 import { AdminNavbar } from "./views/admin/AdminNavbar";
+import { Signup } from "./views/Authentication/Signup";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./components/common/ProtectedRoute";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    ),
     errorElement: (
       <div className="min-h-screen bg-background-100 flex justify-center items-center">
         <h1 className="text-7xl font-bold">404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧</h1>
@@ -53,15 +60,27 @@ const router = createBrowserRouter([
       },
       {
         path: "ordersummary",
-        element: <OrderSummary />,
+        element: (
+          <ProtectedRoute>
+            <OrderSummary />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "delivery",
-        element: <DeliveryAddressForm />,
+        element: (
+          <ProtectedRoute>
+            <DeliveryAddressForm />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },
