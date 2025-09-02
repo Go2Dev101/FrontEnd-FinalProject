@@ -1,31 +1,51 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Info } from "lucide-react";
+
 import { BoxerAuth } from "../../components/BoxerAuth";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
-import { toast } from "sonner"
-import axios from "axios";
-import cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-
+import { toast } from "sonner";
+import { loginUser } from "../../services/authService.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 export const Login = () => {
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const { setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromPath = location.state?.from?.pathname || "/";
+
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    const respon = await axios.post(`http://localhost:3000/api/user/login`, login);
-    console.log(respon);
-    toast(respon.data.message || respon.data);
-    if(respon.data.token){
-      cookies.set("token",respon.data.token,{ expires: 1 })
-      navigate("/")
+    setLoading(true);
+    try {
+      const respon = await loginUser(login);
+      toast(respon.message);
+      setUser(respon.user);
+
+      setErrorMessage("");
+
+      setLogin({
+        email: "",
+        password: "",
+      });
+      navigate(fromPath);
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(
+        err?.response?.data?.message || "Login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-    
   };
 
   return (
@@ -59,6 +79,15 @@ export const Login = () => {
               required
             />
           </label>
+
+          {/* Show error message */}
+          {errorMessage && (
+            <div className="text-red-500 text-sm flex items-center gap-1">
+              <Info size={16} />
+              <p>{errorMessage}</p>
+            </div>
+          )}
+
           <Button
             type="submit"
             size="md"
@@ -67,7 +96,7 @@ export const Login = () => {
               "bg-primary-700/60 pointer-events-none"
             }`}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </Button>
         </form>
       </Card>

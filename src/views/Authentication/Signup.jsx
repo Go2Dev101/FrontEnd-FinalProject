@@ -4,23 +4,29 @@ import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
 import { Info } from "lucide-react";
-// import { toast } from "sonner"
-// import axios from "axios";
+import { signupUser } from "../../services/authService.js";
+import { toast } from "sonner";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+
   const [signup, setSignup] = useState({
-    fristname: "",
-    lastname: "",
+    fristName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassowrd: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setSignup({ ...signup, [e.target.name]: e.target.value });
   };
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -28,10 +34,30 @@ export const Signup = () => {
       return setErrorMessage("Passwords do not match");
     }
     const { confirmPassowrd, ...signupData } = signup;
+    setLoading(true);
+    try {
+      const respon = await signupUser(signupData);
+      setUser(respon.user);
+      toast(respon.message);
 
-    // const respon = await axios.post(`http://localhost:3000/api/user/signup`, signupData);
-    // console.log(respon);
-    // toast(respon.data)
+      setErrorMessage("");
+
+      setSignup({
+        fristName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassowrd: "",
+      });
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(
+        err?.response?.data?.message || "Signup failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,8 +73,8 @@ export const Signup = () => {
             <Input
               onChange={handleChange}
               type="text"
-              name="fristname"
-              value={signup.fristname}
+              name="fristName"
+              value={signup.fristName}
               placeholder="your first name"
               required
             />
@@ -58,8 +84,8 @@ export const Signup = () => {
             <Input
               onChange={handleChange}
               type="text"
-              name="lastname"
-              value={signup.lastname}
+              name="lastName"
+              value={signup.lastName}
               placeholder="your last name"
               required
             />
@@ -117,7 +143,7 @@ export const Signup = () => {
               "bg-primary-700/60 pointer-events-none"
             }`}
           >
-            Sign up
+            {loading ? "Signing up..." : "Sign Up"}
           </Button>
         </form>
       </Card>
