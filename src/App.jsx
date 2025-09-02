@@ -45,10 +45,6 @@ const router = createBrowserRouter([
         element: <DeliveryAddressForm />,
       },
       {
-        path: "cart",
-        element: <MenuSet />,
-      },
-      {
         path: "profile",
         // element: <OrderSuccess />,
         element: (
