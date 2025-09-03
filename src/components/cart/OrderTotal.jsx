@@ -1,21 +1,22 @@
 import { Button } from "../ui/button";
 
-export const OrderTotal = ({ data }) => {
-  console.log(data);
+export const OrderTotal = ({ menuSet = 0 }) => {
   return (
     <>
       <div className="max-w-124 w-full bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
-        <h2 className="font-bold text-4xl text-primary-700">Order Total</h2>
+        <h2 className="font-bold text-4xl text-primary-700 py-2">
+          Order Total
+        </h2>
         <div className="gap-y-3  text-primary-800 text-2xl">
           <div className="flex justify-between ">
-            <p className="text-2xl">{data.title}</p>
-            <p className="text-2xl">{data.priceTHB} THB</p>
+            <p className="text-2xl">Salmon clean set{menuSet.title}</p>
+            <p className="text-2xl">{menuSet.priceTHB} THB</p>
           </div>
           <div className="flex justify-between">
             <p>Delivery Fee</p>
             <p>200 THB</p>
           </div>
-          <div className="flex justify-between  border-black border-b-2 text-sm">
+          <div className="flex justify-between  border-black border-b-2 text-sm p-2">
             <p>*All prices are inclusive of 7% VAT.</p>
           </div>
         </div>
