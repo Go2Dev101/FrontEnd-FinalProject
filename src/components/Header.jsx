@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, Menu, CircleUser } from "lucide-react";
 import { MessageContext } from "../context/MessageContext";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const { orders } = useContext(MessageContext);
@@ -66,15 +66,15 @@ export const Header = () => {
             </Link>
           </li>
           <li>
-            {user ? (
+            {/* {user ? (
               <Link onClick={logout} className="hover:text-amber-400 block">
                 <CircleUser className="inline w-5 h-5" />
               </Link>
-            ) : (
+            ) : ( */}
               <Link to="/login" className="hover:text-amber-400 block">
                 <User className="inline w-5 h-5" />
               </Link>
-            )}
+            {/* )} */}
           </li>
         </ul>
       </nav>
