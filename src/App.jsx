@@ -17,9 +17,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <AuthProvider>
+      <AuthProvider>
         <Layout />
-      // </AuthProvider>
+      </AuthProvider>
     ),
     errorElement: (
       <div className="min-h-screen bg-background-100 flex justify-center items-center">
@@ -57,16 +57,16 @@ const router = createBrowserRouter([
       {
         path: "ordersummary",
         element: (
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <OrderSummary />
-          // </ProtectedRoute>
+          </ProtectedRoute>
         ),
       },
       {
         path: "delivery",
         element: (
           // <ProtectedRoute>
-            <DeliveryAddressForm />
+          <DeliveryAddressForm />
           // </ProtectedRoute>
         ),
       },

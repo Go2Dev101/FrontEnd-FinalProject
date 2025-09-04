@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  console.log(user);
   useEffect(() => {
     const fetchProfile = async () => {
       try {

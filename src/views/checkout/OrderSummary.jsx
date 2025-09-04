@@ -6,8 +6,21 @@ import { OrderList } from "../../components/cart/OrderList";
 // import { MessageContext } from "../../context/MessageContext";
 // import { menuSet } from "../../data/menuSet";
 import { OrderTotal } from "../../components/cart/OrderTotal";
+import { getCartSummary } from "../../services/cartService.js";
+import { useState } from "react";
 
 export const OrderSummary = () => {
+  const [cart, setCart] = useState("");
+  const fetchCart = async () => {
+    try {
+      const res = await getCartSummary();
+      console.log(res);
+      setCart(res.summary);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchCart();
   return (
     <>
       <Boxer>
