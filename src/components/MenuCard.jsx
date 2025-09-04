@@ -16,6 +16,7 @@ export const MenuCard = ({
   price,
   mode = "menu",
   menuId,
+  slug,
 }) => {
   const modes = {
     menu: { seeMore: true, addMenu: false, orderNow: true },
@@ -27,7 +28,7 @@ export const MenuCard = ({
     const { handleOrders } = useContext(MessageContext);
   return (
     <Card className="max-w-80 w-full gap-0">
-      <img src={img.url} alt={img.alt} className="rounded-t-xl h-60 w-full object-cover" />
+      <img src={img} alt={name} className="rounded-t-xl h-60 w-full object-cover" />
       <div className="flex flex-col gap-3 p-5 w-full">
         <div>
           <p className="text-xl font-medium text-primary-900 mb-1">{name}</p>
@@ -47,7 +48,7 @@ export const MenuCard = ({
         <div className="flex gap-3 justify-center w-full">
           {modes[mode].seeMore && (
             <Button
-              onClick={() => navigationDetail(navigate,"menuset",menuId)}
+              onClick={() => navigationDetail(navigate,"menuset",slug)}
               size="md"
               className="bg-secondary-500 hover:bg-secondary-500/80 text-white w-1/2"
             >

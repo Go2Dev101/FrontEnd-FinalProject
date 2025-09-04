@@ -40,10 +40,10 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
           <p>Back to menu</p>
         </section>
         <section className="flex-1/2 flex items-center justify-center mb-6 lg:mb-0">
-          {menu.images.url !== "" ? (
+          {menu.imageUrl !== "" ? (
             <img
-              src={menu.images.url}
-              alt={menu.images.alt}
+              src={menu.imageUrl}
+              alt={menu.title}
               className="max-w-133 w-full aspect-square object-cover rounded-2xl"
             />
           ) : (
@@ -52,16 +52,16 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
         </section>
         <section className="sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
           <h1 className="text-2xl sm:text-4xl font-bold">{menu.title}</h1>
-          <p className="text-xl sm:text-2xl font-medium">{menu.priceTHB} THB</p>
-          <Tag category={menu.category} kcal={menu.nutritionFacts.kcal} />
+          <p className="text-xl sm:text-2xl font-medium">{menu.price} THB</p>
+          <Tag category={menu.category} kcal={menu.kcal} />
           <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
           {menuInfoBar === "info" && (
-            <Information information={menu.information} />
+            <Information information={menu.description} />
           )}
-          {menuInfoBar === "ingre" && <Ingredeints />}
+          {/* {menuInfoBar === "ingre" && <Ingredeints />}
           {menuInfoBar === "nutri" && (
             <Nutrition nutritionFacts={menu.nutritionFacts} />
-          )}
+          )} */}
           <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
             <QuantityInput
               onClickMinus={() =>
@@ -76,7 +76,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
             <div className="flex gap-3 justify-center">
               {modes[mode].addCart && (
                 <Button
-                  onClick={() => handleCart(menu.id, menuQuantity)}
+                  onClick={() => handleCart(menu._id, menuQuantity)}
                   size="md"
                   className="w-32"
                 >
@@ -86,7 +86,7 @@ export const MenuDetail = ({ path, mode = "menu", menu }) => {
               {modes[mode].orderNow && (
                 <Button
                   onClick={() => {
-                    handleOrders(navigate, menu.id, menuQuantity);
+                    handleOrders(navigate, menu._id, menuQuantity);
                   }}
                   size="md"
                   className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"

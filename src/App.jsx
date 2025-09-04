@@ -18,9 +18,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <AuthProvider>
-      <Layout />
-      // </AuthProvider>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
     ),
     errorElement: <PageNotFound />,
     children: [
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <MenuSet />,
       },
       {
-        path: "menuset/:menuSetId",
+        path: "menuset/:menuSlug",
         element: <MenuSetDetail />,
       },
       {
@@ -54,17 +54,17 @@ const router = createBrowserRouter([
       {
         path: "ordersummary",
         element: (
-          // <ProtectedRoute>
-          <OrderSummary />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <OrderSummary />
+          </ProtectedRoute>
         ),
       },
       {
         path: "delivery",
         element: (
-          // <ProtectedRoute>
-          <DeliveryAddressForm />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <DeliveryAddressForm />
+          </ProtectedRoute>
         ),
       },
       {

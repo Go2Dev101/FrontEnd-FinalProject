@@ -8,6 +8,7 @@ import { OrderList } from "../../components/cart/OrderList";
 import { OrderTotal } from "../../components/cart/OrderTotal";
 
 export const OrderSummary = () => {
+
   return (
     <>
       <Boxer>
