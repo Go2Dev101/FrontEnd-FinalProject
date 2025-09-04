@@ -11,6 +11,7 @@ import { AdminNavbar } from "./views/admin/AdminNavbar";
 import { Signup } from "./views/Authentication/Signup";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
+import { PageNotFound } from "./components/common/PageNotFound";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         <h1 className="text-7xl font-bold">404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧</h1>
       </div>
     ),
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "/",
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
         element: <MenuSet />,
       },
       {
-        path: "menuset/:menuSetId",
+        path: "menuset/:menuSlug",
         element: <MenuSetDetail />,
       },
       {
@@ -65,9 +67,15 @@ const router = createBrowserRouter([
       {
         path: "delivery",
         element: (
+<<<<<<< HEAD
           // <ProtectedRoute>
           <DeliveryAddressForm />
           // </ProtectedRoute>
+=======
+          <ProtectedRoute>
+            <DeliveryAddressForm />
+          </ProtectedRoute>
+>>>>>>> refs/remotes/origin/main
         ),
       },
       {
