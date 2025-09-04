@@ -27,16 +27,31 @@ const pickUpPoints = [
 ];
 export const DeliveryAddressForm = () => {
   const [edit, setEdit] = useState(true);
+  const [isShow, setIsShow] = useState(true);
   const [user, setUser] = useState({
-    streetAddress: "",
-    subDistrict: "",
-    district: "",
-    postalCode: "",
-    phoneNumber: "",
+    fullName: "",
+    lastName: "",
+    phone: "",
+    address: {
+      streetAddress: "",
+      subDistrict: "",
+      district: "",
+      postalCode: "",
+    },
   });
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
+  // const handleChangeAddress = (e) => {
+  //   setUser({
+  //     ...user,
+  //     address: {
+  //       ...user.address,
+  //       [e.target.name]: e.target.value,
+  //     },
+  //   });
+  // };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -45,11 +60,15 @@ export const DeliveryAddressForm = () => {
   //     await fetchUsers();
   //     // Reset the form
   //     setUser({
-  //       streetAddress: "",
-  //       subDistrict: "",
-  //       district: "",
-  //       postalCode: "",
-  //       phoneNumber: "",
+  //       fullName: "",
+  //       lastName: "",
+  //       phone: "",
+  //       address: {
+  //         streetAddress: "",
+  //         subDistrict: "",
+  //         district: "",
+  //         postalCode: "",
+  //       },
   //     });
   //   } catch (error) {
   //     console.error("Error creating user:", error);
@@ -70,50 +89,67 @@ export const DeliveryAddressForm = () => {
           <div className="flex-1/2 max-w-164 ">
             <div className="flex flex-col">
               <div className="space-x-4 flex justify-between mb-6">
-                <Button size={"sm"} className="max-w-75 w-full">
+                <Button
+                  size={"sm"}
+                  className="max-w-75 w-full"
+                  onClick={() => {
+                    setIsShow(true);
+                  }}
+                >
                   Delivery Address
                 </Button>
                 <Button
                   size={"sm"}
                   className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
+                  onClick={() => {
+                    setIsShow(false);
+                  }}
                 >
                   Pickup Point
                 </Button>
               </div>
-              <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
-                  <p>Name</p>
-                  <p>Tel :091-234-5678 </p>
-                </div>
-                <p className="text-xl text-primary-700">55</p>
+              {isShow ? (
+                <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
+                  <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
+                    <p>Name</p>
+                    <p>Tel :091-234-5678 </p>
+                  </div>
+                  <p className="text-xl text-primary-700">55</p>
 
-                <SquarePen
-                  onClick={() => setEdit(true)}
-                  className="ml-auto hover:text-primary-900 text-primary-700"
-                />
-              </div>
-              /* Pick up point */
-              <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
-                  <p>Select 1 Pickup Point</p>
-                  <div className="flex gap-3 flex-wrap sm:">
-                    {pickUpPoints.map((point, index) => (
-                      <Button
-                        key={index}
-                        className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
-                      >
-                        {point}
-                      </Button>
-                    ))}
+                  <SquarePen
+                    onClick={() => setEdit(true)}
+                    className="ml-auto hover:text-primary-900 text-primary-700"
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              {/* Pick up point */}
+              {!isShow ? (
+                <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
+                  <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
+                    <p>Select 1 Pickup Point</p>
+                    <div className="flex gap-3 flex-wrap sm:">
+                      {pickUpPoints.map((point, index) => (
+                        <Button
+                          key={index}
+                          className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
+                        >
+                          {point}
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <OrderTotal />
         </section>
       </Boxer>
-      {/* pop-up address */}
+      {/* pop-up address  */}
       {edit && (
         <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
           <Card className="w-full max-w-sm p-3">
@@ -131,10 +167,23 @@ export const DeliveryAddressForm = () => {
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <label>
+                      <p>Fullname</p>
+                      <Input
+                        onChange={handleChange}
+                        value={user.fullName}
+                        name="fullName"
+                        type="text"
+                        placeholder="Enter Your Name"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-2">
+                    <label>
                       <p>Street address</p>
                       <Input
                         onChange={handleChange}
-                        value={user.streetAddress}
+                        value={user.address.streetAddress}
                         name="streetAddress"
                         type="text"
                         placeholder="House Number and street name"
@@ -147,7 +196,7 @@ export const DeliveryAddressForm = () => {
                       <p>Sub-District</p>
                       <Input
                         onChange={handleChange}
-                        value={user.subDistrict}
+                        value={user.address.subDistrict}
                         name="subDistrict"
                         type="text"
                         required
@@ -159,7 +208,7 @@ export const DeliveryAddressForm = () => {
                       <p>District</p>
                       <Input
                         onChange={handleChange}
-                        value={user.district}
+                        value={user.address.district}
                         name="district"
                         type="text"
                         required
@@ -171,7 +220,7 @@ export const DeliveryAddressForm = () => {
                       <p>Postal code</p>
                       <Input
                         onChange={handleChange}
-                        value={user.postalCode}
+                        value={user.address.postalCode}
                         name="postalCode"
                         type="text"
                         required
@@ -199,7 +248,7 @@ export const DeliveryAddressForm = () => {
               </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full ">
                 Save
               </Button>
               <Button variant="outline" className="w-full">
