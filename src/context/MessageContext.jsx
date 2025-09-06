@@ -18,7 +18,7 @@ export const MessageProvider = ({ children }) => {
     const fetchCart = async () => {
       try {
         const respon = await getCart();
-        setOrders(respon.cart);
+        setOrders(respon.cart || []);
       } catch (err) {
         console.error(err);
       }
@@ -28,21 +28,20 @@ export const MessageProvider = ({ children }) => {
 
   // Set data cart database when orders have change
   useEffect(() => {
-    if (orders.length < 1) return;
+    if (!orders || orders.length < 1) return;
     const handleUpdateCart = async () => {
       try {
         await updateCart(orders);
       } catch (err) {
         if (err.response.data.message === "Cart not found!") {
           await createCart(orders);
-        }else{
+        } else {
           console.error(err);
         }
       }
     };
     handleUpdateCart();
   }, [orders]);
-
 
   // เพิ่ม/อัปเดตสินค้าในตะกร้า
   const handleCart = (menuId, quantity = 1, deliveryDate) => {
