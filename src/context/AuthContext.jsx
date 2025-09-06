@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api.js";
+import { getUserProfile } from "../services/profileService.js";
 
 const AuthContext = createContext();
 
@@ -12,8 +13,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await api.get("/api/user/profile");
-        setUser(response.data);
+        const response = await getUserProfile();
+        setUser(response.user);
       } catch (err) {
         console.error("Not authenticated:", err);
         setUser(null);
