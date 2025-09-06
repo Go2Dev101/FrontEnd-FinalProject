@@ -12,7 +12,7 @@ export const MenuSet = () => {
       setLoading(true);
       try {
         const respon = await getAllMenus();
-        setMenus(respon.menus || []);
+        setMenus(respon.menus);
         setLoading(false);
       } catch (err) {
         console.error(err);
