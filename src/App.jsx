@@ -13,7 +13,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { PageNotFound } from "./components/common/PageNotFound";
 import { MessageProvider } from "./context/MessageProvider";
-// import { Home } from "./views/Home";
+import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        // element: <Home />,
-        element: <MenuSet />,
+        element: <Home />,
       },
       {
         path: "menuset",
