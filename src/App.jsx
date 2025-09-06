@@ -12,6 +12,7 @@ import { Signup } from "./views/Authentication/Signup";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { PageNotFound } from "./components/common/PageNotFound";
+import { MessageProvider } from "./context/MessageProvider";
 // import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <AuthProvider>
-        <Layout />
+        <MessageProvider>
+          <Layout />
+        </MessageProvider>
       </AuthProvider>
     ),
     errorElement: <PageNotFound />,

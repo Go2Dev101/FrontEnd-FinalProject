@@ -17,6 +17,7 @@ export const MenuSet = () => {
     };
     fetchMenus();
   }, []);
+
   return (
     <>
       <Menu className="flex flex-row gap-6 flex-wrap justify-center md:justify-start">
