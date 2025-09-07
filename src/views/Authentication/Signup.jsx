@@ -14,7 +14,7 @@ export const Signup = () => {
   const navigate = useNavigate();
 
   const [signup, setSignup] = useState({
-    fristName: "",
+    firstName: "",
     lastName: "",
     email: "",
     password: "",
@@ -43,7 +43,7 @@ export const Signup = () => {
       setErrorMessage("");
 
       setSignup({
-        fristName: "",
+        firstName: "",
         lastName: "",
         email: "",
         password: "",
@@ -73,8 +73,8 @@ export const Signup = () => {
             <Input
               onChange={handleChange}
               type="text"
-              name="fristName"
-              value={signup.fristName}
+              name="firstName"
+              value={signup.firstName}
               placeholder="your first name"
               required
             />

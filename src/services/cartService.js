@@ -2,9 +2,9 @@ import api from "./api.js";
 
 // Create a new cart
 export const createCart = async (cartData) => {
-  const response = await api.post("/api/cart", cartData);
+  const response = await api.post("/api/cart", { items: cartData });
   return response.data;
-}
+};
 
 // Get cart
 export const getCart = async () => {
@@ -14,7 +14,7 @@ export const getCart = async () => {
 
 // Update cart
 export const updateCart = async (cartData) => {
-  const response = await api.put("/api/cart", cartData);
+  const response = await api.put("/api/cart", { items: cartData });
   return response.data;
 };
 
