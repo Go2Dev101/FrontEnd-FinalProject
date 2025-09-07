@@ -22,11 +22,7 @@ const router = createBrowserRouter([
         <Layout />
       </AuthProvider>
     ),
-    errorElement: (
-      <div className="min-h-screen bg-background-100 flex justify-center items-center">
-        <h1 className="text-7xl font-bold">404 - Page Not Found 👨🏻‍🔧👨🏻‍🔧</h1>
-      </div>
-    ),
+
     errorElement: <PageNotFound />,
     children: [
       {
@@ -67,15 +63,9 @@ const router = createBrowserRouter([
       {
         path: "delivery",
         element: (
-<<<<<<< HEAD
-          // <ProtectedRoute>
-          <DeliveryAddressForm />
-          // </ProtectedRoute>
-=======
           <ProtectedRoute>
             <DeliveryAddressForm />
           </ProtectedRoute>
->>>>>>> refs/remotes/origin/main
         ),
       },
       {

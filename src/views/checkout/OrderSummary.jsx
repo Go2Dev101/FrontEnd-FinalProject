@@ -7,20 +7,27 @@ import { OrderList } from "../../components/cart/OrderList";
 // import { menuSet } from "../../data/menuSet";
 import { OrderTotal } from "../../components/cart/OrderTotal";
 import { getCartSummary } from "../../services/cartService.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const OrderSummary = () => {
+  const [load, setLoad] = useState(true);
   const [cart, setCart] = useState("");
-  const fetchCart = async () => {
-    try {
-      const res = await getCartSummary();
-      console.log(res);
-      setCart(res.summary);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  fetchCart();
+  useEffect(() => {
+    const fetchCart = async () => {
+      setLoad(true);
+      try {
+        const res = await getCartSummary();
+        setCart(res.summary);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoad(false);
+      }
+    };
+    fetchCart();
+  }, []);
+
+  console.log(cart.items);
   return (
     <>
       <Boxer>
@@ -34,7 +41,16 @@ export const OrderSummary = () => {
 
         <section id="cart" className="flex justify-center gap-6">
           <div className="w-1/2">
-            <OrderList />
+            {
+              load ? <p>Loading..</p> : <OrderList orders={cart.items} />
+              //  cart.items.length > 0 ? (
+
+              //   cart.items.map((item) => {
+              // <OrderList order={item} key={item._id} />
+
+              //   })
+              // ) : (
+            }
           </div>
           <div id="orderTotal" className="w-1/3">
             {/* {orders && orders.length > 0 ? <OrderTotal /> : null} */}
