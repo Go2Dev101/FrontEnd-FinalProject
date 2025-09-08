@@ -5,7 +5,7 @@ import { ProgressBar } from "../../components/cart/ProgressBar";
 import { CheckOutHeader } from "../../components/cart/CheckOutHeader";
 import { Button } from "@/components/ui/button";
 import { OrderTotal } from "../../components/cart/OrderTotal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardAction,
@@ -17,63 +17,90 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
+import { getCartShippingFee } from "../../services/cartService.js";
+import { editUserProfile } from "../../services/profileService.js";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { toast } from "sonner";
 
 const pickUpPoints = [
   "Chula Hospital",
-  "Udom Suksa School",
+  "Triam Udom Suksa School",
   "The Tree Condo",
   "MRT Samyan",
   "The One Building",
 ];
+
 export const DeliveryAddressForm = () => {
-  const [edit, setEdit] = useState(true);
+  const { user, setUser } = useAuth();
+  const [edit, setEdit] = useState(false);
   const [isShow, setIsShow] = useState(true);
-  const [user, setUser] = useState({
-    fullName: "",
-    lastName: "",
-    phone: "",
+  const [client, setClient] = useState({
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    phone: user?.phone || "",
     address: {
-      streetAddress: "",
-      subDistrict: "",
-      district: "",
-      postalCode: "",
+      streetAddress: user?.address?.streetAddress || "",
+      subDistrict: user?.address?.subDistrict || "",
+      district: user?.address?.district || "",
+      postalCode: user?.address?.postalCode || "",
     },
   });
+  const [summary, setSummary] = useState();
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setClient({ ...client, [e.target.name]: e.target.value });
   };
 
-  // const handleChangeAddress = (e) => {
-  //   setUser({
-  //     ...user,
-  //     address: {
-  //       ...user.address,
-  //       [e.target.name]: e.target.value,
-  //     },
-  //   });
-  // };
+  const handleChangeAddress = (e) => {
+    setClient({
+      ...client,
+      address: {
+        ...client.address,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await axios.post(API, user);
-  //     await fetchUsers();
-  //     // Reset the form
-  //     setUser({
-  //       fullName: "",
-  //       lastName: "",
-  //       phone: "",
-  //       address: {
-  //         streetAddress: "",
-  //         subDistrict: "",
-  //         district: "",
-  //         postalCode: "",
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error("Error creating user:", error);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await editUserProfile(user._id, client);
+      setUser(res.user);
+      // Reset the form
+
+      setEdit(false);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
+  const fetchTotal = async () => {
+    try {
+      const res = await getCartShippingFee();
+      setSummary(res.summary);
+    } catch (error) {
+      if (error.response.data.message === "Shipping zone not found!") {
+        toast(error.response.data.message);
+      } else {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchTotal();
+    setClient({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone,
+      address: {
+        streetAddress: user.address.streetAddress,
+        subDistrict: user.address.subDistrict,
+        district: user.address.district,
+        postalCode: user.address.postalCode,
+      },
+    });
+  }, [user]);
+
+
   return (
     <>
       <Boxer>
@@ -108,13 +135,23 @@ export const DeliveryAddressForm = () => {
                   Pickup Point
                 </Button>
               </div>
+              {/* Delivery Address Button */}
               {isShow ? (
                 <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
                   <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
-                    <p>Name</p>
-                    <p>Tel :091-234-5678 </p>
+                    {/* <div className="flex gap-2"> */}
+                    {/* <p>{`Name : ${user.firstName}   84325      ${user.lastName}`}</p> */}
+                    <p>
+                      Name : {user.firstName}&nbsp;&nbsp;&nbsp;{user.lastName}
+                    </p>
+                    {/* </div> */}
+                    <p>Tel :{user.phone} </p>
                   </div>
-                  <p className="text-xl text-primary-700">55</p>
+                  <p className="text-xl text-primary-700">
+                    Address: {user.address.streetAddress}&nbsp;
+                    {user.address.subDistrict}&nbsp;{user.address.district}
+                    &nbsp;{user.address.postalCode}
+                  </p>
 
                   <SquarePen
                     onClick={() => setEdit(true)}
@@ -124,11 +161,11 @@ export const DeliveryAddressForm = () => {
               ) : (
                 <></>
               )}
-              {/* Pick up point */}
+              {/* Pick up point Button */}
               {!isShow ? (
                 <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
                   <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
-                    <p>Select 1 Pickup Point</p>
+                    <p>Select Pickup Point</p>
                     <div className="flex gap-3 flex-wrap sm:">
                       {pickUpPoints.map((point, index) => (
                         <Button
@@ -146,7 +183,7 @@ export const DeliveryAddressForm = () => {
               )}
             </div>
           </div>
-          <OrderTotal />
+          <OrderTotal mode="delivery" data={summary} />
         </section>
       </Boxer>
       {/* pop-up address  */}
@@ -163,27 +200,40 @@ export const DeliveryAddressForm = () => {
               </CardAction>
             </CardHeader>
             <CardContent>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <label>
-                      <p>Fullname</p>
+                      <p>First Name</p>
                       <Input
+                        value={client.firstName}
                         onChange={handleChange}
-                        value={user.fullName}
-                        name="fullName"
+                        name="firstName"
                         type="text"
-                        placeholder="Enter Your Name"
+                        placeholder="Enter Your First Name"
                         required
                       />
                     </label>
                   </div>
                   <div className="grid gap-2">
                     <label>
-                      <p>Street address</p>
+                      <p>Last Name</p>
                       <Input
+                        value={client.lastName}
                         onChange={handleChange}
-                        value={user.address.streetAddress}
+                        name="lastName"
+                        type="text"
+                        placeholder="Enter Your Last Name"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-2">
+                    <label>
+                      <p>Street Address</p>
+                      <Input
+                        value={client.address.streetAddress}
+                        onChange={handleChangeAddress}
                         name="streetAddress"
                         type="text"
                         placeholder="House Number and street name"
@@ -193,10 +243,10 @@ export const DeliveryAddressForm = () => {
                   </div>
                   <div className="grid gap-2">
                     <label>
-                      <p>Sub-District</p>
+                      <p>Subdistrict</p>
                       <Input
-                        onChange={handleChange}
-                        value={user.address.subDistrict}
+                        value={client.address.subDistrict}
+                        onChange={handleChangeAddress}
                         name="subDistrict"
                         type="text"
                         required
@@ -207,8 +257,8 @@ export const DeliveryAddressForm = () => {
                     <label>
                       <p>District</p>
                       <Input
-                        onChange={handleChange}
-                        value={user.address.district}
+                        value={client.address.district}
+                        onChange={handleChangeAddress}
                         name="district"
                         type="text"
                         required
@@ -217,10 +267,10 @@ export const DeliveryAddressForm = () => {
                   </div>
                   <div className="grid gap-2">
                     <label>
-                      <p>Postal code</p>
+                      <p>Postal Code</p>
                       <Input
-                        onChange={handleChange}
-                        value={user.address.postalCode}
+                        value={client.address.postalCode}
+                        onChange={handleChangeAddress}
                         name="postalCode"
                         type="text"
                         required
@@ -233,9 +283,9 @@ export const DeliveryAddressForm = () => {
                     <label>
                       <p>Phone Number</p>
                       <Input
+                        value={client.phone}
                         onChange={handleChange}
-                        value={user.phoneNumber}
-                        name="phoneNumber"
+                        name="phone"
                         type="tel"
                         required
                         placeholder="0812345678"
@@ -245,16 +295,20 @@ export const DeliveryAddressForm = () => {
                     </label>
                   </div>
                 </div>
+                <Button type="submit" className="w-full ">
+                  Save
+                </Button>
               </form>
-            </CardContent>
-            <CardFooter className="flex-col gap-2">
-              <Button type="submit" className="w-full ">
-                Save
-              </Button>
-              <Button variant="outline" className="w-full">
+              <Button
+                onClick={() => {
+                  setEdit(false);
+                }}
+                variant="outline"
+                className="w-full"
+              >
                 Back
               </Button>
-            </CardFooter>
+            </CardContent>
           </Card>
         </div>
       )}
