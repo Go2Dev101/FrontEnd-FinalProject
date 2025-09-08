@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const fetchProfile = async () => {
       try {
         const response = await api.get("/api/user/profile");
-        setUser(response.data);
+        setUser(response.data.user);
       } catch (err) {
         console.error("Not authenticated:", err);
         setUser(null);
