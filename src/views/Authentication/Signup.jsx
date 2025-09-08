@@ -7,7 +7,7 @@ import { Info } from "lucide-react";
 import { signupUser } from "../../services/authService.js";
 import { toast } from "sonner";
 import { useAuth } from "../../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const { setUser } = useAuth();
@@ -147,6 +147,12 @@ export const Signup = () => {
           </Button>
         </form>
       </Card>
+      <p className="text-primary-900 p-4 text-end max-w-124 w-full">
+        Already have an account?{" "}
+        <Link to="/login" className="hover:underline cursor-pointer">
+          Log in
+        </Link>
+      </p>
     </BoxerAuth>
   );
 };

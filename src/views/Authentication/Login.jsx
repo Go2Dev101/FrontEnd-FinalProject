@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Info } from "lucide-react";
 
 import { BoxerAuth } from "../../components/BoxerAuth";
@@ -23,6 +23,7 @@ export const Login = () => {
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -100,6 +101,13 @@ export const Login = () => {
           </Button>
         </form>
       </Card>
+
+      <p className="text-primary-900 p-4 text-end max-w-124 w-full">
+        Don't have an account?{" "}
+        <Link to="/signup" className="hover:underline cursor-pointer">
+          Sign up
+        </Link>
+      </p>
     </BoxerAuth>
   );
 };
