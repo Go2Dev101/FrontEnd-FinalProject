@@ -2,7 +2,7 @@ import api from "./api.js";
 
 // Edit user profile
 export const editUserProfile = async (userId, profileData) => {
-  const response = await api.post(`/api/user/${userId}`, profileData);
+  const response = await api.put(`/api/user/${userId}`, profileData);
   return response.data;
 };
 
