@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Menu } from "../../components/menu/Menu";
 import { MenuCard } from "../../components/MenuCard";
 // import { menuSet } from "../../data/menuSet";
-import { getAllMenus } from "../../services/menuService";
+import { getAllMenus } from "../../services/menuService.js";
 
 export const MenuSet = () => {
   const [menus, setMenus] = useState([]);
