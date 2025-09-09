@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-// import axios from "axios";
-import { Card } from "../ui/card";
+import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { QuantityInput } from "./QuantityInput";
-import { useMessage } from "../../context/MessageContext";
+import { Card } from "../ui/card";
 
-export const OrderList = ({ cart }) => {
-  const [qty, setQty] = useState(cart.quantity);
-  const { orders, setOrders } = useMessage();
+export const OrderList = ({ cart, onDelete, onQtyChange }) => {
+  const [qty, setQty] = useState(cart.quantity ?? 1);
 
-  const handleDelete = (id) => {
-    if (!window.confirm("Remove this item?")) return;
-    const newOrders = orders.filter((order) => order.menuId !== id);
-    setOrders(newOrders);
-  };
-
+  // ✅ sync เมื่อ parent เปลี่ยน item/quantity
   useEffect(() => {
-    const menu = orders.find((menu) => menu.menuId === cart.menuId);
-    menu.quantity = qty;
-    setOrders([...orders]);
-  }, []);
+    setQty(cart.quantity ?? 1);
+  }, [cart.menuId, cart.quantity]); // <-- แก้จาก cart.items.type.menuId
+
+  // ✅ แจ้ง parent เมื่อ qty เปลี่ยน
+  useEffect(() => {
+    onQtyChange?.(cart.menuId, qty);
+  }, [qty, cart.menuId]);
+
+  const handleDelete = () => {
+    if (!window.confirm("Remove this item?")) return;
+    onDelete?.(cart.menuId);
+  };
 
   return (
     <div className="space-y-4">
@@ -55,7 +55,7 @@ export const OrderList = ({ cart }) => {
             </div>
 
             <button
-              onClick={() => handleDelete(cart.menuId)}
+              onClick={handleDelete}
               className="p-2 rounded-full hover:bg-red-100 cursor-pointer"
               aria-label="remove cart"
               title="Remove from cart"

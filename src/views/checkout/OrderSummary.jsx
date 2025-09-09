@@ -6,20 +6,18 @@ import { OrderTotal } from "../../components/cart/OrderTotal";
 import { getCartSummary } from "../../services/cartService.js";
 import { useEffect, useState } from "react";
 import { calculateCart } from "../../utils/cart.js";
-
-// import { useMessage } from "../../context/MessageContext.jsx";
+import { Card } from "../../components/ui/card.jsx";
 
 export const OrderSummary = () => {
-  // const { orders } = useMessage();
   const [load, setLoad] = useState(true);
-  const [cart, setCart] = useState("");
-  const [calculate, setCalculate] = useState("");
+  const [cart, setCart] = useState({ items: [] });
+  const [calculate, setCalculate] = useState({ totalAmount: 0, cartItems: 0 });
   useEffect(() => {
     const fetchCart = async () => {
       setLoad(true);
       try {
         const res = await getCartSummary();
-        setCart(res.summary);
+        setCart(res.summary || { items: [] });
       } catch (error) {
         console.error(error);
       } finally {
@@ -29,10 +27,32 @@ export const OrderSummary = () => {
     fetchCart();
   }, []);
 
+  // คำนวณยอดรวมใหม่ทุกครั้งที่ items เปลี่ยน
   useEffect(() => {
-    const response = calculateCart(cart.items);
-    setCalculate(response);
-  }, [cart]);
+    setCalculate(calculateCart(cart.items || []));
+  }, [cart.items]);
+
+  // ลูกแจ้งว่าเปลี่ยนจำนวน
+  const handleQtyChange = (menuId, qty) => {
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items.map((item) =>
+        String(item.menuId) === String(menuId)
+          ? { ...item, quantity: qty }
+          : item
+      ),
+    }));
+  };
+
+  // ลูกแจ้งว่าลบ
+  const handleDelete = (menuId) => {
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items.filter(
+        (item) => String(item.menuId) !== String(menuId)
+      ),
+    }));
+  };
 
   return (
     <>
@@ -49,9 +69,15 @@ export const OrderSummary = () => {
           <div className="w-1/2">
             {load ? (
               <p>Loading..</p>
-            ) : // <OrderList carts={cart.items} />
-            cart.items.length > 0 ? (
-              cart.items.map((item) => <OrderList cart={item} key={item._id} />)
+            ) : cart.items.length > 0 ? (
+              cart.items.map((item) => (
+                <OrderList
+                  key={item.menuId}
+                  cart={item}
+                  onQtyChange={handleQtyChange}
+                  onDelete={handleDelete}
+                />
+              ))
             ) : (
               <Card className="w-full p-6">
                 <div className="w-full rounded-xl border border-gray-200 bg-white/60 py-10 px-6 text-center">
