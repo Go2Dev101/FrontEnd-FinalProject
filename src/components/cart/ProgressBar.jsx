@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-export const ProgressBar = ({path}) => {
+export const ProgressBar = ({ path }) => {
+  // const modes = { orderSummary: false, delivery: true };
   return (
     <>
       <div className="flex">
@@ -29,5 +30,3 @@ export const ProgressBar = ({path}) => {
     </>
   );
 };
-
-
