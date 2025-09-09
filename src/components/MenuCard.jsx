@@ -27,7 +27,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
       />
       <div className="flex flex-col gap-3 p-5 w-full">
         <div>
-          <p className="text-xl font-medium text-primary-900 mb-1">
+          <p className="text-xl font-medium text-primary-900 mb-1 line-clamp-1">
             {data.title}
           </p>
           <p className="text-sm text-secondary-400 line-clamp-2">
