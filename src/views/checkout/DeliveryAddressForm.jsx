@@ -88,14 +88,14 @@ export const DeliveryAddressForm = () => {
   useEffect(() => {
     fetchTotal();
     setClient({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phone: user.phone,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      phone: user?.phone,
       address: {
-        streetAddress: user.address.streetAddress,
-        subDistrict: user.address.subDistrict,
-        district: user.address.district,
-        postalCode: user.address.postalCode,
+        streetAddress: user.address?.streetAddress,
+        subDistrict: user.address?.subDistrict,
+        district: user.address?.district,
+        postalCode: user.address?.postalCode,
       },
     });
   }, [user]);
@@ -109,7 +109,7 @@ export const DeliveryAddressForm = () => {
             header={"Delivery Address"}
             title={"Please fill out your address"}
           />
-          <ProgressBar path={"ordersummary"} />
+          <ProgressBar path={"payment"} />
         </section>
 
         <section className="flex flex-1/2 justify-between gap-10  ">
@@ -139,18 +139,16 @@ export const DeliveryAddressForm = () => {
               {isShow ? (
                 <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
                   <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
-                    {/* <div className="flex gap-2"> */}
-                    {/* <p>{`Name : ${user.firstName}   84325      ${user.lastName}`}</p> */}
                     <p>
-                      Name : {user.firstName}&nbsp;&nbsp;&nbsp;{user.lastName}
+                      Name : {user?.firstName}&nbsp;&nbsp;&nbsp;{user?.lastName}
                     </p>
                     {/* </div> */}
-                    <p>Tel :{user.phone} </p>
+                    <p>Tel :{user?.phone} </p>
                   </div>
                   <p className="text-xl text-primary-700">
-                    Address: {user.address.streetAddress}&nbsp;
-                    {user.address.subDistrict}&nbsp;{user.address.district}
-                    &nbsp;{user.address.postalCode}
+                    Address: {user?.address?.streetAddress}&nbsp;
+                    {user?.address?.subDistrict}&nbsp;{user?.address?.district}
+                    &nbsp;{user?.address?.postalCode}
                   </p>
 
                   <SquarePen
@@ -192,9 +190,6 @@ export const DeliveryAddressForm = () => {
           <Card className="w-full max-w-sm p-3">
             <CardHeader>
               <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
-              {/* <CardDescription>
-                Enter your email below to login to your account
-              </CardDescription> */}
               <CardAction>
                 <X onClick={() => setEdit(false)} className="cursor-pointer" />
               </CardAction>
