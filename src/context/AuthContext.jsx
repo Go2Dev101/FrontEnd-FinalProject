@@ -13,13 +13,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-<<<<<<< HEAD
-        const response = await api.get("/api/user/profile");
-        setUser(response.data.user);
-=======
         const response = await getUserProfile();
         setUser(response.user);
->>>>>>> refs/remotes/origin/main
       } catch (err) {
         console.error("Not authenticated:", err);
         setUser(null);
