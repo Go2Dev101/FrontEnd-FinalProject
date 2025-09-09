@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { PageNotFound } from "./components/common/PageNotFound";
 import { MessageProvider } from "./context/MessageContext";
 import { Home } from "./views/Home";
+import { PaymentPage } from "./views/checkout/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -45,14 +46,8 @@ const router = createBrowserRouter([
         element: <DeliveryAddressForm />,
       },
       {
-        path: "profile",
-        // element: <OrderSuccess />,
-        element: (
-          <div className="flex">
-            <AdminNavbar />
-            <AdminDashboard />
-          </div>
-        ),
+        path: "ordersuccess",
+        element: <OrderSuccess />,
       },
       {
         path: "ordersummary",
@@ -77,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "payment",
+        element: (
+          // <ProtectedRoute>
+            <PaymentPage />
+          // </ProtectedRoute>
+        ),
       },
     ],
   },
