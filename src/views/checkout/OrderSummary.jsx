@@ -12,6 +12,7 @@ export const OrderSummary = () => {
   const [load, setLoad] = useState(true);
   const [cart, setCart] = useState({ items: [] });
   const [calculate, setCalculate] = useState({ totalAmount: 0, cartItems: 0 });
+
   useEffect(() => {
     const fetchCart = async () => {
       setLoad(true);
@@ -19,6 +20,7 @@ export const OrderSummary = () => {
         const res = await getCartSummary();
         setCart(res.summary || { items: [] });
       } catch (error) {
+        
         console.error(error);
       } finally {
         setLoad(false);

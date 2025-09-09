@@ -5,10 +5,10 @@ import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../../context/CheckoutContext";
 
 export const PaymentPage = () => {
-  const navigate = useNavigate();
+  const { nextStep } = useCheckout();
   const [countDown, setcountDown] = useState({ min: 1, sec: 0 });
 
   useEffect(() => {
@@ -34,9 +34,9 @@ export const PaymentPage = () => {
 
   useEffect(() => {
     if (countDown.min === 0 && countDown.sec === 0) {
-      navigate("/ordersuccess");
+      nextStep();
     }
-  }, [countDown, navigate]);
+  }, [countDown.min, countDown.sec, nextStep]);
 
   return (
     <Boxer>
@@ -67,7 +67,7 @@ export const PaymentPage = () => {
             {countDown.sec.toString().padStart(2, "0")}
           </p>
           <Button
-            onClick={() => navigate("/ordersuccess")}
+            onClick={() => nextStep()}
             size={"md"}
             className="max-w-45 w-full mx-auto"
           >

@@ -15,6 +15,8 @@ import { PageNotFound } from "./components/common/PageNotFound";
 import { MessageProvider } from "./context/MessageContext";
 import { Home } from "./views/Home";
 import { PaymentPage } from "./views/checkout/PaymentPage";
+import { CheckoutProvider } from "./context/CheckoutContext";
+import { ProtectedCheckoutRoute } from "./components/common/ProtectedCheckoutRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,9 @@ const router = createBrowserRouter([
     element: (
       <AuthProvider>
         <MessageProvider>
-          <Layout />
+          <CheckoutProvider>
+            <Layout />
+          </CheckoutProvider>
         </MessageProvider>
       </AuthProvider>
     ),
@@ -47,7 +51,11 @@ const router = createBrowserRouter([
       },
       {
         path: "ordersuccess",
-        element: <OrderSuccess />,
+        element: (
+          <ProtectedCheckoutRoute requiredStep="ordersuccess">
+            <OrderSuccess />
+          </ProtectedCheckoutRoute>
+        ),
       },
       {
         path: "ordersummary",
@@ -60,9 +68,9 @@ const router = createBrowserRouter([
       {
         path: "delivery",
         element: (
-          <ProtectedRoute>
+          <ProtectedCheckoutRoute requiredStep="delivery">
             <DeliveryAddressForm />
-          </ProtectedRoute>
+          </ProtectedCheckoutRoute>
         ),
       },
       {
@@ -76,9 +84,9 @@ const router = createBrowserRouter([
       {
         path: "payment",
         element: (
-          // <ProtectedRoute>
+          <ProtectedCheckoutRoute requiredStep="payment">
             <PaymentPage />
-          // </ProtectedRoute>
+          </ProtectedCheckoutRoute>
         ),
       },
     ],

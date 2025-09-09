@@ -1,20 +1,36 @@
 import { useNavigate } from "react-router-dom";
+
 import { Button } from "../ui/button";
 import { createOrder } from "../../services/orderService";
 import { useMessage } from "../../context/MessageContext";
+import { useCheckout } from "../../context/CheckoutContext";
+import { useAuth } from "../../context/AuthContext";
+
 
 export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
+
+  const { logout } = useAuth();
   const { orders } = useMessage();
+  const { nextStep, prevStep } = useCheckout();
+
   const navigate = useNavigate();
+
   const handleProceedPayment = async () => {
     if (orders.length === 0) {
       return navigate("/menuset");
     }
     try {
       await createOrder();
-      navigate("/payment");
+      nextStep();
+      // navigate("/payment");
     } catch (error) {
+      if (error.response.data.message === "Authentication token missing!") {
+        return logout();
+      }
+      if (error.response.data.code === "TOKEN_EXPIRED") {
+        return logout();
+      }
       console.error(error);
     }
   };
@@ -54,7 +70,7 @@ export const OrderTotal = ({ mode, data }) => {
           </Button>
         ) : (
           <Button
-            onClick={() => navigate("/delivery")}
+            onClick={() => nextStep()}
             size={"md"}
             className="bg-primary-700 text-3xl font-bold"
           >
@@ -62,9 +78,7 @@ export const OrderTotal = ({ mode, data }) => {
           </Button>
         )}
         <Button
-          onClick={() =>
-            navigate(`${modes[mode] ? "/orderSummary" : "/menuSet"}`)
-          }
+          onClick={() => prevStep()}
           size={"md"}
           variant={"outline"}
           className="mt-7 bg-white shadow-md border-primary-700 border-3 text-primary-700 text-3xl font-bold hover:bg-gray-100/80"

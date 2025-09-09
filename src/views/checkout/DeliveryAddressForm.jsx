@@ -32,6 +32,7 @@ const pickUpPoints = [
 
 export const DeliveryAddressForm = () => {
   const { user, setUser } = useAuth();
+
   const [edit, setEdit] = useState(false);
   const [isShow, setIsShow] = useState(true);
   const [client, setClient] = useState({
@@ -46,6 +47,7 @@ export const DeliveryAddressForm = () => {
     },
   });
   const [summary, setSummary] = useState();
+
   const handleChange = (e) => {
     setClient({ ...client, [e.target.name]: e.target.value });
   };
@@ -99,7 +101,6 @@ export const DeliveryAddressForm = () => {
       },
     });
   }, [user]);
-
 
   return (
     <>
