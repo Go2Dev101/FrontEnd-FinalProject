@@ -5,22 +5,22 @@ import { createOrder } from "../../services/orderService";
 export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
   const navigate = useNavigate();
-  const handleProceedPayment = async() => {
+  const handleProceedPayment = async () => {
     try {
       await createOrder();
       //เขียนดักไม่ให้กดเล่นเยอะเกิน
       //ลบตะกร้า Set cart= 0 in []
       navigate("/payment");
-
     } catch (error) {
       console.error(error);
-    } 
+    }
   };
+
   return (
     <>
       <div className="max-w-124 w-full bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
         <h2 className="font-bold text-4xl text-primary-700 py-2">
-          Order Total
+          {data?.totalItems || 0} ITEMS
         </h2>
         <div className="gap-y-3  text-primary-800 text-2xl">
           <div className="flex justify-between ">
