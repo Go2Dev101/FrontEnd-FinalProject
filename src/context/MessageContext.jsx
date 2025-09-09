@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createCart, getCart, updateCart } from "../services/cartService";
+import { getCart, updateCart } from "../services/cartService";
 import { useAuth } from "./AuthContext";
 
 const MessageContext = createContext();
@@ -33,11 +33,7 @@ export const MessageProvider = ({ children }) => {
       try {
         await updateCart(orders);
       } catch (err) {
-        if (err.response.data.message === "Cart not found!") {
-          await createCart(orders);
-        } else {
-          console.error(err);
-        }
+        console.error(err);
       }
     };
     handleUpdateCart();
@@ -45,50 +41,37 @@ export const MessageProvider = ({ children }) => {
 
   // เพิ่ม/อัปเดตสินค้าในตะกร้า
   const handleCart = (menuId, quantity = 1, deliveryDate) => {
-    if (user) {
-      const menu = orders.find((menu) => menu.menuId === menuId);
+    if (!user) {
+      return navigate("/login");
+    }
 
-      if (typeof menu === "object") {
-        menu.quantity += quantity || 1;
-        menu.deliveryDate = deliveryDate;
-        setOrders([...orders]);
-      } else {
-        setOrders([
-          ...orders,
-          {
-            menuId: menuId,
-            quantity: quantity || 1,
-            deliveryDate: deliveryDate,
-          },
-        ]);
-      }
+    const index = orders.findIndex((menu) => menu.menuId === menuId);
+
+    if (index !== -1) {
+      const updatedOrders = [...orders];
+      updatedOrders[index] = {
+        ...updatedOrders[index],
+        quantity: updatedOrders[index].quantity + (quantity || 1),
+        deliveryDate,
+      };
+      setOrders(updatedOrders);
     } else {
-      navigate("/login");
+      setOrders([
+        ...orders,
+        {
+          menuId: menuId,
+          quantity: quantity || 1,
+          deliveryDate: deliveryDate,
+        },
+      ]);
     }
   };
 
-  // const handleCart = (menuId, quantity = 1, deliveryDate) => {
-  //   setOrders((previousOrders) => {
-  //     const index = previousOrders.findIndex(
-  //       (item) => item.menuId === menuId && item.deliveryDate === deliveryDate
-  //     );
-  //     if (index !== -1) {
-  //       const next = [...previousOrders];
-  //       next[index] = {
-  //         ...next[index],
-  //         quantity: next[index].quantity + quantity,
-  //       };
-  //       return next;
-  //     }
-  //     return [...previousOrders, { menuId, deliveryDate, quantity }];
-  //   });
-  // };
-
   // ใช้เวลาสั่งซื้อแล้วพาไปหน้า summary
   const handleOrders = (navigate, menuId, quantity, deliveryDate) => {
-    const menu = orders.find((menu) => menu.menuId === menuId);
+    const index = orders.findIndex((menu) => menu.menuId === menuId);
 
-    if (typeof menu !== "object") {
+    if (index === -1) {
       setOrders([
         ...orders,
         {

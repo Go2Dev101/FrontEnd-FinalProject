@@ -18,7 +18,7 @@ export const Signup = () => {
     lastName: "",
     email: "",
     password: "",
-    confirmPassowrd: "",
+    confirmPassoword: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,10 +30,10 @@ export const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (signup.password !== signup.confirmPassowrd) {
+    if (signup.password !== signup.confirmPassoword) {
       return setErrorMessage("Passwords do not match");
     }
-    const { confirmPassowrd, ...signupData } = signup;
+    const { confirmPassoword, ...signupData } = signup;
     setLoading(true);
     try {
       const respon = await signupUser(signupData);
@@ -47,7 +47,7 @@ export const Signup = () => {
         lastName: "",
         email: "",
         password: "",
-        confirmPassowrd: "",
+        confirmPassoword: "",
       });
       navigate("/login");
     } catch (err) {
@@ -69,7 +69,7 @@ export const Signup = () => {
           className="flex flex-col max-w-103 w-full gap-4 mx-auto"
         >
           <label className="w-full">
-            <p className="font-medium">Frist Name</p>
+            <p className="font-medium">First Name</p>
             <Input
               onChange={handleChange}
               type="text"
@@ -118,8 +118,8 @@ export const Signup = () => {
             <Input
               onChange={handleChange}
               type="password"
-              name="confirmPassowrd"
-              value={signup.confirmPassowrd}
+              name="confirmPassoword"
+              value={signup.confirmPassoword}
               placeholder="confirm your password"
               minLength="8"
               required
