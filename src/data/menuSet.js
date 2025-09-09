@@ -5,7 +5,7 @@ export const menuSet = [
     slug: "salmon-clean-set",
     information: {
       description:
-        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minut how to make the best smoothie bowl recipe with 5 ingredients in 5 minut",
+        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minute how to make the best smoothie bowl recipe with 5 ingredients in 5 minute",
       meals: {
         day: 3,
         breakfast: "light, energizing start",
@@ -15,8 +15,8 @@ export const menuSet = [
     },
     priceTHB: 259,
     images: {
-      url: "/img/manuSet3Day.png",
-      alt: "manu Set 3 Day",
+      url: "/img/menuSet3Day.png",
+      alt: "menu Set 3 Day",
     },
     category: "Shrimp",
     ingredients: "",
@@ -39,7 +39,7 @@ export const menuSet = [
     slug: "salmon-clean-set",
     information: {
       description:
-        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minut how to make the best smoothie bowl recipe with 5 ingredients in 5 minut",
+        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minute how to make the best smoothie bowl recipe with 5 ingredients in 5 minute",
       meals: {
         day: 3,
         breakfast: "light, energizing start",
@@ -49,8 +49,8 @@ export const menuSet = [
     },
     priceTHB: 259,
     images: {
-      url: "/img/manuSet3Day.png",
-      alt: "manu Set 3 Day",
+      url: "/img/menuSet3Day.png",
+      alt: "menu Set 3 Day",
     },
     category: "Shrimp",
     ingredients: "",
@@ -73,7 +73,7 @@ export const menuSet = [
     slug: "salmon-clean-set",
     information: {
       description:
-        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minut how to make the best smoothie bowl recipe with 5 ingredients in 5 minut",
+        "Learn how to make the best smoothie bowl recipe with 5 ingredients in 5 minute how to make the best smoothie bowl recipe with 5 ingredients in 5 minute",
       meals: {
         day: 3,
         breakfast: "light, energizing start",
@@ -83,8 +83,8 @@ export const menuSet = [
     },
     priceTHB: 259,
     images: {
-      url: "/img/manuSet3Day.png",
-      alt: "manu Set 3 Day",
+      url: "/img/menuSet3Day.png",
+      alt: "menu Set 3 Day",
     },
     category: "Shrimp",
     ingredients: "",
