@@ -20,7 +20,6 @@ export const OrderSummary = () => {
         const res = await getCartSummary();
         setCart(res.summary || { items: [] });
       } catch (error) {
-        
         console.error(error);
       } finally {
         setLoad(false);
