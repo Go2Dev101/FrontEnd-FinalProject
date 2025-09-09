@@ -1,14 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, Menu, CircleUser } from "lucide-react";
-import { MessageContext } from "../context/MessageContext";
-// import { useAuth } from "../context/AuthContext";
+
+import {useMessage} from "../context/MessageContext"
+import { useAuth } from "../context/AuthContext";
 
 export const Header = () => {
-  // const { user, logout } = useAuth();
+  const { user, logout } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
-  const { orders } = useContext(MessageContext);
+  const { orders } = useMessage();
 
   return (
     <div className="bg-gray-100">
@@ -57,7 +58,7 @@ export const Header = () => {
             <Link to="/ordersummary" className="hover:text-amber-400 block">
               <div className="hidden md:block relative hover:scale-105 cursor-pointer">
                 <ShoppingCart className="inline w-5 h-5" />
-                {orders.length > 0 && (
+                {user && orders.length > 0 && (
                   <p className="absolute -top-1 -right-2 text-xs bg-red-600 rounded-full px-1">
                     {orders.length}
                   </p>
@@ -66,15 +67,15 @@ export const Header = () => {
             </Link>
           </li>
           <li>
-            {/* {user ? (
+            {user ? (
               <Link onClick={logout} className="hover:text-amber-400 block">
                 <CircleUser className="inline w-5 h-5" />
               </Link>
-            ) : ( */}
+            ) : (
               <Link to="/login" className="hover:text-amber-400 block">
                 <User className="inline w-5 h-5" />
               </Link>
-            {/* )} */}
+            )}
           </li>
         </ul>
       </nav>

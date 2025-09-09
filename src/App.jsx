@@ -12,22 +12,25 @@ import { Signup } from "./views/Authentication/Signup";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
 import { PageNotFound } from "./components/common/PageNotFound";
-// import { Home } from "./views/Home";
+import { MessageProvider } from "./context/MessageContext";
+import { Home } from "./views/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <AuthProvider>
-        <Layout />
+        <MessageProvider>
+          <Layout />
+        </MessageProvider>
       </AuthProvider>
     ),
+
     errorElement: <PageNotFound />,
     children: [
       {
         path: "/",
-        // element: <Home />,
-        element: <MenuSet />,
+        element: <Home />,
       },
       {
         path: "menuset",

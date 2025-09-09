@@ -8,6 +8,6 @@ export const getAllMenus = async () => {
 
 // Get menu by slug
 export const getMenuBySlug = async (slug) => {
-  const response = await api.get(`/api/menu${slug}`);
+  const response = await api.get(`/api/menu/${slug}`);
   return response.data;
 };

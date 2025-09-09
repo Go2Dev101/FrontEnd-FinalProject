@@ -9,14 +9,14 @@ export const InfoBar = ({ onClick, menuBar }) => {
       >
         <p className="line-clamp-1">information</p>
       </div>
-      <div
+      {/* <div
         onClick={() => onClick("ingre")}
         className={`h-10 w-full flex justify-center items-center capitalize cursor-pointer text-center ${
           menuBar === "ingre" && "bg-primary-900 text-white font-medium"
         }`}
       >
         <p className="line-clamp-1">ingredients</p>
-      </div>
+      </div> */}
       <div
         onClick={() => onClick("nutri")}
         className={`h-10 w-full flex justify-center items-center capitalize cursor-pointer text-center ${
