@@ -18,7 +18,7 @@ export const MessageProvider = ({ children }) => {
     const fetchCart = async () => {
       try {
         const respon = await getCart();
-        setOrders(respon.cart || []);
+        setOrders(respon.cart);
       } catch (err) {
         console.error(err);
       }
@@ -113,7 +113,7 @@ export const MessageProvider = ({ children }) => {
 
   return (
     <MessageContext.Provider
-      value={{ orders, handleOrders, handleCart, handleDelete }}
+      value={{ orders, setOrders, handleOrders, handleCart, handleDelete }}
     >
       {children}
     </MessageContext.Provider>
