@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu } from "../../components/menu/Menu";
 import { MenuCard } from "../../components/MenuCard";
-<<<<<<< HEAD
-// import { menuSet } from "../../data/menuSet";
-=======
->>>>>>> refs/remotes/origin/main
 import { getAllMenus } from "../../services/menuService.js";
 
 export const MenuSet = () => {
