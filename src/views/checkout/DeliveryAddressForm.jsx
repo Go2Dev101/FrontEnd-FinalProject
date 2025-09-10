@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Boxer } from "../../components/Boxer";
 import { SquarePen } from "lucide-react";
 import { ProgressBar } from "../../components/cart/ProgressBar";
@@ -10,8 +9,6 @@ import {
   Card,
   CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -94,10 +91,10 @@ export const DeliveryAddressForm = () => {
       lastName: user?.lastName,
       phone: user?.phone,
       address: {
-        streetAddress: user.address?.streetAddress,
-        subDistrict: user.address?.subDistrict,
-        district: user.address?.district,
-        postalCode: user.address?.postalCode,
+        streetAddress: user?.address?.streetAddress,
+        subDistrict: user?.address?.subDistrict,
+        district: user?.address?.district,
+        postalCode: user?.address?.postalCode,
       },
     });
   }, [user]);

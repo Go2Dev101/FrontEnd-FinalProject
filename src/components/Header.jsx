@@ -11,8 +11,7 @@ export const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isUser, setIsUser] = useState(false);
-  // const [isUserLogin, setIsUserLogin] = useState(false);
-  const { orders } = useMessage();
+  const { carts } = useMessage();
 
   return (
     <div className="bg-gray-100">
@@ -83,9 +82,9 @@ export const Header = () => {
               <Link to="/ordersummary" className="hover:text-amber-400 block">
                 <div className="relative hover:scale-105 cursor-pointer">
                   <ShoppingCart className="inline w-5 h-5" />
-                  {user && orders.length > 0 && (
+                  {user && carts.length > 0 && (
                     <p className="absolute -top-1 -right-2 text-xs bg-red-600 rounded-full px-1">
-                      {orders.length}
+                      {carts.length}
                     </p>
                   )}
                 </div>

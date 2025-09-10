@@ -11,13 +11,13 @@ export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
 
   const { logout } = useAuth();
-  const { orders } = useMessage();
+  const { carts } = useMessage();
   const { nextStep, prevStep } = useCheckout();
 
   const navigate = useNavigate();
-  const isCartEmpty = !Array.isArray(orders) || orders.length === 0;
+  const isCartEmpty = !Array.isArray(carts) || carts.length === 0;
   const handleProceedPayment = async () => {
-    if (orders.length === 0) {
+    if (carts.length === 0) {
       return navigate("/menuset");
     }
     try {
