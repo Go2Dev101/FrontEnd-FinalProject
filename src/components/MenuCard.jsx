@@ -64,7 +64,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
           {modes[mode].orderNow && (
             <Button
               onClick={() => {
-                handleOrders(navigate, data._id, 1, "");
+                handleOrders(navigate, data, 1, "");
               }}
               size="md"
               className="bg-tertiary-500 hover:bg-tertiary-500/90 w-1/2"

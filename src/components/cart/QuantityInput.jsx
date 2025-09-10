@@ -1,36 +1,23 @@
 import { Minus, Plus } from "lucide-react";
 
-export const QuantityInput = ({
-  onClickMinus,
-  onClickPlus,
-  quantity,
-  mode = "menu",
-}) => {
-  const modes = {
-    menu: {
-      background: "bg-white",
-      button: "bg-secondary-200",
-    },
-    order: {
-      background: "bg-white",
-    },
+export const QuantityInput = ({ setCount, count, onChange }) => {
+  const handleChange = (newValue) => {
+    setCount(newValue);
+    onChange?.(newValue);
   };
   return (
-    <div
-      className={`p-2 rounded-full border flex w-31 justify-between items-center ${modes[mode].background}`}
-    >
+    <div className="p-2 rounded-full border flex w-31 justify-between items-center bg-white">
       <span
-        onClick={onClickMinus}
-        className={`w-8 h-8 rounded-full flex justify-center items-center cursor-pointer ${
-          modes[mode].button
-        } ${quantity === 1 && "pointer-events-none opacity-80"}`}
+        onClick={() => handleChange(count - 1)}
+        className={`w-8 h-8 rounded-full flex justify-center items-center cursor-pointer bg-secondary-200
+        ${count === 1 && "pointer-events-none opacity-80"}`}
       >
         <Minus />
       </span>
-      <p>{quantity}</p>
+      <p>{count}</p>
       <span
-        onClick={onClickPlus}
-        className={`w-8 h-8 rounded-full flex justify-center items-center cursor-pointer ${modes[mode].button}`}
+        onClick={() => handleChange(count + 1)}
+        className="w-8 h-8 rounded-full flex justify-center items-center cursor-pointer bg-secondary-200"
       >
         <Plus />
       </span>

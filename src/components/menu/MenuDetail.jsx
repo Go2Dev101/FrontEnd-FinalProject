@@ -163,22 +163,11 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
-              <QuantityInput
-                onClickMinus={() =>
-                  handleCounter(setMenuQuantity, menuQuantity, "minus")
-                }
-                onClickPlus={() =>
-                  handleCounter(setMenuQuantity, menuQuantity, "plus")
-                }
-                quantity={menuQuantity}
-                mode="menu"
-              />
+              <QuantityInput setCount={setMenuQuantity} count={menuQuantity} />
               <div className="flex gap-3 justify-center">
                 {modes[mode].addCart && (
                   <Button
-                    onClick={() =>
-                      handleCart(menu._id, menuQuantity, deliveryDate)
-                    }
+                    onClick={() => handleCart(menu, menuQuantity, deliveryDate)}
                     size="md"
                     className="w-32"
                   >
@@ -188,12 +177,7 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
                 {modes[mode].orderNow && (
                   <Button
                     onClick={() => {
-                      handleOrders(
-                        navigate,
-                        menu._id,
-                        menuQuantity,
-                        deliveryDate
-                      );
+                      handleOrders(navigate, menu, menuQuantity, deliveryDate);
                     }}
                     size="md"
                     className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"

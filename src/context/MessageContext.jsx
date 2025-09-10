@@ -11,14 +11,15 @@ const MessageContext = createContext();
 export const MessageProvider = ({ children }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
+  const [carts, setCarts] = useState([]);
 
   // Read data from cart database
   useEffect(() => {
     const fetchCart = async () => {
+      if (!user) return;
       try {
         const respon = await getCart();
-        setOrders(respon.cart);
+        setCarts(respon.cart);
       } catch (err) {
         console.error(err);
       }
@@ -28,38 +29,43 @@ export const MessageProvider = ({ children }) => {
 
   // Set data cart database when orders have change
   useEffect(() => {
-    if (!orders || orders.length < 1) return;
+    if (!user) return;
     const handleUpdateCart = async () => {
       try {
-        await updateCart(orders);
+        await updateCart(carts);
       } catch (err) {
         console.error(err);
       }
     };
     handleUpdateCart();
-  }, [orders]);
+  }, [carts]);
 
   // เพิ่ม/อัปเดตสินค้าในตะกร้า
-  const handleCart = (menuId, quantity = 1, deliveryDate) => {
+  const handleCart = (data, quantity = 1, deliveryDate) => {
     if (!user) {
       return navigate("/login");
     }
 
-    const index = orders.findIndex((menu) => menu.menuId === menuId);
+    const index = carts.findIndex((menu) => menu.menuId._id === data._id);
 
     if (index !== -1) {
-      const updatedOrders = [...orders];
+      const updatedOrders = [...carts];
       updatedOrders[index] = {
         ...updatedOrders[index],
         quantity: updatedOrders[index].quantity + (quantity || 1),
         deliveryDate,
       };
-      setOrders(updatedOrders);
+      setCarts(updatedOrders);
     } else {
-      setOrders([
-        ...orders,
+      setCarts([
+        ...carts,
         {
-          menuId: menuId,
+          menuId: {
+            _id: data._id,
+            title: data.title,
+            price: data.price,
+            imageUrl: data.imageUrl,
+          },
           quantity: quantity || 1,
           deliveryDate: deliveryDate,
         },
@@ -68,14 +74,19 @@ export const MessageProvider = ({ children }) => {
   };
 
   // ใช้เวลาสั่งซื้อแล้วพาไปหน้า summary
-  const handleOrders = (navigate, menuId, quantity, deliveryDate) => {
-    const index = orders.findIndex((menu) => menu.menuId === menuId);
+  const handleOrders = (navigate, data, quantity, deliveryDate) => {
+    const index = carts.findIndex((menu) => menu.menuId._id === data._id);
 
     if (index === -1) {
-      setOrders([
-        ...orders,
+      setCarts([
+        ...carts,
         {
-          menuId: menuId,
+          menuId: {
+            _id: data._id,
+            title: data.title,
+            price: data.price,
+            imageUrl: data.imageUrl,
+          },
           quantity: quantity || 1,
           deliveryDate: deliveryDate,
         },
@@ -84,19 +95,14 @@ export const MessageProvider = ({ children }) => {
     navigate("/ordersummary");
   };
 
-  // ลบออกจากตะกร้า
-  const handleDelete = (menuId, deliveryDate) => {
-    setOrders((previousOrders) =>
-      previousOrders.filter(
-        (item) =>
-          !(item.menuId === menuId && item.deliveryDate === deliveryDate)
-      )
-    );
-  };
-
   return (
     <MessageContext.Provider
-      value={{ orders, setOrders, handleOrders, handleCart, handleDelete }}
+      value={{
+        carts,
+        setCarts,
+        handleOrders,
+        handleCart,
+      }}
     >
       {children}
     </MessageContext.Provider>
