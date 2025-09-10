@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { createOrder } from "../../services/orderService";
+import { useMessage } from "../../context/MessageContext";
 
 export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
+  const { orders } = useMessage();
   const navigate = useNavigate();
   const handleProceedPayment = async () => {
+    if (orders.length === 0) {
+      return navigate("/menuset");
+    }
     try {
       await createOrder();
-      //เขียนดักไม่ให้กดเล่นเยอะเกิน
-      //ลบตะกร้า Set cart= 0 in []
       navigate("/payment");
     } catch (error) {
       console.error(error);
