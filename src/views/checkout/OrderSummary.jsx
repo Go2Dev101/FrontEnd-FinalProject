@@ -7,8 +7,10 @@ import { getCartSummary } from "../../services/cartService.js";
 import { useEffect, useState } from "react";
 import { calculateCart } from "../../utils/cart.js";
 import { Card } from "../../components/ui/card.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 export const OrderSummary = () => {
+  const { logout } = useAuth();
   const [load, setLoad] = useState(true);
   const [cart, setCart] = useState({ items: [] });
   const [calculate, setCalculate] = useState({ totalAmount: 0, cartItems: 0 });
@@ -20,14 +22,16 @@ export const OrderSummary = () => {
         const res = await getCartSummary();
         setCart(res.summary || { items: [] });
       } catch (error) {
-        
+        if (error.response.data.code === "TOKEN_EXPIRED") {
+          logout();
+        }
         console.error(error);
       } finally {
         setLoad(false);
       }
     };
     fetchCart();
-  }, []);
+  }, [logout]);
 
   // คำนวณยอดรวมใหม่ทุกครั้งที่ items เปลี่ยน
   useEffect(() => {
@@ -64,7 +68,7 @@ export const OrderSummary = () => {
             header={"Order Summary"}
             title={"Please review your order"}
           />
-          <ProgressBar path={"delivery"} />
+          <ProgressBar />
         </section>
 
         <section id="cart" className="flex justify-center gap-6">

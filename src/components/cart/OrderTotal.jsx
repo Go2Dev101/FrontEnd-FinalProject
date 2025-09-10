@@ -15,7 +15,7 @@ export const OrderTotal = ({ mode, data }) => {
   const { nextStep, prevStep } = useCheckout();
 
   const navigate = useNavigate();
-
+  const isCartEmpty = !Array.isArray(orders) || orders.length === 0;
   const handleProceedPayment = async () => {
     if (orders.length === 0) {
       return navigate("/menuset");
@@ -70,9 +70,12 @@ export const OrderTotal = ({ mode, data }) => {
           </Button>
         ) : (
           <Button
-            onClick={() => nextStep()}
-            size={"md"}
-            className="bg-primary-700 text-3xl font-bold"
+            onClick={() => () => nextStep()}
+            size="md"
+            disabled={isCartEmpty}
+            aria-disabled={isCartEmpty}
+            title={isCartEmpty ? "Cart is empty" : undefined}
+            className="bg-primary-700 text-3xl font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Checkout
           </Button>
