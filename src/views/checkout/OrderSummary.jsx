@@ -22,8 +22,11 @@ export const OrderSummary = () => {
         const res = await getCartSummary();
         setCart(res.summary || { items: [] });
       } catch (error) {
+        if (error.response.data.message === "Authentication token missing!") {
+          return logout();
+        }
         if (error.response.data.code === "TOKEN_EXPIRED") {
-          logout();
+          return logout();
         }
         console.error(error);
       } finally {
