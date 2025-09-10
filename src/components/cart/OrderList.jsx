@@ -9,12 +9,12 @@ export const OrderList = ({ cart, onDelete, onQtyChange }) => {
   // ✅ sync เมื่อ parent เปลี่ยน item/quantity
   useEffect(() => {
     setQty(cart.quantity ?? 1);
-  }, [cart.menuId, cart.quantity]); // <-- แก้จาก cart.items.type.menuId
+  }, [cart.menuId, cart.quantity]);
 
   // ✅ แจ้ง parent เมื่อ qty เปลี่ยน
   useEffect(() => {
     onQtyChange?.(cart.menuId, qty);
-  }, [qty, cart.menuId]);
+  }, [qty, cart.menuId, onQtyChange]);
 
   const handleDelete = () => {
     if (!window.confirm("Remove this item?")) return;
@@ -28,7 +28,7 @@ export const OrderList = ({ cart, onDelete, onQtyChange }) => {
           {/* ซ้าย: รูป + รายละเอียด */}
           <div className="flex items-center gap-6">
             <img
-              src={cart.imageUrl || "/img/Set Menu IMG.svg"} // fallback รูป
+              src={cart.imageUrl || "/img/Set Menu IMG.svg"}
               alt={cart.name}
               className="w-28 h-28 object-cover rounded-xl bg-gray-100"
             />
