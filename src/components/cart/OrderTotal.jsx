@@ -60,7 +60,7 @@ export const OrderTotal = ({ mode, data }) => {
         )}
         <Button
           onClick={() =>
-            navigate(`${modes[mode] ? "/orderSummary" : "/menuSet"}`)
+            navigate(`${modes[mode] ? "/ordersummary" : "/menuSet"}`)
           }
           size={"md"}
           variant={"outline"}
