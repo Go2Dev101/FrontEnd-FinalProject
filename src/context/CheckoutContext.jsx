@@ -7,7 +7,8 @@ const steps = ["ordersummary", "delivery", "payment", "ordersuccess"];
 
 export const CheckoutProvider = ({ children }) => {
   const [step, setStep] = useState("ordersummary");
-  const navigate = useNavigate()
+  const [orderId, setOrderId] = useState("");
+  const navigate = useNavigate();
 
   // Read step from localStorage
   useEffect(() => {
@@ -15,19 +16,20 @@ export const CheckoutProvider = ({ children }) => {
     if (save) {
       const data = JSON.parse(save);
       setStep(data.step || "ordersummary");
+      setOrderId(data.orderId || "");
     }
   }, []);
 
   // Save step to localStorage
   useEffect(() => {
-    localStorage.setItem("checkout", JSON.stringify({ step }));
-  }, [step]);
+    localStorage.setItem("checkout", JSON.stringify({ step, orderId }));
+  }, [step, orderId]);
 
   const nextStep = () => {
     const currentIndex = steps.indexOf(step);
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1]);
-      navigate(`/${steps[currentIndex + 1]}`)
+      navigate(`/${steps[currentIndex + 1]}`);
     }
   };
 
@@ -35,7 +37,7 @@ export const CheckoutProvider = ({ children }) => {
     const currentIndex = steps.indexOf(step);
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1]);
-      navigate(`/${steps[currentIndex - 1]}`)
+      navigate(`/${steps[currentIndex - 1]}`);
     }
   };
   return (
