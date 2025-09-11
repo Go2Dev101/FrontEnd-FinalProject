@@ -1,25 +1,21 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Dumbbell, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigationDetail } from "../utils/navigation";
-
 
 import { Tag } from "./menu/Tag";
 import { useMessage } from "../context/MessageContext";
 
 export const MenuCard = ({ data, mode = "menu" }) => {
   const modes = {
-    menu: { seeMore: true, addMenu: false, orderNow: true },
-    landing: { seeMore: false, addMenu: false, orderNow: true },
-    addMenu: { seeMore: true, addMenu: true, orderNow: false },
+    menu: { seeMore: true },
+    landing: { seeMore: false },
   };
   const navigate = useNavigate();
 
   const { handleOrders } = useMessage();
   return (
-    <Card className="max-w-80 w-full gap-0">
+    <Card className="max-w-80 min-w-72  w-full gap-0">
       <img
         src={data.imageUrl}
         alt={data.title}
@@ -34,20 +30,11 @@ export const MenuCard = ({ data, mode = "menu" }) => {
             {data.information.description}
           </p>
         </div>
-        <Tag proteins={data.proteins} kcal={data.nutritionFacts.kcal} />
-        {/* <div className="flex gap-2">
-          {data.proteins &&
-            data.proteins.map((protein, index) => (
-              <Badge key={index} variant="secondary">
-                {protein}
-              </Badge>
-            ))}
 
-          <Badge variant="secondary">
-            <Dumbbell />
-            {data.nutritionFacts.kcal}kcal
-          </Badge>
-        </div> */}
+        {/* Tag menu card */}
+        <Tag proteins={data.proteins} kcal={data.nutritionFacts.kcal} />
+
+        {/* price menu card */}
         <p className="text-end text-xl font-medium text-primary-900">
           {data.price} THB
         </p>
@@ -61,23 +48,15 @@ export const MenuCard = ({ data, mode = "menu" }) => {
               See more
             </Button>
           )}
-          {modes[mode].orderNow && (
-            <Button
-              onClick={() => {
-                handleOrders(navigate, data, 1, "");
-              }}
-              size="md"
-              className="bg-tertiary-500 hover:bg-tertiary-500/90 w-1/2"
-            >
-              Order now
-            </Button>
-          )}
-          {modes[mode].addMenu && (
-            <Button size="md" className="w-1/2">
-              <Plus className="size-6" />
-              Add menu
-            </Button>
-          )}
+          <Button
+            onClick={() => {
+              handleOrders(navigate, data, 1, "");
+            }}
+            size="md"
+            className="bg-tertiary-500 hover:bg-tertiary-500/90 w-1/2"
+          >
+            Order now
+          </Button>
         </div>
       </div>
     </Card>
