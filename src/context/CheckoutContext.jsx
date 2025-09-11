@@ -56,6 +56,8 @@ export const CheckoutProvider = ({ children }) => {
       value={{
         step,
         setStep,
+        orderId,
+        setOrderId,
         nextStep,
         prevStep,
       }}

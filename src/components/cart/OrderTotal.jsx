@@ -10,7 +10,7 @@ export const OrderTotal = ({ mode, data }) => {
 
   const { logout } = useAuth();
   const { carts } = useMessage();
-  const { nextStep, prevStep } = useCheckout();
+  const { nextStep, prevStep, setOrderId } = useCheckout();
   const navigate = useNavigate();
 
   const isCartEmpty = !Array.isArray(carts) || carts.length === 0;
@@ -20,9 +20,9 @@ export const OrderTotal = ({ mode, data }) => {
       return navigate("/menuset");
     }
     try {
-      await createOrder();
+      const respon = await createOrder();
+      setOrderId(respon.order._id);
       nextStep();
-      // navigate("/payment");
     } catch (error) {
       if (error.response.data.message === "Authentication token missing!") {
         return logout();
@@ -43,12 +43,24 @@ export const OrderTotal = ({ mode, data }) => {
         <div className="gap-y-3  text-primary-800 text-2xl">
           <div className="flex justify-between ">
             <p className="text-2xl">Subtotal</p>
-            <p className="text-2xl">{data?.totalAmount || 0} THB </p>
+            <p className="text-2xl">
+              {data?.totalAmount?.toLocaleString("th-TH", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) || 0}
+              THB{" "}
+            </p>
           </div>
           {modes[mode] && (
             <div className="flex justify-between">
               <p>Delivery Fee</p>
-              <p>{data?.shippingFee || 0} THB </p>
+              <p>
+                {data?.shippingFee?.toLocaleString("th-TH", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || 0}
+                THB{" "}
+              </p>
             </div>
           )}
           <div className="flex justify-between  border-black border-b-2 text-sm p-2">
@@ -57,7 +69,13 @@ export const OrderTotal = ({ mode, data }) => {
         </div>
         <div className="flex justify-between font-bold text-3xl text-primary-700 py-2 mb-16">
           <p>Total</p>
-          <p>{data?.grandTotal || 0} THB </p>
+          <p>
+            {data?.grandTotal?.toLocaleString("th-TH", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) || 0}{" "}
+            THB{" "}
+          </p>
         </div>
         {modes[mode] ? (
           <Button
