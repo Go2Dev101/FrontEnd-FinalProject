@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-
 import { Button } from "../ui/button";
 import { createOrder } from "../../services/orderService";
 import { useMessage } from "../../context/MessageContext";
 import { useCheckout } from "../../context/CheckoutContext";
 import { useAuth } from "../../context/AuthContext";
-
 
 export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
@@ -13,9 +11,10 @@ export const OrderTotal = ({ mode, data }) => {
   const { logout } = useAuth();
   const { carts } = useMessage();
   const { nextStep, prevStep } = useCheckout();
-
   const navigate = useNavigate();
+
   const isCartEmpty = !Array.isArray(carts) || carts.length === 0;
+
   const handleProceedPayment = async () => {
     if (carts.length === 0) {
       return navigate("/menuset");
@@ -70,11 +69,9 @@ export const OrderTotal = ({ mode, data }) => {
           </Button>
         ) : (
           <Button
-            onClick={() => () => nextStep()}
+            onClick={() => nextStep()}
             size="md"
             disabled={isCartEmpty}
-            aria-disabled={isCartEmpty}
-            title={isCartEmpty ? "Cart is empty" : undefined}
             className="bg-primary-700 text-3xl font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Checkout
