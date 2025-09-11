@@ -1,12 +1,3 @@
-export const handleCounter = (setCount, count, mode) => {
-  {
-    mode === "plus" && setCount(count + 1);
-  }
-  {
-    mode === "minus" && setCount(count - 1);
-  }
-};
-
 export const addDays = (date, days) => {
   const result = new Date(date);
   result.setDate(result.getDate() + days);

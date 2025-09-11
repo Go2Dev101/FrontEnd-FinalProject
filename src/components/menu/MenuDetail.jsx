@@ -9,7 +9,7 @@ import { Information } from "./Information";
 import { InfoBar } from "./InfoBar";
 import { QuantityInput } from "../cart/QuantityInput";
 import { navigation } from "../../utils/navigation";
-import { addDays, formatDate, handleCounter } from "../../utils/handle";
+import { addDays, formatDate } from "../../utils/handle";
 import { useMessage } from "../../context/MessageContext";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -67,29 +67,13 @@ export const MenuDetail = ({ path, menu, loading }) => {
             <div className="h-5 rounded bg-gray-200"></div>
             <div className="h-5 w-24 rounded bg-gray-200"></div>
             <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
-              <QuantityInput
-                onClickMinus={() =>
-                  handleCounter(setMenuQuantity, menuQuantity, "minus")
-                }
-                onClickPlus={() =>
-                  handleCounter(setMenuQuantity, menuQuantity, "plus")
-                }
-                quantity={menuQuantity}
-                mode="menu"
-              />
+              <QuantityInput setCount={setMenuQuantity} count={menuQuantity} />
               <div className="flex gap-3 justify-center">
-                <Button
-                  onClick={() => handleCart(menu._id, menuQuantity)}
-                  size="md"
-                  className="w-32"
-                >
+                <Button size="md" className="w-32">
                   Add to cart
                 </Button>
 
                 <Button
-                  onClick={() => {
-                    handleOrders(navigate, menu._id, menuQuantity);
-                  }}
                   size="md"
                   className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
                 >
