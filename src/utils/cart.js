@@ -12,16 +12,3 @@ export const calculateCart = (carts = []) => {
 
   return { totalAmount, totalItems, grandTotal: totalAmount };
 };
-
-// export const calculateCart = (cart = []) => {
-//   const totalAmount = cart.reduce(
-//     (sum, item) => sum + item.price * item.quantity,
-//     0
-//   );
-//   const cartItems = cart.length;
-//   return {
-//     totalAmount,
-//     cartItems,
-//     items: cart,
-//   };
-// };
