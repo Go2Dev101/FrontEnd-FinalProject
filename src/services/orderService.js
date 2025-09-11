@@ -11,3 +11,9 @@ export const getAllOrders = async () => {
   const response = await api.get("/api/order");
   return response.data;
 }
+
+// Get orders_Id  for receipt
+export const getIdOrders = async (orderId) => {
+  const response = await api.get(`/api/order/${orderId}`);
+  return response.data;
+}
