@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CheckoutContext = createContext();
 
@@ -9,6 +9,7 @@ export const CheckoutProvider = ({ children }) => {
   const [step, setStep] = useState("ordersummary");
   const [orderId, setOrderId] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Read step from localStorage
   useEffect(() => {
@@ -25,6 +26,14 @@ export const CheckoutProvider = ({ children }) => {
     localStorage.setItem("checkout", JSON.stringify({ step, orderId }));
   }, [step, orderId]);
 
+  useEffect(() => {
+    const path = location.pathname.replace("/", ""); // '/delivery' => 'delivery'
+    if (path === "ordersummary") {
+      setStep("ordersummary");
+      setOrderId("")
+    }
+  }, [location]);
+
   const nextStep = () => {
     const currentIndex = steps.indexOf(step);
     if (currentIndex < steps.length - 1) {
@@ -38,6 +47,8 @@ export const CheckoutProvider = ({ children }) => {
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1]);
       navigate(`/${steps[currentIndex - 1]}`);
+    } else {
+      navigate("/menuset");
     }
   };
   return (
