@@ -50,12 +50,11 @@ export const Home = () => {
             bowl.”
           </p>
         
-          <Button className="bg-[#f49b21] text-white w-fit mx-auto mt-5">Order Now</Button>
         </div>
       </section>
 
       {/* Promotion */}
-      <section className="relative px-10">
+      <section className="relative px-10 py-5">
        
         <div
           ref={promoRef}
