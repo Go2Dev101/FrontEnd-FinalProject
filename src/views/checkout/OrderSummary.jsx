@@ -3,65 +3,20 @@ import { Boxer } from "../../components/Boxer";
 import { ProgressBar } from "../../components/cart/ProgressBar";
 import { OrderList } from "../../components/cart/OrderList";
 import { OrderTotal } from "../../components/cart/OrderTotal";
-import { getCartSummary } from "../../services/cartService.js";
 import { useEffect, useState } from "react";
 import { calculateCart } from "../../utils/cart.js";
 import { Card } from "../../components/ui/card.jsx";
-import { useAuth } from "../../context/AuthContext.jsx";
+import { useMessage } from "../../context/MessageContext.jsx";
+// import { useAuth } from "../../context/AuthContext.jsx";
 
 export const OrderSummary = () => {
-  const { logout } = useAuth();
-  const [load, setLoad] = useState(true);
-  const [cart, setCart] = useState({ items: [] });
+  // const { logout } = useAuth();
   const [calculate, setCalculate] = useState({ totalAmount: 0, cartItems: 0 });
+  const { carts } = useMessage();
 
   useEffect(() => {
-    const fetchCart = async () => {
-      setLoad(true);
-      try {
-        const res = await getCartSummary();
-        setCart(res.summary || { items: [] });
-      } catch (error) {
-        if (error.response.data.message === "Authentication token missing!") {
-          return logout();
-        }
-        if (error.response.data.code === "TOKEN_EXPIRED") {
-          return logout();
-        }
-        console.error(error);
-      } finally {
-        setLoad(false);
-      }
-    };
-    fetchCart();
-  }, [logout]);
-
-  // คำนวณยอดรวมใหม่ทุกครั้งที่ items เปลี่ยน
-  useEffect(() => {
-    setCalculate(calculateCart(cart.items || []));
-  }, [cart.items]);
-
-  // ลูกแจ้งว่าเปลี่ยนจำนวน
-  const handleQtyChange = (menuId, qty) => {
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.map((item) =>
-        String(item.menuId) === String(menuId)
-          ? { ...item, quantity: qty }
-          : item
-      ),
-    }));
-  };
-
-  // ลูกแจ้งว่าลบ
-  const handleDelete = (menuId) => {
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.filter(
-        (item) => String(item.menuId) !== String(menuId)
-      ),
-    }));
-  };
+    setCalculate(calculateCart(carts || []));
+  }, [carts]);
 
   return (
     <>
@@ -76,16 +31,9 @@ export const OrderSummary = () => {
 
         <section id="cart" className="flex justify-center gap-6">
           <div className="w-1/2">
-            {load ? (
-              <p>Loading..</p>
-            ) : cart.items.length > 0 ? (
-              cart.items.map((item) => (
-                <OrderList
-                  key={item.menuId}
-                  cart={item}
-                  onQtyChange={handleQtyChange}
-                  onDelete={handleDelete}
-                />
+            {carts.length > 0 ? (
+              carts.map((item) => (
+                <OrderList key={item.menuId._id} cart={item} />
               ))
             ) : (
               <Card className="w-full p-6">
@@ -100,7 +48,6 @@ export const OrderSummary = () => {
             )}
           </div>
           <div id="orderTotal" className="w-1/3">
-            {/* {orders && orders.length > 0 ? <OrderTotal /> : null} */}
             <OrderTotal mode="orderSummary" data={calculate} />
           </div>
         </section>

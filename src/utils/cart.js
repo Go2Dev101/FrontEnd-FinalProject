@@ -1,11 +1,11 @@
-export const calculateCart = (cart = []) => {
-  const totalAmount = cart.reduce(
+export const calculateCart = (carts = []) => {
+  const totalAmount = carts.reduce(
     (sum, item) =>
-      sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+      sum + (Number(item.menuId.price) || 0) * (Number(item.quantity) || 0),
     0
   );
 
-  const totalItems = cart.reduce(
+  const totalItems = carts.reduce(
     (n, item) => n + (Number(item.quantity) || 0),
     0
   );
