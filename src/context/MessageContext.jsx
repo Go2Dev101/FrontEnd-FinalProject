@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { getCart, updateCart } from "../services/cartService";
 import { useAuth } from "./AuthContext";
+import { addDays, formatDate } from "../utils/handle";
 
 const MessageContext = createContext();
 
@@ -67,7 +68,13 @@ export const MessageProvider = ({ children }) => {
             imageUrl: data.imageUrl,
           },
           quantity: quantity || 1,
-          deliveryDate: deliveryDate,
+          deliveryDate:
+            deliveryDate?.trim() === "" || deliveryDate === undefined
+              ? `${formatDate(new Date())} - ${addDays(
+                  new Date(),
+                  data.durationDays
+                )}`
+              : deliveryDate,
         },
       ]);
     }
@@ -76,7 +83,6 @@ export const MessageProvider = ({ children }) => {
   // ใช้เวลาสั่งซื้อแล้วพาไปหน้า summary
   const handleOrders = (navigate, data, quantity, deliveryDate) => {
     const index = carts.findIndex((menu) => menu.menuId._id === data._id);
-
     if (index === -1) {
       setCarts([
         ...carts,
@@ -88,7 +94,13 @@ export const MessageProvider = ({ children }) => {
             imageUrl: data.imageUrl,
           },
           quantity: quantity || 1,
-          deliveryDate: deliveryDate,
+          deliveryDate:
+            deliveryDate?.trim() === "" || deliveryDate === undefined
+              ? `${formatDate(new Date())} - ${addDays(
+                  new Date(),
+                  data.durationDays
+                )}`
+              : deliveryDate,
         },
       ]);
     }
