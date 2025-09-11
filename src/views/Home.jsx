@@ -25,12 +25,12 @@ export const Home = () => {
     fetchMenu();
   }, []);
 
-  const scrollPromo = (dir) => {
+  const scrollPromo = (direct) => {
     const el = promoRef.current;
     if (!el) return;
     const amount = Math.max(el.clientWidth * 0.9, 320);
     el.scrollBy({
-      left: dir === "left" ? -amount : amount,
+      left: direct === "left" ? -amount : amount,
       behavior: "smooth",
     });
   };
@@ -54,7 +54,7 @@ export const Home = () => {
       </section>
 
       {/* Promotion */}
-      <section className="relative px-10 py-5">
+      <section className="relative px-6 sm:px-10 py-5">
        
         <div
           ref={promoRef}
@@ -95,12 +95,12 @@ export const Home = () => {
         </h2>
         <div className="grid md:grid-cols-4 gap-6 text-center">
           <div className="flex flex-col items-center gap-2">
-            <img src="../src/assets/location.svg" alt="" />
-            <p className="font-semibold">Select location</p>
-          </div>
-          <div className="flex flex-col items-center gap-2">
             <img src="../src/assets/choosemenu.svg" alt="" />
             <p className="font-semibold">Choose order</p>
+          </div>
+           <div className="flex flex-col items-center gap-2">
+            <img src="../src/assets/location.svg" alt="" />
+            <p className="font-semibold">Select location</p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <img src="../src/assets/payment.svg" alt="" />
