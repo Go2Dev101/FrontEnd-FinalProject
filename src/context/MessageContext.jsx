@@ -129,6 +129,7 @@ export const MessageProvider = ({ children }) => {
 
   // Clear cart
   const handleClearCart = () => {
+    if (!window.confirm("Remove all item in cart?")) return;
     setCarts([]);
   };
 
