@@ -40,7 +40,7 @@ export const Home = () => {
       {/* Hero */}
       <section className="grid md:grid-cols-2 items-center p-6">
         <img
-          src="../src/assets/spaghetti.png"
+          src="img/spaghetti.png"
           alt="Spaghetti"
           className="w-full h-full object-cover"
         />
