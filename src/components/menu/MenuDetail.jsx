@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, MoveLeft, ChevronDown } from "lucide-react";
+import { MoveLeft, ChevronDown } from "lucide-react";
 
 import { Boxer } from "../Boxer";
 import { Nutrition } from "./Nutrition";
@@ -9,7 +9,6 @@ import { Information } from "./Information";
 import { InfoBar } from "./InfoBar";
 import { QuantityInput } from "../cart/QuantityInput";
 import { navigation } from "../../utils/navigation";
-import { Ingredeints } from "./Ingredeints";
 import { addDays, formatDate, handleCounter } from "../../utils/handle";
 import { useMessage } from "../../context/MessageContext";
 import { Button } from "@/components/ui/button";
@@ -20,11 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
-  const modes = {
-    menu: { addCart: true, addMenu: false, orderNow: true },
-    addMenu: { addCart: false, addMenu: true, orderNow: false },
-  };
+export const MenuDetail = ({ path, menu, loading }) => {
   const { handleCart, handleOrders } = useMessage();
   const navigate = useNavigate();
 
@@ -60,6 +55,7 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
           )}
         </section>
         {loading ? (
+          // page loading
           <section className="animate-pulse sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
             <div className="h-5 rounded bg-gray-200"></div>
             <div className="h-5 w-24 rounded bg-gray-200"></div>
@@ -67,7 +63,6 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
               <div className="flex-1/8 h-5 rounded bg-gray-200"></div>
               <div className="flex-1/8 h-5 rounded bg-gray-200"></div>
             </div>
-
             <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
             <div className="h-5 rounded bg-gray-200"></div>
             <div className="h-5 w-24 rounded bg-gray-200"></div>
@@ -83,36 +78,28 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
                 mode="menu"
               />
               <div className="flex gap-3 justify-center">
-                {modes[mode].addCart && (
-                  <Button
-                    onClick={() => handleCart(menu._id, menuQuantity)}
-                    size="md"
-                    className="w-32"
-                  >
-                    Add to cart
-                  </Button>
-                )}
-                {modes[mode].orderNow && (
-                  <Button
-                    onClick={() => {
-                      handleOrders(navigate, menu._id, menuQuantity);
-                    }}
-                    size="md"
-                    className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
-                  >
-                    Order now
-                  </Button>
-                )}
-                {modes[mode].addMenu && (
-                  <Button size="md" className="w-32">
-                    <Plus className="size-6" />
-                    Add menu
-                  </Button>
-                )}
+                <Button
+                  onClick={() => handleCart(menu._id, menuQuantity)}
+                  size="md"
+                  className="w-32"
+                >
+                  Add to cart
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    handleOrders(navigate, menu._id, menuQuantity);
+                  }}
+                  size="md"
+                  className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
+                >
+                  Order now
+                </Button>
               </div>
             </div>
           </section>
         ) : (
+          // page load successfully
           <section className="sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
             <h1 className="text-2xl sm:text-4xl font-bold">{menu.title}</h1>
             <p className="text-xl sm:text-2xl font-medium">{menu.price} THB</p>
@@ -121,7 +108,6 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
             {menuInfoBar === "info" && (
               <Information information={menu.information} />
             )}
-            {/* {menuInfoBar === "ingre" && <Ingredeints />} */}
             {menuInfoBar === "nutri" && (
               <Nutrition nutritionFacts={menu.nutritionFacts} />
             )}
@@ -164,33 +150,25 @@ export const MenuDetail = ({ path, mode = "menu", menu, loading }) => {
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 items-center mt-3">
               <QuantityInput setCount={setMenuQuantity} count={menuQuantity} />
+
               <div className="flex gap-3 justify-center">
-                {modes[mode].addCart && (
-                  <Button
-                    onClick={() => handleCart(menu, menuQuantity, deliveryDate)}
-                    size="md"
-                    className="w-32"
-                  >
-                    Add to cart
-                  </Button>
-                )}
-                {modes[mode].orderNow && (
-                  <Button
-                    onClick={() => {
-                      handleOrders(navigate, menu, menuQuantity, deliveryDate);
-                    }}
-                    size="md"
-                    className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
-                  >
-                    Order now
-                  </Button>
-                )}
-                {modes[mode].addMenu && (
-                  <Button size="md" className="w-32">
-                    <Plus className="size-6" />
-                    Add menu
-                  </Button>
-                )}
+                <Button
+                  onClick={() => handleCart(menu, menuQuantity, deliveryDate)}
+                  size="md"
+                  className="w-32"
+                >
+                  Add to cart
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    handleOrders(navigate, menu, menuQuantity, deliveryDate);
+                  }}
+                  size="md"
+                  className="bg-tertiary-500 hover:bg-tertiary-500/90 w-32"
+                >
+                  Order now
+                </Button>
               </div>
             </div>
           </section>

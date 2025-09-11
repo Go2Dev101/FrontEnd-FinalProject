@@ -3,7 +3,7 @@ import { Dumbbell } from "lucide-react";
 
 export const Tag = ({ proteins, kcal }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 ">
       {proteins &&
         proteins.map((protein, index) => (
           <Badge key={index} variant="secondary">
