@@ -17,7 +17,7 @@ export const OrderList = ({ cart }) => {
     <div className="space-y-4">
       <Card className="w-full p-4">
         <div className="flex items-center justify-between gap-4">
-          {/* ซ้าย: รูป + รายละเอียด */}
+          {/* Img + title + delivery date*/}
           <div className="flex items-center gap-6">
             <img
               src={cart.menuId.imageUrl}
@@ -32,7 +32,7 @@ export const OrderList = ({ cart }) => {
             </div>
           </div>
 
-          {/* ขวา: ราคา + จำนวน + ปุ่มลบ */}
+          {/* price + button */}
           <div className="flex items-center gap-6">
             <div className="text-right">
               <p className="font-semibold">{cart.menuId.price} THB</p>

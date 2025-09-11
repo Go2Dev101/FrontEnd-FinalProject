@@ -95,13 +95,14 @@ export const MessageProvider = ({ children }) => {
     navigate("/ordersummary");
   };
 
-  // OrderList;
+  // OrderList(Cart)
+  // Delete from cart
   const handleDelete = (id) => {
     if (!window.confirm("Remove this item?")) return;
     const updateCarts = carts.filter((item) => item.menuId._id !== id);
     setCarts(updateCarts);
   };
-
+  // Update cart
   const handleChange = (id, quantity) => {
     const editCarts = carts.find((item) => item.menuId._id === id);
     if (editCarts) {
@@ -114,6 +115,11 @@ export const MessageProvider = ({ children }) => {
     }
   };
 
+  // Clear cart
+  const handleClearCart = () => {
+    setCarts([]);
+  };
+
   return (
     <MessageContext.Provider
       value={{
@@ -123,6 +129,7 @@ export const MessageProvider = ({ children }) => {
         handleCart,
         handleDelete,
         handleChange,
+        handleClearCart,
       }}
     >
       {children}
