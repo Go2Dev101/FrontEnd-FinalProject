@@ -14,29 +14,31 @@ export const OrderList = ({ cart }) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="flex justify-center">
       <Card className="w-full p-4">
         <div className="flex items-center justify-between gap-4">
           {/* Img + title + delivery date*/}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-6">
             <img
               src={cart.menuId.imageUrl}
               alt={cart.title}
-              className="w-28 h-28 object-cover rounded-xl bg-gray-100"
+              className="w-15 h-15 object-cover rounded-xl bg-gray-100 md:w-28 md:h-28"
             />
             <div className="text-primary-700">
-              <p className="font-semibold text-lg">{cart.menuId.title}</p>
-              <p className="text-sm text-gray-500">
+              <p className="truncate w-2/3 text-sm md:w-full md:text-xl">
+                {cart.menuId.title}
+              </p>
+              <p className="truncate w-2/3 text-xs text-gray-500 md:w-2/3">
                 Delivery Date: {cart.deliveryDate || "-"}
               </p>
             </div>
           </div>
 
           {/* price + button */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-0.5 -mx-4 md:gap-2 md: px-2">
             <div className="text-right">
               <p className="font-semibold">{cart.menuId.price} THB</p>
-              <div className="mt-2">
+              <div className="mt-2 ">
                 <QuantityInput
                   count={qty}
                   setCount={setQty}
@@ -47,7 +49,7 @@ export const OrderList = ({ cart }) => {
 
             <button
               onClick={() => handleDelete(cart.menuId._id)}
-              className="p-2 rounded-full hover:bg-red-100 cursor-pointer"
+              className="p-2 rounded-full hover:bg-red-100 cursor-pointer mt-6"
               aria-label="remove cart"
               title="Remove from cart"
             >

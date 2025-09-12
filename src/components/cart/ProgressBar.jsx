@@ -15,7 +15,7 @@ export const ProgressBar = () => {
   );
 
   return (
-    <div className="w-112">
+    <div className="w-112 hidden md:block">
       {/* แถวของวงกลม (ความสูงเท่ากับวงกลม) */}
       <div className="relative grid grid-cols-3 items-center justify-items-center px-[22px] h-11">
         {/* เส้น: วาดครั้งเดียว อยู่หลังวงกลม */}
