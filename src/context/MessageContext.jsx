@@ -26,7 +26,7 @@ export const MessageProvider = ({ children }) => {
       }
     };
     fetchCart();
-  }, []);
+  }, [user]);
 
   // Set data cart database when orders have change
   useEffect(() => {
