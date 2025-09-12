@@ -5,7 +5,7 @@ import { OrderList } from "../../components/cart/OrderList";
 import { OrderTotal } from "../../components/cart/OrderTotal";
 import { useEffect, useState } from "react";
 import { calculateCart } from "../../utils/cart.js";
-import { Card } from "../../components/ui/card.jsx";
+import { Card, CardContent } from "../../components/ui/card.jsx";
 import { useMessage } from "../../context/MessageContext.jsx";
 // import { useAuth } from "../../context/AuthContext.jsx";
 
@@ -30,27 +30,31 @@ export const OrderSummary = () => {
           <ProgressBar />
         </section>
 
-        <div>
-          <button
-            id="clear-cart"
-            className=" w-max-1/12 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition cursor-pointer"
-            onClick={handleClearCart}
-          >
-            Clear Cart 🗑️
-          </button>
-        </div>
-
-        <div className="flex gap-6">
-          <section id="cart" className="flex flex-col items-end gap-2">
-            <div className="flex gap-6">
-              <div className="w-1/2">
+        <section
+          id="main"
+          className="flex flex-col align-middle gap-4 lg:flex-row justify-center"
+        >
+          <div className="flex flex-col md:px-10">
+            {/* ClearCart Button */}
+            <div className="flex justify-end py-4">
+              <button
+                id="clear-cart"
+                className="w-fit w-max-1/12 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition cursor-pointer"
+                onClick={handleClearCart}
+              >
+                Clear Cart 🗑️
+              </button>
+            </div>
+            {/* Order Details */}
+            <div>
+              <div className="">
                 {carts.length > 0 ? (
                   carts.map((item) => (
                     <OrderList key={item.menuId._id} cart={item} />
                   ))
                 ) : (
-                  <Card className="w-full p-6">
-                    <div className="w-full rounded-xl border border-gray-200 bg-white/60 py-10 px-6 text-center">
+                  <Card className="w-full md:p-10 lg:p-24">
+                    <CardContent className="rounded-xl border border-gray-200 bg-white/60 py-10 px-6 text-center">
                       <p className="text-gray-500 text-lg">
                         Your cart is empty
                       </p>
@@ -58,16 +62,18 @@ export const OrderSummary = () => {
                         Choose your favorite menu and come back here to review
                         your cart 🍽️
                       </p>
-                    </div>
+                    </CardContent>
                   </Card>
                 )}
               </div>
-              <div id="orderTotal" className="w-1/3">
-                <OrderTotal mode="orderSummary" data={calculate} />
-              </div>
             </div>
-          </section>
-        </div>
+          </div>
+
+          {/* Order Total */}
+          <div id="orderTotal" className="w-full md:w-2/3 lg:w-1/3 mx-auto">
+            <OrderTotal mode="orderSummary" data={calculate} />
+          </div>
+        </section>
       </Boxer>
     </>
   );

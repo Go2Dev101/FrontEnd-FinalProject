@@ -63,7 +63,7 @@ export const OrderTotal = ({ mode, data }) => {
               </p>
             </div>
           )}
-          <div className="flex justify-between  border-black border-b-2 text-sm p-2">
+          <div className="flex justify-between  border-gray-300 border-b-2 text-sm p-2">
             <p>*All prices are inclusive of 7% VAT.</p>
           </div>
         </div>
