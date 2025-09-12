@@ -7,22 +7,33 @@ import { getIdOrders } from "../../services/orderService";
 
 export const OrderSuccess = () => {
 
-  const { orderId } = useCheckout()
-  const [storeReceipt, setStoreReceipt] = useState("")
+  const formatTH = (s) =>
+  new Date(s)
+    .toLocaleString("en-GB", {
+      timeZone: "Asia/Bangkok",
+      hour12: false,
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+    })
+    .replace(",", " เวลา");
+
+  const { orderId } = useCheckout();
+  const [storeReceipt, setStoreReceipt] = useState("");
+
+  
   useEffect(() => {
-    const fetch = async()=>{
-      try { const orders = await getIdOrders(orderId)
-            setStoreReceipt(orders.order) 
-            console.log(orders)
+    const fetch = async () => {
+      try {
+        const orders = await getIdOrders(orderId);
+        setStoreReceipt(orders.order);
+        console.log(orders);
       } catch (error) {
         console.error(error);
-        
       }
-    }
-    fetch()
-  }
-,[])
-  
+    };
+    fetch();
+  }, []);
+
   return (
     <Boxer className="flex flex-col items-center px-2 sm:px-4">
       <div className="p-4 bg-white w-full max-w-2xl text-center">
@@ -34,15 +45,16 @@ export const OrderSuccess = () => {
           <div className="text-sm sm:text-base text-gray-600">
             The order confirmation has been sent to{" "}
             <br className="block sm:hidden" />
-            <span className="break-words">example@gmail.com</span>
+            <span className="break-words">{storeReceipt.email}</span>
           </div>
         </section>
 
         {/* Section: Transaction Info */}
+        
         <section className="mt-5 px-4 sm:px-10 bg-white w-full text-left space-y-2 text-sm sm:text-base">
           <div>
             <div className="font-medium">Transaction Date</div>
-            <div>Friday, July 11, 2025 (GMT+7)</div>
+            <div>{formatTH(storeReceipt.createdAt)}</div>
           </div>
           <div>
             <div className="font-medium">Payment Method</div>
@@ -57,21 +69,24 @@ export const OrderSuccess = () => {
         {/* Section: Order Summary */}
         <section className="mt-5 px-4 sm:px-10 py-2 bg-white w-full">
           <div className="text-left font-semibold mb-2">TRACK ORDER</div>
-          <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
-            <div className="flex items-center gap-2">
-              {/* <img
-                src=""
-                alt="Product"
+          {
+            (storeReceipt.items?.map((receipt) => (
+              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
+                <div className="flex items-center gap-2">
+                  <img
+                src={receipt.menuId.imageUrl}
+                alt={receipt.name}
                 className="w-16 h-16 bg-gray-100 rounded"
-              /> */}
-              <div>
-                <div className="font-medium">Healthy Chicken Breast </div>
-                <div className="text-gray-600">x1</div>
+              />
+                  <div>
+                    <div className="font-medium">{receipt.name?.toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
+                    <div className="text-gray-600 text-left">X {receipt.quantity}</div>
+                  </div>
+                </div>
+                <div className="font-medium">{receipt.price?.toLocaleString("en-US", { minimumFractionDigits: 2 })} THB </div>
               </div>
-            </div>
-
-            <div className="font-medium">THB 300</div>
-          </div>
+            )))
+          }
         </section>
 
         {/* Section: Price Summary */}
@@ -79,15 +94,15 @@ export const OrderSuccess = () => {
           <div className="space-y-2 text-sm sm:text-base">
             <div className="flex justify-between">
               <div>Subtotal</div>
-              <div>THB {storeReceipt?.totalAmount}</div>
+              <div>{storeReceipt?.totalAmount?.toLocaleString("en-US", { minimumFractionDigits: 2 })}THB</div>
             </div>
             <div className="flex justify-between">
               <div>Shipment cost</div>
-              <div>THB 40</div>
+              <div>{storeReceipt?.shippingFee?.toLocaleString("en-US", { minimumFractionDigits: 2 })} THB</div>
             </div>
             <div className="flex justify-between font-bold">
               <div>Grand Total</div>
-              <div>THB 340</div>
+              <div> {storeReceipt?.grandTotal?.toLocaleString("en-US", { minimumFractionDigits: 2 })}THB</div>
             </div>
           </div>
         </section>
