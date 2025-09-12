@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Boxer } from "../../components/Boxer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useCheckout } from "../../context/CheckoutContext";
+import { getIdOrders } from "../../services/orderService";
 
 export const OrderSuccess = () => {
+
+  const { orderId } = useCheckout()
+  const [storeReceipt, setStoreReceipt] = useState("")
+  useEffect(() => {
+    const fetch = async()=>{
+      try { const orders = await getIdOrders(orderId)
+            setStoreReceipt(orders.order) 
+            console.log(orders)
+      } catch (error) {
+        console.error(error);
+        
+      }
+    }
+    fetch()
+  }
+,[])
+  
   return (
     <Boxer className="flex flex-col items-center px-2 sm:px-4">
       <div className="p-4 bg-white w-full max-w-2xl text-center">
@@ -40,11 +59,11 @@ export const OrderSuccess = () => {
           <div className="text-left font-semibold mb-2">TRACK ORDER</div>
           <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
             <div className="flex items-center gap-2">
-              <img
+              {/* <img
                 src=""
                 alt="Product"
                 className="w-16 h-16 bg-gray-100 rounded"
-              />
+              /> */}
               <div>
                 <div className="font-medium">Healthy Chicken Breast </div>
                 <div className="text-gray-600">x1</div>
@@ -60,7 +79,7 @@ export const OrderSuccess = () => {
           <div className="space-y-2 text-sm sm:text-base">
             <div className="flex justify-between">
               <div>Subtotal</div>
-              <div>THB 300</div>
+              <div>THB {storeReceipt?.totalAmount}</div>
             </div>
             <div className="flex justify-between">
               <div>Shipment cost</div>

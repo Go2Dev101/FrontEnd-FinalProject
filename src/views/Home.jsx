@@ -40,7 +40,7 @@ export const Home = () => {
       {/* Hero */}
       <section className="grid md:grid-cols-2 items-center p-6">
         <img
-          src="../src/assets/spaghetti.png"
+          src="img/spaghetti.png"
           alt="Spaghetti"
           className="w-full h-full object-cover"
         />
@@ -95,19 +95,19 @@ export const Home = () => {
         </h2>
         <div className="grid md:grid-cols-4 gap-6 text-center">
           <div className="flex flex-col items-center gap-2">
-            <img src="../src/assets/choosemenu.svg" alt="" />
+            <img src="img/choosemenu.svg" alt="" />
             <p className="font-semibold">Choose order</p>
           </div>
            <div className="flex flex-col items-center gap-2">
-            <img src="../src/assets/location.svg" alt="" />
+            <img src="img/location.svg" alt="" />
             <p className="font-semibold">Select location</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <img src="../src/assets/payment.svg" alt="" />
+            <img src="img/payment.svg" alt="" />
             <p className="font-semibold">Pay advanced</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <img src="../src/assets/enjoymeal.svg" alt="" />
+            <img src="img/enjoymeal.svg" alt="" />
             <p className="font-semibold">Enjoy meals</p>
           </div>
         </div>
@@ -117,7 +117,7 @@ export const Home = () => {
       <section className="p-10">
         <h2 className="text-center text-2xl font-bold mb-6">Delivery</h2>
         <img
-          src="../src/assets/deliveryzone.svg"
+          src="img/deliveryzone.svg"
           alt="Delivery routes"
           className="mx-auto"
         />

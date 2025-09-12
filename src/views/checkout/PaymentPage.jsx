@@ -1,16 +1,27 @@
+import { useState, useEffect } from "react";
+
 import { Boxer } from "../../components/Boxer";
 import { CheckOutHeader } from "../../components/cart/CheckOutHeader";
 import { ProgressBar } from "../../components/cart/ProgressBar";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useCheckout } from "../../context/CheckoutContext";
+import { updateOrderStatus } from "../../services/orderService";
+import { toast } from "sonner";
 
 export const PaymentPage = () => {
-  const { nextStep } = useCheckout();
+  const { nextStep, orderId } = useCheckout();
   const [countDown, setcountDown] = useState({ min: 1, sec: 0 });
 
+  const handlePaid = async () => {
+    try {
+      const respon = await updateOrderStatus(orderId,"paid");
+      toast(respon.message);
+      nextStep();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     const handleCountTime = () => {
       setcountDown((prev) => {
@@ -34,7 +45,7 @@ export const PaymentPage = () => {
 
   useEffect(() => {
     if (countDown.min === 0 && countDown.sec === 0) {
-      nextStep();
+      handlePaid()
     }
   }, [countDown.min, countDown.sec, nextStep]);
 
@@ -67,7 +78,7 @@ export const PaymentPage = () => {
             {countDown.sec.toString().padStart(2, "0")}
           </p>
           <Button
-            onClick={() => nextStep()}
+            onClick={() => handlePaid()}
             size={"md"}
             className="max-w-45 w-full mx-auto"
           >
