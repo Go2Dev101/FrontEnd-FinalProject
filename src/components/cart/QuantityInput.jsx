@@ -6,12 +6,12 @@ export const QuantityInput = ({ setCount, count, onChange }) => {
     onChange?.(newValue);
   };
   return (
-    <div className="p-2 rounded-full border flex w-31 justify-between items-center bg-white">
+    <div className="p-2 rounded-full border flex w-20 justify-between items-center bg-white md:w-31">
       <span
         onClick={() => handleChange(count - 1)}
         className={`rounded-full flex justify-center items-center cursor-pointer bg-secondary-200
         ${
-          count === 1 && "pointer-events-none opacity-80 w-6 h-6 md:w-8 md:h-8"
+          count === 1 && "pointer-events-none opacity-80 w-4 h-4 md:w-6 md:h-6"
         }`}
       >
         <Minus />
@@ -19,7 +19,7 @@ export const QuantityInput = ({ setCount, count, onChange }) => {
       <p>{count}</p>
       <span
         onClick={() => handleChange(count + 1)}
-        className="rounded-full flex justify-center items-center cursor-pointer bg-secondary-200 w-6 h-6 md:w-8 md:h-8"
+        className="rounded-full flex justify-center items-center cursor-pointer bg-secondary-200 w-4 h-4 md:w-6 md:h-6"
       >
         <Plus />
       </span>
