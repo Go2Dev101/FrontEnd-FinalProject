@@ -36,7 +36,7 @@ export const OrderTotal = ({ mode, data }) => {
 
   return (
     <>
-      <div className="max-w-124 w-full bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
+      <div className="max-w-124 w-full lg:mx-0 mx-auto bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
         <h2 className="font-bold text-4xl text-primary-700 py-2">
           {data?.totalItems || 0} ITEMS
         </h2>

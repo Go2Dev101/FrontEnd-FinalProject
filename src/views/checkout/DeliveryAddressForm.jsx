@@ -110,13 +110,13 @@ export const DeliveryAddressForm = () => {
           <ProgressBar path={"payment"} />
         </section>
 
-        <section className="flex flex-1/2 justify-between gap-10  ">
+        <section className="flex flex-1/2 max-w-full flex-col lg:flex-row justify-between gap-10">
           <div className="flex-1/2 max-w-164 ">
             <div className="flex flex-col">
-              <div className="space-x-4 flex justify-between mb-6">
+              <div className="flex justify-center gap-10 mb-6 lg:flex-row gap-y-5 ">
                 <Button
                   size={"sm"}
-                  className="max-w-75 w-full"
+                  className="max-w-50 w-full md:max-w-75 px-2 md:text-xl"
                   onClick={() => {
                     setIsShow(true);
                   }}
@@ -125,7 +125,7 @@ export const DeliveryAddressForm = () => {
                 </Button>
                 <Button
                   size={"sm"}
-                  className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
+                  className="max-w-50 w-full md:max-w-75 px-2  md:text-xl bg-white text-primary-700 hover:bg-gray-100/80"
                   onClick={() => {
                     setIsShow(false);
                   }}
@@ -135,19 +135,21 @@ export const DeliveryAddressForm = () => {
               </div>
               {/* Delivery Address Button */}
               {isShow ? (
-                <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                  <div className="flex justify-between gap-6 text-2xl font-bold text-primary-700">
+                <div className=" bg-white flex mb-3 p-8 rounded-xl">
+                  <div className="flex flex-col max-w-full justify-between gap-6 text-2xl font-bold text-primary-700">
                     <p>
                       Name : {user?.firstName}&nbsp;&nbsp;&nbsp;{user?.lastName}
                     </p>
-                    {/* </div> */}
+
                     <p>Tel :{user?.phone} </p>
+
+                    <p>
+                      Address: {user?.address?.streetAddress}&nbsp;
+                      {user?.address?.subDistrict}&nbsp;
+                      {user?.address?.district}
+                      &nbsp;{user?.address?.postalCode}
+                    </p>
                   </div>
-                  <p className="text-xl text-primary-700">
-                    Address: {user?.address?.streetAddress}&nbsp;
-                    {user?.address?.subDistrict}&nbsp;{user?.address?.district}
-                    &nbsp;{user?.address?.postalCode}
-                  </p>
 
                   <SquarePen
                     onClick={() => setEdit(true)}
@@ -166,7 +168,7 @@ export const DeliveryAddressForm = () => {
                       {pickUpPoints.map((point, index) => (
                         <Button
                           key={index}
-                          className="max-w-75 w-full bg-white text-primary-700 hover:bg-gray-100/80"
+                          className="max-w-75 w-full flex  bg-white text-primary-700 hover:bg-gray-100/80"
                         >
                           {point}
                         </Button>
@@ -179,6 +181,7 @@ export const DeliveryAddressForm = () => {
               )}
             </div>
           </div>
+
           <OrderTotal mode="delivery" data={summary} />
         </section>
       </Boxer>
