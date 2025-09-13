@@ -46,10 +46,6 @@ const router = createBrowserRouter([
         element: <MenuSetDetail />,
       },
       {
-        path: "contact",
-        element: <DeliveryAddressForm />,
-      },
-      {
         path: "ordersuccess",
         element: (
           <ProtectedCheckoutRoute requiredStep="ordersuccess">
