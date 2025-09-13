@@ -32,9 +32,9 @@ export const OrderSummary = () => {
 
         <section
           id="main"
-          className="flex flex-col items-center gap-2 max-w-screen mx-auto lg:flex-row justify-center "
+          className="flex flex-col gap-2 max-w-screen mx-auto lg:flex-row lg:justify-center"
         >
-          <div id="box1" className="flex flex-col md:px-10">
+          <div id="box1" className="flex flex-col px-10 md:px-20">
             {/* ClearCart Button */}
             <div className="flex justify-end py-4">
               <button
