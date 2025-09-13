@@ -54,7 +54,7 @@ export const OrderSuccess = () => {
         <section className="mt-5 px-4 sm:px-10 bg-white w-full text-left space-y-2 text-sm sm:text-base">
           <div>
             <div className="font-medium">Transaction Date</div>
-            <div>{formatTH(storeReceipt.createdAt)}</div>
+            <div>{storeReceipt.createdAt}</div>
           </div>
           <div>
             <div className="font-medium">Payment Method</div>
