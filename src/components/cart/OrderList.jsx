@@ -14,7 +14,7 @@ export const OrderList = ({ cart }) => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center w-max-740 h-max-200">
       <Card className="w-full p-4">
         <div className="flex items-center justify-between gap-4">
           {/* Img + title + delivery date*/}
@@ -25,10 +25,10 @@ export const OrderList = ({ cart }) => {
               className="w-15 h-15 object-cover rounded-xl bg-gray-100 md:w-28 md:h-28"
             />
             <div className="text-primary-700">
-              <p className="truncate w-2/3 text-sm md:w-full md:text-xl">
+              <p className="line-clamp-1 w-full sm:text-sm md:text-md">
                 {cart.menuId.title}
               </p>
-              <p className="truncate w-2/3 text-xs text-gray-500 md:w-2/3">
+              <p className="line-clamp-1 w-full text-xs text-gray-500">
                 Delivery Date: {cart.deliveryDate || "-"}
               </p>
             </div>
