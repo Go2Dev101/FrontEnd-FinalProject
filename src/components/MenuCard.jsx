@@ -19,7 +19,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
       <img loading="lazy"
         src={data.imageUrl}
         alt={data.title}
-        className="rounded-t-xl h-60 w-full object-cover"
+        className="rounded-t-xl h-60 w-full object-top"
       />
       <div className="flex flex-col gap-3 p-5 w-full">
         <div>
