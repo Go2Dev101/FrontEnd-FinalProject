@@ -19,7 +19,7 @@ export const OrderList = ({ cart }) => {
         <div className="flex items-center justify-between gap-4">
           {/* Img + title + delivery date*/}
           <div className="flex items-center gap-2 md:gap-6">
-            <img
+            <img loading="lazy"
               src={cart.menuId.imageUrl}
               alt={cart.title}
               className="w-15 h-15 object-cover rounded-xl bg-gray-100 md:w-28 md:h-28"

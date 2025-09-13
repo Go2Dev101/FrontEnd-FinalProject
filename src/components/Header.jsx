@@ -18,8 +18,8 @@ export const Header = () => {
       <nav className="bg-primary-900 text-white px-4 md:px-16 py-4 shadow-md flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img
-            src="/img/logo-brown-image.png"
+          <img loading="lazy"
+            src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757247/logo-brown-image_l7l9gm.png"
             alt="logo-brown-image"
             className="w-6 h-6"
           />

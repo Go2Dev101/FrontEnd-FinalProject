@@ -64,8 +64,8 @@ export const PaymentPage = () => {
             Payment Now
           </p>
           <hr />
-          <img
-            src="./img/QRCode.png"
+          <img loading="lazy"
+            src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757234/QRCode_awxz1n.webp"
             alt="QR code"
             className="h-70 object-contain "
           />

@@ -33,6 +33,14 @@ export const OrderSuccess = () => {
     fetch();
   }, []);
 
+   console.log("storeReceipt")
+   console.log(storeReceipt)
+
+   console.log("storeReceipt.createdAt")
+   console.log(storeReceipt.createdAt)
+   
+   console.log("formatTH(storeReceipt.createdAt)")
+   console.log(formatTH(storeReceipt.createdAt))
   return (
     <Boxer className="flex flex-col items-center px-2 sm:px-4">
       <div className="p-4 bg-white w-full max-w-2xl text-center">
@@ -67,7 +75,7 @@ export const OrderSuccess = () => {
           {storeReceipt.items?.map((receipt) => (
             <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <img
+                <img loading="lazy"
                   src={receipt.menuId.imageUrl}
                   alt={receipt.name}
                   className="w-16 h-16 bg-gray-100 rounded"
