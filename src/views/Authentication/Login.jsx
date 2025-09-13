@@ -76,7 +76,6 @@ export const Login = () => {
               name="password"
               value={login.password}
               placeholder="Enter your password"
-              minLength="8"
               required
             />
           </label>
