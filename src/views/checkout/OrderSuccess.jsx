@@ -33,6 +33,8 @@ export const OrderSuccess = () => {
     fetch();
   }, []);
 
+   console.log("{formatTH(storeReceipt.createdAt)}")
+   console.log(formatTH(storeReceipt.createdAt))
   return (
     <Boxer className="flex flex-col items-center px-2 sm:px-4">
       <div className="p-4 bg-white w-full max-w-2xl text-center">
