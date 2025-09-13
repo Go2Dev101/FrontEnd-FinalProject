@@ -9,7 +9,7 @@ export const Information = ({ information }) => {
             Nutritious Meals Each day includes:
           </h3>
 
-          <ul className="list-disc pl-5 max-h-101 overflow-y-scroll">
+          <ul className="list-disc pl-5 max-h-101 overflow-y-auto">
             {information.meals.map((meal,index) => (
               <li key={index}>
                 <p className="font-medium">Day: {meal.day}</p>
