@@ -110,22 +110,27 @@ export const DeliveryAddressForm = () => {
           <ProgressBar path={"payment"} />
         </section>
 
-        <section className="flex flex-1/2 max-w-full flex-col lg:flex-row justify-between gap-10">
-          <div className="flex-1/2 max-w-164 ">
-            <div className="flex flex-col">
-              <div className="flex justify-center gap-10 mb-6 lg:flex-row gap-y-5 ">
+        <section id="main">
+          <div className="flex flex-col max-w-full mx-auto lg:flex-row lg:justify-between lg:px-50 lg:gap-20">
+            <div id="leftBox" className="flex flex-col mx-auto">
+              <div
+                id="button"
+                className="flex gap-4 mb-4 w-full flex-col items-center mx-auto min-w-124 md:flex-row"
+              >
+                {/* Delivery Address Button */}
                 <Button
                   size={"sm"}
-                  className="max-w-50 w-full md:max-w-75 px-2 md:text-xl"
+                  className="w-50 md:w-75 px-2 md:text-xl"
                   onClick={() => {
                     setIsShow(true);
                   }}
                 >
                   Delivery Address
                 </Button>
+                {/* Pick up point Button */}
                 <Button
                   size={"sm"}
-                  className="max-w-50 w-full md:max-w-75 px-2  md:text-xl bg-white text-primary-700 hover:bg-gray-100/80"
+                  className="w-50 md:w-75 px-2  md:text-xl bg-white text-primary-700 hover:bg-gray-100/80"
                   onClick={() => {
                     setIsShow(false);
                   }}
@@ -133,68 +138,74 @@ export const DeliveryAddressForm = () => {
                   Pickup Point
                 </Button>
               </div>
-              {/* Delivery Address Button */}
-              {isShow ? (
-                <div className=" bg-white flex mb-3 p-8 rounded-xl">
-                  <div className="flex flex-col max-w-full justify-between gap-6 text-2xl font-bold text-primary-700">
-                    <p>
-                      Name : {user?.firstName}&nbsp;&nbsp;&nbsp;{user?.lastName}
-                    </p>
+              <div id="deliInfo" className="mx-auto w-full min-w-100">
+                {/* Delivery Address Box */}
+                {isShow ? (
+                  <div
+                    id="info"
+                    className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
+                  >
+                    <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
+                      <p>
+                        Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
+                        {user?.lastName}
+                      </p>
 
-                    <p>Tel :{user?.phone} </p>
+                      <p>Tel :{user?.phone} </p>
 
-                    <p>
-                      Address: {user?.address?.streetAddress}&nbsp;
-                      {user?.address?.subDistrict}&nbsp;
-                      {user?.address?.district}
-                      &nbsp;{user?.address?.postalCode}
-                    </p>
+                      <p>
+                        Address: {user?.address?.streetAddress}&nbsp;
+                        {user?.address?.subDistrict}&nbsp;
+                        {user?.address?.district}
+                        &nbsp;{user?.address?.postalCode}
+                      </p>
+                    </div>
+
+                    <SquarePen
+                      onClick={() => setEdit(true)}
+                      className="ml-auto hover:text-primary-900 text-primary-700"
+                    />
                   </div>
-
-                  <SquarePen
-                    onClick={() => setEdit(true)}
-                    className="ml-auto hover:text-primary-900 text-primary-700"
-                  />
-                </div>
-              ) : (
-                <></>
-              )}
-              {/* Pick up point Button */}
-              {!isShow ? (
-                <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                  <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
-                    <p>Select Pickup Point</p>
-                    <div className="flex gap-3 flex-wrap sm:">
-                      {pickUpPoints.map((point, index) => (
-                        <Button
-                          key={index}
-                          className="max-w-75 w-full flex  bg-white text-primary-700 hover:bg-gray-100/80"
-                        >
-                          {point}
-                        </Button>
-                      ))}
+                ) : (
+                  <></>
+                )}
+                {/* Pick up point Box */}
+                {!isShow ? (
+                  <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
+                    <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
+                      <p>Select Pickup Point</p>
+                      <div className="flex gap-3 flex-wrap sm:">
+                        {pickUpPoints.map((point, index) => (
+                          <Button
+                            key={index}
+                            className="max-w-75 w-full flex  bg-white text-primary-700 hover:bg-gray-100/80"
+                          >
+                            {point}
+                          </Button>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <></>
-              )}
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            <div id="rightBox" className="w-full">
+              {/* Oder Total  */}
+              <OrderTotal mode="delivery" data={summary} />
             </div>
           </div>
-
-          <OrderTotal mode="delivery" data={summary} />
         </section>
       </Boxer>
       {/* pop-up address  */}
       {edit && (
         <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
           <Card className="w-full max-w-sm p-3">
-            <CardHeader>
-              <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
-              <CardAction>
-                <X onClick={() => setEdit(false)} className="cursor-pointer" />
-              </CardAction>
-            </CardHeader>
+            <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
+            <CardAction>
+              <X onClick={() => setEdit(false)} className="cursor-pointer" />
+            </CardAction>
             <CardContent>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
