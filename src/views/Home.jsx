@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { getAllMenus } from "../services/menuService.js";
 import { useEffect, useRef, useState } from "react";
 import { MenuCard } from "../components/MenuCard.jsx";
@@ -39,8 +37,8 @@ export const Home = () => {
     <div className="bg-[#fef5e5] text-gray-900">
       {/* Hero */}
       <section className="grid md:grid-cols-2 items-center p-6">
-        <img
-          src="img/spaghetti.png"
+        <img loading="lazy"
+          src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757231/spaghetti_vdhtln.webp"
           alt="Spaghetti"
           className="w-full h-full object-cover"
         />
@@ -95,19 +93,19 @@ export const Home = () => {
         </h2>
         <div className="grid md:grid-cols-4 gap-6 text-center">
           <div className="flex flex-col items-center gap-2">
-            <img src="img/choosemenu.svg" alt="" />
+            <img loading="lazy" src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757244/enjoymeal_hjxuez.webp" alt="" />
             <p className="font-semibold">Choose order</p>
           </div>
            <div className="flex flex-col items-center gap-2">
-            <img src="img/location.svg" alt="" />
+            <img loading="lazy" src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757245/location_zcfio6.webp" alt="" />
             <p className="font-semibold">Select location</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <img src="img/payment.svg" alt="" />
+            <img loading="lazy" src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757254/payment_ulntz3.webp" alt="" />
             <p className="font-semibold">Pay advanced</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <img src="img/enjoymeal.svg" alt="" />
+            <img loading="lazy" src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757242/choosemenu_fl5bh9.webp" alt="" />
             <p className="font-semibold">Enjoy meals</p>
           </div>
         </div>
@@ -116,8 +114,8 @@ export const Home = () => {
       {/* Delivery */}
       <section className="p-10">
         <h2 className="text-center text-2xl font-bold mb-6">Delivery</h2>
-        <img
-          src="img/deliveryzone.svg"
+        <img loading="lazy"
+          src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757251/deliveryzone_u54kvw.webp"
           alt="Delivery routes"
           className="mx-auto"
         />

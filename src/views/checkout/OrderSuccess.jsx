@@ -75,7 +75,7 @@ export const OrderSuccess = () => {
           {storeReceipt.items?.map((receipt) => (
             <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <img
+                <img loading="lazy"
                   src={receipt.menuId.imageUrl}
                   alt={receipt.name}
                   className="w-16 h-16 bg-gray-100 rounded"

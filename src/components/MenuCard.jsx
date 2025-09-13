@@ -16,7 +16,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
   const { handleOrders } = useMessage();
   return (
     <Card className="max-w-80 min-w-72  w-full gap-0">
-      <img
+      <img loading="lazy"
         src={data.imageUrl}
         alt={data.title}
         className="rounded-t-xl h-60 w-full object-cover"
