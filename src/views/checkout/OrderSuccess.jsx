@@ -6,21 +6,20 @@ import { useCheckout } from "../../context/CheckoutContext";
 import { getIdOrders } from "../../services/orderService";
 
 export const OrderSuccess = () => {
-
   const formatTH = (s) =>
-  new Date(s)
-    .toLocaleString("en-GB", {
-      timeZone: "Asia/Bangkok",
-      hour12: false,
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", second: "2-digit",
-    })
-    .replace(",", " เวลา");
+    !s ? "-" : new Date(s).toLocaleString("th-TH", {
+            timeZone: "Asia/Bangkok",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })
+          .replace(/^(.*)\s(.*)$/, "วันที่ $1 เวลา $2");
 
   const { orderId } = useCheckout();
   const [storeReceipt, setStoreReceipt] = useState("");
-
-  
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -50,43 +49,46 @@ export const OrderSuccess = () => {
         </section>
 
         {/* Section: Transaction Info */}
-        
+
         <section className="mt-5 px-4 sm:px-10 bg-white w-full text-left space-y-2 text-sm sm:text-base">
           <div>
             <div className="font-medium">Transaction Date</div>
-            <div>{storeReceipt.createdAt}</div>
+            <div>{formatTH(storeReceipt.createdAt)}</div>
           </div>
           <div>
             <div className="font-medium">Payment Method</div>
             <div>Prompt pay</div>
-          </div>
-          <div>
-            <div className="font-medium">Shipping Method</div>
-            <div>Express delivery (1-3 business days)</div>
           </div>
         </section>
 
         {/* Section: Order Summary */}
         <section className="mt-5 px-4 sm:px-10 py-2 bg-white w-full">
           <div className="text-left font-semibold mb-2">TRACK ORDER</div>
-          {
-            (storeReceipt.items?.map((receipt) => (
-              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
-                <div className="flex items-center gap-2">
-                  <img
-                src={receipt.menuId.imageUrl}
-                alt={receipt.name}
-                className="w-16 h-16 bg-gray-100 rounded"
-              />
-                  <div>
-                    <div className="font-medium">{receipt.name?.toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
-                    <div className="text-gray-600 text-left">X {receipt.quantity}</div>
+          {storeReceipt.items?.map((receipt) => (
+            <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 text-sm sm:text-base">
+              <div className="flex items-center gap-2">
+                <img
+                  src={receipt.menuId.imageUrl}
+                  alt={receipt.name}
+                  className="w-16 h-16 bg-gray-100 rounded"
+                />
+                <div>
+                  <div className="font-medium">
+                    {receipt.name?.toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </div>
+                  <div className="text-gray-600 text-left">
+                    X {receipt.quantity}
                   </div>
                 </div>
-                <div className="font-medium">{receipt.price?.toLocaleString("en-US", { minimumFractionDigits: 2 })} THB </div>
               </div>
-            )))
-          }
+              <div className="font-medium">
+                {receipt.price?.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,})}{" "}THB
+              </div>
+            </div>
+          ))}
         </section>
 
         {/* Section: Price Summary */}
@@ -94,15 +96,24 @@ export const OrderSuccess = () => {
           <div className="space-y-2 text-sm sm:text-base">
             <div className="flex justify-between">
               <div>Subtotal</div>
-              <div>{storeReceipt?.totalAmount?.toLocaleString("en-US", { minimumFractionDigits: 2 })}THB</div>
+              <div>
+                {storeReceipt?.totalAmount?.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,})}{" "}THB
+              </div>
             </div>
             <div className="flex justify-between">
               <div>Shipment cost</div>
-              <div>{storeReceipt?.shippingFee?.toLocaleString("en-US", { minimumFractionDigits: 2 })} THB</div>
+              <div>
+                {storeReceipt?.shippingFee?.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,})}{" "}THB
+              </div>
             </div>
             <div className="flex justify-between font-bold">
               <div>Grand Total</div>
-              <div> {storeReceipt?.grandTotal?.toLocaleString("en-US", { minimumFractionDigits: 2 })}THB</div>
+              <div>
+                {storeReceipt?.grandTotal?.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,})}{" "}THB
+              </div>
             </div>
           </div>
         </section>
