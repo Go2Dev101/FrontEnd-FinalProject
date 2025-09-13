@@ -36,7 +36,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
 
         {/* price menu card */}
         <p className="text-end text-xl font-medium text-primary-900">
-          {data.price} THB
+          {data.price.toLocaleString("th-TH")} THB
         </p>
         <div className="flex gap-3 justify-center w-full">
           {modes[mode].seeMore && (

@@ -38,16 +38,13 @@ export const OrderTotal = ({ mode, data }) => {
     <>
       <div className="max-w-124 w-full lg:mx-0 mx-auto bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
         <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl text-primary-700 py-2">
-          {data?.totalItems || 0} ITEMS
+          {data?.totalItems || 0} Items
         </h2>
         <div className="gap-y-3  text-primary-800 text-2xl">
           <div className="flex justify-between ">
             <p className="text-lg lg:text-2xl">Subtotal</p>
             <p className="text-lg lg:text-2xl">
-              {data?.totalAmount?.toLocaleString("th-TH", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) || 0}
+              {data?.totalAmount?.toLocaleString("th-TH") || 0}
               THB{" "}
             </p>
           </div>
@@ -55,10 +52,7 @@ export const OrderTotal = ({ mode, data }) => {
             <div className="flex justify-between">
               <p className="text-lg lg:text-2xl">Delivery Fee</p>
               <p className="text-lg lg:text-2xl">
-                {data?.shippingFee?.toLocaleString("th-TH", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                }) || 0}
+                {data?.shippingFee?.toLocaleString("th-TH") || 0}
                 THB{" "}
               </p>
             </div>
@@ -70,10 +64,7 @@ export const OrderTotal = ({ mode, data }) => {
         <div className="flex justify-between font-bold text-3xl text-primary-700 py-2 mb-16">
           <p className="text-2xl md:text-3xl lg:text-4xl">Total</p>
           <p className="text-2xl md:text-3xl lg:text-4xl">
-            {data?.grandTotal?.toLocaleString("th-TH", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }) || 0}{" "}
+            {data?.grandTotal?.toLocaleString("th-TH") || 0}{" "}
             THB{" "}
           </p>
         </div>

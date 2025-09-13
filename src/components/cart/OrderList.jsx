@@ -37,7 +37,7 @@ export const OrderList = ({ cart }) => {
           {/* price + button */}
           <div className="flex items-center gap-0.5 -mx-4 md:gap-2 md: px-2">
             <div className="text-right">
-              <p className="font-semibold">{cart.menuId.price} THB</p>
+              <p className="font-semibold">{cart.menuId.price.toLocaleString("th-TH")} THB</p>
               <div className="mt-2 ">
                 <QuantityInput
                   count={qty}
