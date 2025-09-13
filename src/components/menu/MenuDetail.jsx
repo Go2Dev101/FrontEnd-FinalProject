@@ -47,7 +47,7 @@ export const MenuDetail = ({ path, menu, loading }) => {
           {!menu.imageUrl ? (
             <span className="max-w-133 w-full aspect-square rounded-4xl bg-secondary-200 animate-pulse"></span>
           ) : (
-            <img
+            <img loading="lazy"
               src={menu.imageUrl}
               alt={menu.title}
               className="max-w-133 w-full aspect-square object-cover rounded-2xl"

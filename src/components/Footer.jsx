@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className="flex flex-col ">
           
           <div className="flex gap-x-1 font-bold gap-y-3 items-center">
-            <img src="/img/logoWhite.svg" alt="logo-white-image" className="w-8" />
+            <img loading="lazy" src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757260/logo-white-image_wnesrm.png" alt="logo-white-image" className="w-8" />
             <p className="text-3xl">DailyLean</p>
           </div>
 
