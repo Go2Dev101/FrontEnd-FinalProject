@@ -19,19 +19,41 @@ import { editUserProfile } from "../../services/profileService.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { toast } from "sonner";
 
-// const pickUpPoints = [
-//   "Chula Hospital",
-//   "Triam Udom Suksa School",
-//   "The Tree Condo",
-//   "MRT Samyan",
-//   "The One Building",
-// ];
+const listPostalCode = [
+  "10320",
+  "10310",
+  "10240",
+  "10800",
+  "10900",
+  "10110",
+  "10500",
+  "10400",
+  "10300",
+  "10330",
+  "10100",
+  "10120",
+  "10510",
+  "10250",
+  "10260",
+  "10220",
+  "10210",
+  "10230",
+  "10200",
+  "10700",
+  "10600",
+  "10520",
+  "10170",
+  "10530",
+  "10140",
+  "10150",
+  "10160",
+];
 
 export const DeliveryAddressForm = () => {
   const { user, setUser } = useAuth();
 
   const [edit, setEdit] = useState(false);
-  // const [isShow, setIsShow] = useState(true);
+
   const [client, setClient] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
@@ -71,23 +93,22 @@ export const DeliveryAddressForm = () => {
       console.error("Error creating user:", error);
     }
   };
-  
 
   useEffect(() => {
     const fetchTotal = async () => {
-    if(!user?.address?.postalCode )
-      return
-    try {
-      const res = await getCartShippingFee();
-      setSummary(res.summary);
-    } catch (error) {
-      if (error.response.data.message === "Shipping zone not found!") {
-        toast(error.response.data.message);
-      } else {
-        console.error(error);
+      if (!user?.address?.postalCode) 
+        return;
+      try {
+        const res = await getCartShippingFee();
+        setSummary(res.summary);
+      } catch (error) {
+        if (error.response.data.message === "Shipping zone not found!") {
+          toast(error.response.data.message);
+        } else {
+          console.error(error);
+        }
       }
-    }
-  };
+    };
 
     fetchTotal();
     setClient({
@@ -115,7 +136,7 @@ export const DeliveryAddressForm = () => {
         </section>
 
         <section id="main">
-          <div className="flex flex-col max-w-full mx-auto md:gap-2 lg:flex-row lg:justify-between lg:px-50 lg:gap-20">
+          <div className="flex flex-col gap-4 max-w-full mx-auto lg:gap-0 lg:flex-row lg:justify-center lg:px-10">
             <div id="leftBox" className="flex flex-col mx-auto">
               <div
                 id="button"
@@ -125,42 +146,43 @@ export const DeliveryAddressForm = () => {
                 <h2 className=" rounded-3xl bg-primary-700  text-white font-bold text-center py-2 w-full md:py-3 md:text-xl lg:text-2xl  lg:px-3 lg:py-3">
                   Delivery Address
                 </h2>
-                
-                
               </div>
               <div id="deliInfo" className="mx-auto w-full min-w-100">
                 {/* Delivery Address Box */}
                 <div
-                    id="info"
-                    className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
-                  >
-                    <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
-                      <p>
-                        Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
-                        {user?.lastName}
-                      </p>
+                  id="info"
+                  className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
+                >
+                  <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
+                    <p>
+                      Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
+                      {user?.lastName}
+                    </p>
 
-                      <p>Tel :{user?.phone} </p>
+                    <p>Tel : {user?.phone} </p>
 
-                      <p>
-                        Address: {user?.address?.streetAddress}&nbsp;
-                        {user?.address?.subDistrict}&nbsp;
-                        {user?.address?.district}
-                        &nbsp;{user?.address?.postalCode}
-                      </p>
-                    </div>
-
-                    <SquarePen
-                      onClick={() => setEdit(true)}
-                      className="ml-auto hover:text-primary-900 text-primary-700"
-                    />
+                    <p>
+                      Address : {user?.address?.streetAddress}&nbsp;
+                      {user?.address?.subDistrict}&nbsp;
+                      {user?.address?.district}
+                      &nbsp;{user?.address?.postalCode}
+                    </p>
                   </div>
-                
+
+                  <SquarePen
+                    onClick={() => setEdit(true)}
+                    className="ml-auto hover:text-primary-900 text-primary-700 cursor-pointer"
+                  />
+                </div>
               </div>
             </div>
-            <div id="rightBox" className="w-full">
+            <div id="rightBox" className="w-full lg:w-1/3 mx-auto">
               {/* Oder Total  */}
-              <OrderTotal mode="delivery" data={summary} />
+              <OrderTotal
+                mode="delivery"
+                data={summary}
+                client={user?.address?.postalCode}
+              />
             </div>
           </div>
         </section>
@@ -245,6 +267,7 @@ export const DeliveryAddressForm = () => {
                     <label>
                       <p>Postal Code</p>
                       <Input
+                        list="postalCodes"
                         value={client.address.postalCode}
                         onChange={handleChangeAddress}
                         name="postalCode"
@@ -253,6 +276,11 @@ export const DeliveryAddressForm = () => {
                         maxLength={5}
                         pattern="1\d{4}"
                       />
+                      <datalist id="postalCodes">
+                        {listPostalCode.map((postal) => (
+                          <option value={postal} />
+                        ))}
+                      </datalist>
                     </label>
                   </div>
                   <div className="grid gap-2">
