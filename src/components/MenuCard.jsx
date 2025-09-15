@@ -16,7 +16,8 @@ export const MenuCard = ({ data, mode = "menu" }) => {
   const { handleOrders } = useMessage();
   return (
     <Card className="max-w-80 min-w-72  w-full gap-0">
-      <img loading="lazy"
+      <img
+        loading="lazy"
         src={data.imageUrl}
         alt={data.title}
         className="rounded-t-xl h-60 w-full object-top"
@@ -36,7 +37,7 @@ export const MenuCard = ({ data, mode = "menu" }) => {
 
         {/* price menu card */}
         <p className="text-end text-xl font-medium text-primary-900">
-          {data.price.toLocaleString("th-TH")} THB
+          {data.price?.toLocaleString("th-TH")} THB
         </p>
         <div className="flex gap-3 justify-center w-full">
           {modes[mode].seeMore && (

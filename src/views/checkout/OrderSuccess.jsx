@@ -10,7 +10,7 @@ export const OrderSuccess = () => {
     !s
       ? "-"
       : new Date(s)
-          .toLocaleString("th-TH", {
+          ?.toLocaleString("th-TH", {
             timeZone: "Asia/Bangkok",
             year: "numeric",
             month: "2-digit",
@@ -94,7 +94,7 @@ export const OrderSuccess = () => {
                 </div>
               </div>
               <div className="font-medium">
-                {receipt.price.toLocaleString("th-TH")} THB
+                {receipt.price?.toLocaleString("th-TH")} THB
               </div>
             </div>
           ))}
