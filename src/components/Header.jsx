@@ -51,11 +51,7 @@ export const Header = () => {
                   Menu
                 </Link>
               </li>
-              <li>
-                <Link to="/contact" className="hover:text-amber-400 block">
-                  Contact Us
-                </Link>
-              </li>
+            
             </ul>
           )}
 
@@ -73,11 +69,7 @@ export const Header = () => {
                 Menu
               </Link>
             </li>
-            <li className="hidden md:block">
-              <Link to="/contact" className="hover:text-amber-400 block">
-                Contact Us
-              </Link>
-            </li>
+           
             <li>
               <Link to="/ordersummary" className="hover:text-amber-400 block">
                 <div className="relative hover:scale-105 cursor-pointer">

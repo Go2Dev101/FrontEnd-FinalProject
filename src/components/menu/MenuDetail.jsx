@@ -47,7 +47,8 @@ export const MenuDetail = ({ path, menu, loading }) => {
           {!menu.imageUrl ? (
             <span className="max-w-133 w-full aspect-square rounded-4xl bg-secondary-200 animate-pulse"></span>
           ) : (
-            <img loading="lazy"
+            <img
+              loading="lazy"
               src={menu.imageUrl}
               alt={menu.title}
               className="max-w-133 w-full aspect-square object-cover rounded-2xl"
@@ -86,7 +87,9 @@ export const MenuDetail = ({ path, menu, loading }) => {
           // page load successfully
           <section className="sm:px-4 text-primary-900 flex-1/2 flex flex-col sm:justify-center gap-4">
             <h1 className="text-2xl sm:text-4xl font-bold">{menu.title}</h1>
-            <p className="text-xl sm:text-2xl font-medium">{menu.price} THB</p>
+            <p className="text-xl sm:text-2xl font-medium">
+              {menu.price?.toLocaleString("th-TH")} THB
+            </p>
             <Tag proteins={menu.proteins} kcal={menu.nutritionFacts.kcal} />
             <InfoBar onClick={handleMenuInfoBar} menuBar={menuInfoBar} />
             {menuInfoBar === "info" && (
