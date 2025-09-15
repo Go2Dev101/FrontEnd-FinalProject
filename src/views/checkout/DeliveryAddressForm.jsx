@@ -19,19 +19,19 @@ import { editUserProfile } from "../../services/profileService.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { toast } from "sonner";
 
-const pickUpPoints = [
-  "Chula Hospital",
-  "Triam Udom Suksa School",
-  "The Tree Condo",
-  "MRT Samyan",
-  "The One Building",
-];
+// const pickUpPoints = [
+//   "Chula Hospital",
+//   "Triam Udom Suksa School",
+//   "The Tree Condo",
+//   "MRT Samyan",
+//   "The One Building",
+// ];
 
 export const DeliveryAddressForm = () => {
   const { user, setUser } = useAuth();
 
   const [edit, setEdit] = useState(false);
-  const [isShow, setIsShow] = useState(true);
+  // const [isShow, setIsShow] = useState(true);
   const [client, setClient] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
@@ -71,7 +71,12 @@ export const DeliveryAddressForm = () => {
       console.error("Error creating user:", error);
     }
   };
-  const fetchTotal = async () => {
+  
+
+  useEffect(() => {
+    const fetchTotal = async () => {
+    if(!user?.address?.postalCode )
+      return
     try {
       const res = await getCartShippingFee();
       setSummary(res.summary);
@@ -84,7 +89,6 @@ export const DeliveryAddressForm = () => {
     }
   };
 
-  useEffect(() => {
     fetchTotal();
     setClient({
       firstName: user?.firstName,
@@ -111,37 +115,22 @@ export const DeliveryAddressForm = () => {
         </section>
 
         <section id="main">
-          <div className="flex flex-col max-w-full mx-auto lg:flex-row lg:justify-between lg:px-50 lg:gap-20">
+          <div className="flex flex-col max-w-full mx-auto md:gap-2 lg:flex-row lg:justify-between lg:px-50 lg:gap-20">
             <div id="leftBox" className="flex flex-col mx-auto">
               <div
                 id="button"
                 className="flex gap-4 mb-4 w-full flex-col items-center mx-auto min-w-124 md:flex-row"
               >
                 {/* Delivery Address Button */}
-                <Button
-                  size={"sm"}
-                  className="w-50 md:w-75 px-2 md:text-xl"
-                  onClick={() => {
-                    setIsShow(true);
-                  }}
-                >
+                <h2 className=" rounded-3xl bg-primary-700  text-white font-bold text-center py-2 w-full md:py-3 md:text-xl lg:text-2xl  lg:px-3 lg:py-3">
                   Delivery Address
-                </Button>
-                {/* Pick up point Button */}
-                <Button
-                  size={"sm"}
-                  className="w-50 md:w-75 px-2  md:text-xl bg-white text-primary-700 hover:bg-gray-100/80"
-                  onClick={() => {
-                    setIsShow(false);
-                  }}
-                >
-                  Pickup Point
-                </Button>
+                </h2>
+                
+                
               </div>
               <div id="deliInfo" className="mx-auto w-full min-w-100">
                 {/* Delivery Address Box */}
-                {isShow ? (
-                  <div
+                <div
                     id="info"
                     className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
                   >
@@ -166,29 +155,7 @@ export const DeliveryAddressForm = () => {
                       className="ml-auto hover:text-primary-900 text-primary-700"
                     />
                   </div>
-                ) : (
-                  <></>
-                )}
-                {/* Pick up point Box */}
-                {!isShow ? (
-                  <div className=" bg-white flex flex-col mb-3 p-8 rounded-xl">
-                    <div className="flex flex-col justify-between gap-6 text-2xl font-bold text-primary-700">
-                      <p>Select Pickup Point</p>
-                      <div className="flex gap-3 flex-wrap sm:">
-                        {pickUpPoints.map((point, index) => (
-                          <Button
-                            key={index}
-                            className="max-w-75 w-full flex  bg-white text-primary-700 hover:bg-gray-100/80"
-                          >
-                            {point}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
+                
               </div>
             </div>
             <div id="rightBox" className="w-full">
@@ -202,10 +169,12 @@ export const DeliveryAddressForm = () => {
       {edit && (
         <div className="h-screen w-full fixed top-0 left-0 bg-black/80 z-60 overscroll-none flex justify-center items-center">
           <Card className="w-full max-w-sm p-3">
-            <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
-            <CardAction>
-              <X onClick={() => setEdit(false)} className="cursor-pointer" />
-            </CardAction>
+            <CardHeader className="flex justify-between">
+              <CardTitle className="text-2xl">Edit Delivery Address</CardTitle>
+              <CardAction>
+                <X onClick={() => setEdit(false)} className="cursor-pointer" />
+              </CardAction>
+            </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
