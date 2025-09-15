@@ -1,6 +1,6 @@
 export const addDays = (date, days) => {
   const result = new Date(date);
-  result.setDate(result.getDate() + days);
+  result.setDate(result.getDate() + (days-1));
   return formatDate(result);
 };
 
