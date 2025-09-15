@@ -32,9 +32,12 @@ export const OrderSummary = () => {
 
         <section
           id="main"
-          className="flex flex-col gap-2 max-w-screen mx-auto lg:flex-row lg:justify-center"
+          className="flex flex-col gap-4 max-w-full mx-auto lg:gap-0 lg:flex-row lg:justify-center lg:px-10"
         >
-          <div id="box1" className="flex flex-col px-10 md:px-20">
+          <div
+            id="box1"
+            className="flex flex-col mx-auto max-w-full px-6 md:px-30 lg:px-0"
+          >
             {/* ClearCart Button */}
             <div className="flex justify-end py-4">
               <button
@@ -46,8 +49,8 @@ export const OrderSummary = () => {
               </button>
             </div>
             {/* Order Details */}
-            <div>
-              <div>
+            <div className="max-w-ful">
+              <div className="flex flex-col justify-items-start">
                 {carts.length > 0 ? (
                   carts.map((item) => (
                     <OrderList key={item.menuId._id} cart={item} />
@@ -70,7 +73,7 @@ export const OrderSummary = () => {
           </div>
 
           {/* Order Total */}
-          <div id="box2" className="w-full md:w-2/3 lg:w-1/3 mx-auto">
+          <div id="box2" className="w-full lg:w-1/3 mx-auto">
             <OrderTotal mode="orderSummary" data={calculate} />
           </div>
         </section>

@@ -38,7 +38,7 @@ export const OrderTotal = ({ mode, data }) => {
     <>
       <div className="max-w-124 w-full lg:mx-0 mx-auto bg-white flex flex-col mb-3 p-6 rounded-xl shadow-md">
         <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl text-primary-700 py-2">
-          {data?.totalItems || 0} ITEMS
+          {data?.totalItems || 0} Items
         </h2>
         <div className="gap-y-3  text-primary-800 text-2xl">
           <div className="flex justify-between ">
