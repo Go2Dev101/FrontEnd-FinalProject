@@ -96,7 +96,8 @@ export const DeliveryAddressForm = () => {
 
   useEffect(() => {
     const fetchTotal = async () => {
-      if (!user?.address?.postalCode) return;
+      if (!user?.address?.postalCode) 
+        return;
       try {
         const res = await getCartShippingFee();
         setSummary(res.summary);
