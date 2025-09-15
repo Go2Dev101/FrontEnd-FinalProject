@@ -7,6 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 
 export const OrderTotal = ({ mode, data }) => {
   const modes = { orderSummary: false, delivery: true };
+  const {handleDeleteCart} = useMessage();
 
   const { logout } = useAuth();
   const { carts } = useMessage();
@@ -22,6 +23,7 @@ export const OrderTotal = ({ mode, data }) => {
     try {
       const respon = await createOrder();
       setOrderId(respon.order._id);
+      handleDeleteCart();
       nextStep();
     } catch (error) {
       if (error.response.data.message === "Authentication token missing!") {
