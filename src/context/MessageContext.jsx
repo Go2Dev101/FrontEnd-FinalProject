@@ -48,7 +48,7 @@ export const MessageProvider = ({ children }) => {
     const index = carts.findIndex((menu) => menu.menuId._id === data._id);
 
     if (index !== -1) {
-      const updateCarts = [...carts];
+      updateCarts = [...carts];
       updateCarts[index] = {
         ...updateCarts[index],
         quantity: updateCarts[index].quantity + (quantity || 1),
