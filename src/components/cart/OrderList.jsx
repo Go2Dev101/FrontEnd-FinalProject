@@ -37,7 +37,9 @@ export const OrderList = ({ cart }) => {
                 {cart.deliveryDate || "-"}
               </p>
               <div className="text-tertiary-500">
-                <p className="font-semibold">{cart.menuId.price} THB</p>
+                <p className="font-semibold">
+                  {cart.menuId.price?.toLocaleString("th-TH") || 0} THB
+                </p>
               </div>
             </div>
           </div>
