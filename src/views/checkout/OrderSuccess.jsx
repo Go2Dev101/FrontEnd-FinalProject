@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Boxer } from "../../components/Boxer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -28,7 +28,6 @@ export const OrderSuccess = () => {
       try {
         const orders = await getIdOrders(orderId);
         setStoreReceipt(orders.order);
-        // console.log(orders);
       } catch (error) {
         console.error(error);
       }
@@ -36,14 +35,6 @@ export const OrderSuccess = () => {
     fetch();
   }, []);
 
-  //  console.log("storeReceipt")
-  //  console.log(storeReceipt)
-
-  //  console.log("storeReceipt.createdAt")
-  //  console.log(storeReceipt.createdAt)
-
-  //  console.log("formatTH(storeReceipt.createdAt)")
-  //  console.log(formatTH(storeReceipt.createdAt))
   return (
     <Boxer className="flex flex-col items-center px-2 sm:px-4">
       <div className="p-4 bg-white w-full max-w-2xl text-center">
