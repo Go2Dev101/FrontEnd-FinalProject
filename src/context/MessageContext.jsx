@@ -132,6 +132,10 @@ export const MessageProvider = ({ children }) => {
     if (!window.confirm("Remove all item in cart?")) return;
     setCarts([]);
   };
+  // Delete cart after press Proceed Payment button
+  const handleDeleteCart = () => {
+    setCarts([]);
+  };
 
   return (
     <MessageContext.Provider
@@ -143,6 +147,7 @@ export const MessageProvider = ({ children }) => {
         handleDelete,
         handleChange,
         handleClearCart,
+        handleDeleteCart,
       }}
     >
       {children}
