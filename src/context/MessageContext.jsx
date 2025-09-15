@@ -157,6 +157,10 @@ export const MessageProvider = ({ children }) => {
       console.error(err);
     }
   };
+  // Delete cart after press Proceed Payment button
+  const handleDeleteCart = () => {
+    setCarts([]);
+  };
 
   return (
     <MessageContext.Provider
@@ -168,6 +172,7 @@ export const MessageProvider = ({ children }) => {
         handleDelete,
         handleChange,
         handleClearCart,
+        handleDeleteCart,
       }}
     >
       {children}
