@@ -71,23 +71,21 @@ export const DeliveryAddressForm = () => {
       console.error("Error creating user:", error);
     }
   };
-  
 
   useEffect(() => {
     const fetchTotal = async () => {
-    if(!user?.address?.postalCode )
-      return
-    try {
-      const res = await getCartShippingFee();
-      setSummary(res.summary);
-    } catch (error) {
-      if (error.response.data.message === "Shipping zone not found!") {
-        toast(error.response.data.message);
-      } else {
-        console.error(error);
+      if (!user?.address?.postalCode) return;
+      try {
+        const res = await getCartShippingFee();
+        setSummary(res.summary);
+      } catch (error) {
+        if (error.response.data.message === "Shipping zone not found!") {
+          toast(error.response.data.message);
+        } else {
+          console.error(error);
+        }
       }
-    }
-  };
+    };
 
     fetchTotal();
     setClient({
@@ -125,37 +123,34 @@ export const DeliveryAddressForm = () => {
                 <h2 className=" rounded-3xl bg-primary-700  text-white font-bold text-center py-2 w-full md:py-3 md:text-xl lg:text-2xl  lg:px-3 lg:py-3">
                   Delivery Address
                 </h2>
-                
-                
               </div>
               <div id="deliInfo" className="mx-auto w-full min-w-100">
                 {/* Delivery Address Box */}
                 <div
-                    id="info"
-                    className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
-                  >
-                    <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
-                      <p>
-                        Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
-                        {user?.lastName}
-                      </p>
+                  id="info"
+                  className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
+                >
+                  <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
+                    <p>
+                      Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
+                      {user?.lastName}
+                    </p>
 
-                      <p>Tel :{user?.phone} </p>
+                    <p>Tel :{user?.phone} </p>
 
-                      <p>
-                        Address: {user?.address?.streetAddress}&nbsp;
-                        {user?.address?.subDistrict}&nbsp;
-                        {user?.address?.district}
-                        &nbsp;{user?.address?.postalCode}
-                      </p>
-                    </div>
-
-                    <SquarePen
-                      onClick={() => setEdit(true)}
-                      className="ml-auto hover:text-primary-900 text-primary-700"
-                    />
+                    <p>
+                      Address: {user?.address?.streetAddress}&nbsp;
+                      {user?.address?.subDistrict}&nbsp;
+                      {user?.address?.district}
+                      &nbsp;{user?.address?.postalCode}
+                    </p>
                   </div>
-                
+
+                  <SquarePen
+                    onClick={() => setEdit(true)}
+                    className="ml-auto hover:text-primary-900 text-primary-700"
+                  />
+                </div>
               </div>
             </div>
             <div id="rightBox" className="w-full">
