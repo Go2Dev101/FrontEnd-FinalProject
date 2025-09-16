@@ -98,7 +98,7 @@ export const Signup = () => {
               value={signup.email}
               placeholder="example@example.com"
               required
-              pattern="^\S+@\S+.\S+$"
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
             />
           </label>
           <label className="w-full">
