@@ -62,6 +62,7 @@ export const DeliveryAddressForm = () => {
       streetAddress: user?.address?.streetAddress || "",
       subDistrict: user?.address?.subDistrict || "",
       district: user?.address?.district || "",
+      province: "Bangkok",
       postalCode: user?.address?.postalCode || "",
     },
   });
@@ -96,8 +97,7 @@ export const DeliveryAddressForm = () => {
 
   useEffect(() => {
     const fetchTotal = async () => {
-      if (!user?.address?.postalCode) 
-        return;
+      if (!user?.address?.postalCode) return;
       try {
         const res = await getCartShippingFee();
         setSummary(res.summary);
@@ -119,6 +119,7 @@ export const DeliveryAddressForm = () => {
         streetAddress: user?.address?.streetAddress,
         subDistrict: user?.address?.subDistrict,
         district: user?.address?.district,
+        province: "Bangkok",
         postalCode: user?.address?.postalCode,
       },
     });
@@ -142,7 +143,7 @@ export const DeliveryAddressForm = () => {
                 id="button"
                 className="flex gap-4 mb-4 w-full flex-col items-center mx-auto min-w-124 md:flex-row"
               >
-                {/* Delivery Address Button */}
+                {/* Delivery Address tab */}
                 <h2 className=" rounded-3xl bg-primary-700  text-white font-bold text-center py-2 w-full md:py-3 md:text-xl lg:text-2xl  lg:px-3 lg:py-3">
                   Delivery Address
                 </h2>
@@ -153,26 +154,31 @@ export const DeliveryAddressForm = () => {
                   id="info"
                   className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
                 >
-                  <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
-                    <p>
+                  <div className="flex-1 min-w-0 flex flex-col w-full gap-6 text-md lg:text-2xl font-bold text-primary-700">
+                    <p className="break-words whitespace-normal">
                       Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
                       {user?.lastName}
                     </p>
 
-                    <p>Tel : {user?.phone} </p>
+                    <p className="break-words whitespace-normal">
+                      Tel : {user?.phone}{" "}
+                    </p>
 
-                    <p>
+                    <p className="break-words whitespace-normal">
                       Address : {user?.address?.streetAddress}&nbsp;
                       {user?.address?.subDistrict}&nbsp;
-                      {user?.address?.district}
-                      &nbsp;{user?.address?.postalCode}
+                      {user?.address?.district}&nbsp;
+                      {user?.address?.province}&nbsp;
+                      {user?.address?.postalCode}
                     </p>
                   </div>
-
-                  <SquarePen
-                    onClick={() => setEdit(true)}
-                    className="ml-auto hover:text-primary-900 text-primary-700 cursor-pointer"
-                  />
+                  <div className="w-6 flex-shrink-0">
+                    {/* Edit Address Button */}
+                    <SquarePen
+                      onClick={() => setEdit(true)}
+                      className="ml-auto hover:text-primary-900 text-primary-700 cursor-pointer"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -199,8 +205,8 @@ export const DeliveryAddressForm = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
+                <div className="flex flex-col gap-1">
+                  <div className="grid gap-1">
                     <label>
                       <p>First Name</p>
                       <Input
@@ -213,7 +219,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Last Name</p>
                       <Input
@@ -226,7 +232,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Street Address</p>
                       <Input
@@ -239,7 +245,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Subdistrict</p>
                       <Input
@@ -251,7 +257,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>District</p>
                       <Input
@@ -263,7 +269,18 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
+                    <label>
+                      <p>Province</p>
+                      <Input
+                        type="text"
+                        onChange={handleChangeAddress}
+                        value="Bangkok"
+                        readOnly
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-1">
                     <label>
                       <p>Postal Code</p>
                       <Input
@@ -283,7 +300,8 @@ export const DeliveryAddressForm = () => {
                       </datalist>
                     </label>
                   </div>
-                  <div className="grid gap-2">
+
+                  <div className="grid gap-1 mb-2">
                     <label>
                       <p>Phone Number</p>
                       <Input
@@ -299,7 +317,7 @@ export const DeliveryAddressForm = () => {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="w-full ">
+                <Button type="submit" className="w-full mb-2 ">
                   Save
                 </Button>
               </form>
