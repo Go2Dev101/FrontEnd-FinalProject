@@ -18,7 +18,8 @@ export const Header = () => {
       <nav className="bg-primary-900 text-white px-4 md:px-16 py-4 shadow-md flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img loading="lazy"
+          <img
+            loading="lazy"
             src="https://res.cloudinary.com/dk4pdticm/image/upload/v1757757247/logo-brown-image_l7l9gm.png"
             alt="logo-brown-image"
             className="w-6 h-6"
@@ -51,7 +52,6 @@ export const Header = () => {
                   Menu
                 </Link>
               </li>
-            
             </ul>
           )}
 
@@ -69,7 +69,7 @@ export const Header = () => {
                 Menu
               </Link>
             </li>
-           
+
             <li>
               <Link to="/ordersummary" className="hover:text-amber-400 block">
                 <div className="relative hover:scale-105 cursor-pointer">
@@ -84,7 +84,7 @@ export const Header = () => {
             </li>
             <li>
               {user ? (
-                <Link onClick={logout} className="hover:text-amber-400 block">
+                <button onClick={logout} className="hover:text-amber-400 block">
                   <Avatar>
                     <AvatarImage
                       src="https://github.com/shadcn.png"
@@ -92,7 +92,7 @@ export const Header = () => {
                     />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
-                </Link>
+                </button>
               ) : (
                 <div className="relative ">
                   <User

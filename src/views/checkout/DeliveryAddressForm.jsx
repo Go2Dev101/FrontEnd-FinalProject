@@ -19,19 +19,41 @@ import { editUserProfile } from "../../services/profileService.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { toast } from "sonner";
 
-// const pickUpPoints = [
-//   "Chula Hospital",
-//   "Triam Udom Suksa School",
-//   "The Tree Condo",
-//   "MRT Samyan",
-//   "The One Building",
-// ];
+const listPostalCode = [
+  "10320",
+  "10310",
+  "10240",
+  "10800",
+  "10900",
+  "10110",
+  "10500",
+  "10400",
+  "10300",
+  "10330",
+  "10100",
+  "10120",
+  "10510",
+  "10250",
+  "10260",
+  "10220",
+  "10210",
+  "10230",
+  "10200",
+  "10700",
+  "10600",
+  "10520",
+  "10170",
+  "10530",
+  "10140",
+  "10150",
+  "10160",
+];
 
 export const DeliveryAddressForm = () => {
   const { user, setUser } = useAuth();
 
   const [edit, setEdit] = useState(false);
-  // const [isShow, setIsShow] = useState(true);
+
   const [client, setClient] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
@@ -40,6 +62,7 @@ export const DeliveryAddressForm = () => {
       streetAddress: user?.address?.streetAddress || "",
       subDistrict: user?.address?.subDistrict || "",
       district: user?.address?.district || "",
+      province: "Bangkok",
       postalCode: user?.address?.postalCode || "",
     },
   });
@@ -96,6 +119,7 @@ export const DeliveryAddressForm = () => {
         streetAddress: user?.address?.streetAddress,
         subDistrict: user?.address?.subDistrict,
         district: user?.address?.district,
+        province: "Bangkok",
         postalCode: user?.address?.postalCode,
       },
     });
@@ -113,13 +137,13 @@ export const DeliveryAddressForm = () => {
         </section>
 
         <section id="main">
-          <div className="flex flex-col max-w-full mx-auto md:gap-2 lg:flex-row lg:justify-between lg:px-50 lg:gap-20">
+          <div className="flex flex-col gap-4 max-w-full mx-auto lg:gap-0 lg:flex-row lg:justify-center lg:px-10">
             <div id="leftBox" className="flex flex-col mx-auto">
               <div
                 id="button"
                 className="flex gap-4 mb-4 w-full flex-col items-center mx-auto min-w-124 md:flex-row"
               >
-                {/* Delivery Address Button */}
+                {/* Delivery Address tab */}
                 <h2 className=" rounded-3xl bg-primary-700  text-white font-bold text-center py-2 w-full md:py-3 md:text-xl lg:text-2xl  lg:px-3 lg:py-3">
                   Delivery Address
                 </h2>
@@ -130,32 +154,41 @@ export const DeliveryAddressForm = () => {
                   id="info"
                   className="bg-white flex mb-3 p-8 rounded-xl w-full mx-auto md:max-w-124 lg:max-w-154"
                 >
-                  <div className="flex flex-col max-w-full gap-6  text-md lg:text-2xl font-bold text-primary-700">
-                    <p>
+                  <div className="flex-1 min-w-0 flex flex-col w-full gap-6 text-md lg:text-2xl font-bold text-primary-700">
+                    <p className="break-words whitespace-normal">
                       Name : {user?.firstName}&nbsp;&nbsp;&nbsp;
                       {user?.lastName}
                     </p>
 
-                    <p>Tel :{user?.phone} </p>
+                    <p className="break-words whitespace-normal">
+                      Tel : {user?.phone}{" "}
+                    </p>
 
-                    <p>
-                      Address: {user?.address?.streetAddress}&nbsp;
+                    <p className="break-words whitespace-normal">
+                      Address : {user?.address?.streetAddress}&nbsp;
                       {user?.address?.subDistrict}&nbsp;
-                      {user?.address?.district}
-                      &nbsp;{user?.address?.postalCode}
+                      {user?.address?.district}&nbsp;
+                      {user?.address?.province}&nbsp;
+                      {user?.address?.postalCode}
                     </p>
                   </div>
-
-                  <SquarePen
-                    onClick={() => setEdit(true)}
-                    className="ml-auto hover:text-primary-900 text-primary-700"
-                  />
+                  <div className="w-6 flex-shrink-0">
+                    {/* Edit Address Button */}
+                    <SquarePen
+                      onClick={() => setEdit(true)}
+                      className="ml-auto hover:text-primary-900 text-primary-700 cursor-pointer"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div id="rightBox" className="w-full">
+            <div id="rightBox" className="w-full lg:w-1/3 mx-auto">
               {/* Oder Total  */}
-              <OrderTotal mode="delivery" data={summary} />
+              <OrderTotal
+                mode="delivery"
+                data={summary}
+                client={user?.address?.postalCode}
+              />
             </div>
           </div>
         </section>
@@ -172,8 +205,8 @@ export const DeliveryAddressForm = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
+                <div className="flex flex-col gap-1">
+                  <div className="grid gap-1">
                     <label>
                       <p>First Name</p>
                       <Input
@@ -186,7 +219,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Last Name</p>
                       <Input
@@ -199,7 +232,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Street Address</p>
                       <Input
@@ -212,7 +245,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>Subdistrict</p>
                       <Input
@@ -224,7 +257,7 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
                     <label>
                       <p>District</p>
                       <Input
@@ -236,10 +269,22 @@ export const DeliveryAddressForm = () => {
                       />
                     </label>
                   </div>
-                  <div className="grid gap-2">
+                  <div className="grid gap-1">
+                    <label>
+                      <p>Province</p>
+                      <Input
+                        type="text"
+                        onChange={handleChangeAddress}
+                        value="Bangkok"
+                        readOnly
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-1">
                     <label>
                       <p>Postal Code</p>
                       <Input
+                        list="postalCodes"
                         value={client.address.postalCode}
                         onChange={handleChangeAddress}
                         name="postalCode"
@@ -248,9 +293,15 @@ export const DeliveryAddressForm = () => {
                         maxLength={5}
                         pattern="1\d{4}"
                       />
+                      <datalist id="postalCodes">
+                        {listPostalCode.map((postal) => (
+                          <option value={postal} />
+                        ))}
+                      </datalist>
                     </label>
                   </div>
-                  <div className="grid gap-2">
+
+                  <div className="grid gap-1 mb-2">
                     <label>
                       <p>Phone Number</p>
                       <Input
@@ -266,7 +317,7 @@ export const DeliveryAddressForm = () => {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="w-full ">
+                <Button type="submit" className="w-full mb-2 ">
                   Save
                 </Button>
               </form>

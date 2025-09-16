@@ -5,7 +5,7 @@ import { useMessage } from "../../context/MessageContext";
 import { useCheckout } from "../../context/CheckoutContext";
 import { useAuth } from "../../context/AuthContext";
 
-export const OrderTotal = ({ mode, data }) => {
+export const OrderTotal = ({ mode, data,client="" }) => {
   const modes = { orderSummary: false, delivery: true };
   const {handleDeleteCart} = useMessage();
 
@@ -74,7 +74,8 @@ export const OrderTotal = ({ mode, data }) => {
           <Button
             onClick={handleProceedPayment}
             size={"md"}
-            className="bg-primary-700 text-md md:text-xl lg:text-2xl font-bold"
+            disabled={client.trim() === ""}
+            className="bg-primary-700 text-md md:text-xl lg:text-2xl font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Proceed Payment
           </Button>
