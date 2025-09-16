@@ -35,7 +35,9 @@ export const Signup = () => {
     setLoading(true);
     try {
       const respon = await signupUser(signupData);
-      toast(respon.message);
+      toast(respon.message, {
+            duration: 1000,
+          });
 
       setErrorMessage("");
 

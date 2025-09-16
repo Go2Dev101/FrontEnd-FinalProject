@@ -103,7 +103,9 @@ export const DeliveryAddressForm = () => {
         setSummary(res.summary);
       } catch (error) {
         if (error.response.data.message === "Shipping zone not found!") {
-          toast(error.response.data.message);
+          toast(error.response.data.message, {
+            duration: 1000,
+          });
         } else {
           console.error(error);
         }
