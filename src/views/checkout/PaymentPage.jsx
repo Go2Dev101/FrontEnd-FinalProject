@@ -16,7 +16,9 @@ export const PaymentPage = () => {
   const handlePaid = async () => {
     try {
       const respon = await updateOrderStatus(orderId,"paid");
-      toast(respon.message);
+      toast(respon.message, {
+            duration: 1000,
+          });
       nextStep();
     } catch (error) {
       console.error(error);

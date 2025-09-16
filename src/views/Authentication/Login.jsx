@@ -29,7 +29,9 @@ export const Login = () => {
     setLoading(true);
     try {
       const respon = await loginUser(login);
-      toast(respon.message);
+      toast(respon.message, {
+            duration: 1000,
+          });
       setUser(respon.user);
 
       setErrorMessage("");

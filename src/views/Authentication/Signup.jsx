@@ -6,11 +6,9 @@ import { Input } from "../../components/ui/input";
 import { Info } from "lucide-react";
 import { signupUser } from "../../services/authService.js";
 import { toast } from "sonner";
-import { useAuth } from "../../context/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const [signup, setSignup] = useState({
@@ -37,7 +35,9 @@ export const Signup = () => {
     setLoading(true);
     try {
       const respon = await signupUser(signupData);
-      toast(respon.message);
+      toast(respon.message, {
+            duration: 1000,
+          });
 
       setErrorMessage("");
 
