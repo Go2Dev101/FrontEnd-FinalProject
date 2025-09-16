@@ -53,14 +53,14 @@ export const OrderList = ({ cart }) => {
                 onChange={onChange}
               />
             </div>
-            <div className="flex">
+            <div className="flex mx-3">
               <button
                 onClick={() => handleDelete(cart.menuId._id)}
                 className="p-2 rounded-full hover:bg-red-100 cursor-pointer"
                 aria-label="remove cart"
                 title="Remove from cart"
               >
-                <Trash2 className="mx-2" />
+                <Trash2 />
               </button>
             </div>
           </div>
