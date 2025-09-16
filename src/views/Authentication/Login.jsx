@@ -66,6 +66,7 @@ export const Login = () => {
               value={login.email}
               placeholder="example@example.com"
               required
+              pattern="^\S+@\S+.\S+$"
             />
           </label>
           <label className="w-full">

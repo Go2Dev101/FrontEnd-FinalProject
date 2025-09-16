@@ -41,6 +41,8 @@ export const MessageProvider = ({ children }) => {
   // เพิ่ม/อัปเดตสินค้าในตะกร้า
   const handleCart = async (data, quantity = 1, deliveryDate) => {
     let updateCarts;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     if (!user) {
       return navigate("/login");
     }
@@ -67,8 +69,8 @@ export const MessageProvider = ({ children }) => {
           quantity: quantity || 1,
           deliveryDate:
             deliveryDate?.trim() === "" || deliveryDate === undefined
-              ? `${formatDate(new Date())} - ${addDays(
-                  new Date(),
+              ? `${formatDate(tomorrow)} - ${addDays(
+                  tomorrow,
                   data.durationDays
                 )}`
               : deliveryDate,
@@ -86,6 +88,8 @@ export const MessageProvider = ({ children }) => {
   // ใช้เวลาสั่งซื้อแล้วพาไปหน้า summary
   const handleOrders = async (navigate, data, quantity, deliveryDate) => {
     let updateCarts;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     const index = carts.findIndex((menu) => menu.menuId._id === data._id);
     if (index === -1) {
       updateCarts = [
@@ -100,8 +104,8 @@ export const MessageProvider = ({ children }) => {
           quantity: quantity || 1,
           deliveryDate:
             deliveryDate?.trim() === "" || deliveryDate === undefined
-              ? `${formatDate(new Date())} - ${addDays(
-                  new Date(),
+              ? `${formatDate(tomorrow)} - ${addDays(
+                  tomorrow,
                   data.durationDays
                 )}`
               : deliveryDate,

@@ -33,6 +33,9 @@ export const MenuDetail = ({ path, menu, loading }) => {
     setMenuInfoBar(e);
   };
 
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+
   return (
     <Boxer className="flex justify-center">
       <div className="flex flex-col lg:flex-row max-w-300 w-full">
@@ -116,7 +119,7 @@ export const MenuDetail = ({ path, menu, loading }) => {
                     className="w-auto overflow-hidden p-0"
                     align="start"
                   >
-                    <Calendar
+                    {/* <Calendar
                       mode="single"
                       selected={date}
                       captionLayout="dropdown"
@@ -126,6 +129,25 @@ export const MenuDetail = ({ path, menu, loading }) => {
                         setDeliveryDate(
                           `${formatDate(date)} - ${addDays(
                             date,
+                            menu.durationDays
+                          )}`
+                        );
+                      }}
+                    /> */}
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      captionLayout="dropdown"
+                      // ห้ามเลือกก่อนวันพรุ่งนี้ และห้ามเลื่อนไปเดือนก่อนหน้า
+                      disabled={{ before: minDate }}
+                      fromDate={minDate}
+                      onSelect={(selected) => {
+                        if (!selected) return;
+                        setDate(selected);
+                        setIsDeliveryDate(false);
+                        setDeliveryDate(
+                          `${formatDate(selected)} - ${addDays(
+                            selected,
                             menu.durationDays
                           )}`
                         );
