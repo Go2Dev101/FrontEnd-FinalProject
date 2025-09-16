@@ -14,7 +14,7 @@ export const Header = () => {
   const { carts } = useMessage();
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 sticky top-0 z-12">
       <nav className="bg-primary-900 text-white px-4 md:px-16 py-4 shadow-md flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
