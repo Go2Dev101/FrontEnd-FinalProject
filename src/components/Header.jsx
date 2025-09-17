@@ -102,15 +102,13 @@ export const Header = () => {
                     <div class="absolute -right-6 sm:-right-8 bg-white p-2 border-1 border-secondary-200 rounded-sm w-25">
                       <ul class="text-secondary-500 flex flex-col gap-1 z-30">
                         <li
-                          onClick={() => setIsUser(!isUser)}
-                          // 
+                          onClick={() => setisLogin(!isLogin)}
                           className="block w-full text-left whitespace-nowrap hover:bg-secondary-100"
-
                         >
                           <Link to="/orderhistory">Order History</Link>
                         </li>
                         <li
-                          onClick={() => setIsUser(!isUser)}
+                          onClick={() => setisLogin(!isLogin)}
                           class="hover:bg-secondary-200 p-1 rounded-sm cursor-pointer"
                         >
                           <button
