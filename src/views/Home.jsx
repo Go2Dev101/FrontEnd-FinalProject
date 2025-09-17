@@ -1,4 +1,4 @@
-import { getAllMenus } from "../services/menuService.js";
+import { getMenuPopular } from "../services/menuService.js";
 import { useEffect, useRef, useState } from "react";
 import { MenuCard } from "../components/MenuCard.jsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -12,7 +12,7 @@ export const Home = () => {
     const fetchMenu = async () => {
       setLoading(true);
       try {
-        const respon = await getAllMenus();
+        const respon = await getMenuPopular();
         setMenus(respon.menus || []);
       } catch (error) {
         console.error(error);
@@ -56,7 +56,7 @@ export const Home = () => {
        
         <div
           ref={promoRef}
-          className="flex flex-row overflow-auto gap-10 scroll-smooth no-scrollbar"
+          className="flex flex-row overflow-y-auto gap-10 scroll-smooth no-scrollbar"
         >
           {loading ? (
             <p>Loading....</p>
@@ -72,7 +72,7 @@ export const Home = () => {
         <button
           aria-label="scroll left"
           onClick={() => scrollPromo("left")}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow rounded-full flex items-center justify-center w-12 h-12"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow rounded-full flex items-center justify-center w-12 h-12 cursor-pointer"
         >
           <ChevronLeft size={100} />
         </button>
@@ -80,7 +80,7 @@ export const Home = () => {
         <button
           aria-label="scroll right"
           onClick={() => scrollPromo("right")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow rounded-full flex items-center justify-center w-12 h-12"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow rounded-full flex items-center justify-center w-12 h-12 cursor-pointer"
         >
           <ChevronRight size={100} />
         </button>

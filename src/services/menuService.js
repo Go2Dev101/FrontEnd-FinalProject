@@ -11,3 +11,9 @@ export const getMenuBySlug = async (slug) => {
   const response = await api.get(`/api/menu/${slug}`);
   return response.data;
 };
+
+// Get menu popular
+export const getMenuPopular = async () => {
+  const response = await api.get("/api/menu/popular");
+  return response.data;
+};
