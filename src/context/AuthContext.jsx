@@ -34,10 +34,16 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/api/user/logout");
       setUser(null);
-      navigate("/login"); // Redirect to login page after logout
+
+      // Clear localStorage token on logout
+      localStorage.removeItem("authToken");
+      navigate("/login");
     } catch (err) {
       if (err.response.data.message === "Authentication token missing!") {
         setUser(null);
+
+        // Clear localStorage token on logout
+        localStorage.removeItem("authToken");
         navigate("/login");
       }
       console.error("Logout failed:", err);
