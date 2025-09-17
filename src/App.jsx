@@ -17,6 +17,7 @@ import { Home } from "./views/Home";
 import { PaymentPage } from "./views/checkout/PaymentPage";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { ProtectedCheckoutRoute } from "./components/common/ProtectedCheckoutRoute";
+import { OrderHistory } from "./views/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
           <ProtectedCheckoutRoute requiredStep="payment">
             <PaymentPage />
           </ProtectedCheckoutRoute>
+        ),
+      },
+      {
+        path: "orderhistory",
+        element: (
+          <ProtectedRoute>
+            <OrderHistory />
+          </ProtectedRoute>
         ),
       },
     ],
