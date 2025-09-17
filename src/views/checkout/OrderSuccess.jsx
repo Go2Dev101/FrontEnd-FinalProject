@@ -43,11 +43,6 @@ export const OrderSuccess = () => {
           <div className="text-base sm:text-lg font-semibold">
             Thanks for your order!
           </div>
-          <div className="text-sm sm:text-base text-gray-600">
-            The order confirmation has been sent to{" "}
-            <br className="block sm:hidden" />
-            <span className="break-words">{storeReceipt.email}</span>
-          </div>
         </section>
 
         {/* Section: Transaction Info */}
