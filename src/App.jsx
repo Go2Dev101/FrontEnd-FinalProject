@@ -18,6 +18,7 @@ import { PaymentPage } from "./views/checkout/PaymentPage";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { ProtectedCheckoutRoute } from "./components/common/ProtectedCheckoutRoute";
 import { OrderHistory } from "./views/OrderHistory";
+import { ScrollToTop } from "./components/common/ScrollToTop";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       <AuthProvider>
         <MessageProvider>
           <CheckoutProvider>
+            <ScrollToTop />
             <Layout />
           </CheckoutProvider>
         </MessageProvider>
