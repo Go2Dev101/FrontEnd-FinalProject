@@ -53,7 +53,7 @@ export const Home = () => {
 
       {/* Promotion */}
       <section className="relative px-6 sm:px-10 py-5">
-       
+       <p className="text-center text-2xl font-bold mb-6">Popular Menu</p>
         <div
           ref={promoRef}
           className="flex flex-row overflow-y-auto gap-10 scroll-smooth no-scrollbar"
