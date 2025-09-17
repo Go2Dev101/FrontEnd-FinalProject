@@ -11,6 +11,7 @@ export const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isUser, setIsUser] = useState(false);
+  const [isLogin, setisLogin] = useState(false);
   const { carts } = useMessage();
 
   return (
@@ -84,15 +85,45 @@ export const Header = () => {
             </li>
             <li>
               {user ? (
-                <button onClick={logout} className="hover:text-amber-400 block">
-                  <Avatar>
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </button>
+                <div className="relative ">
+                  <button
+                    onClick={() => setisLogin(!isLogin)}
+                    className="hover:text-amber-400 block"
+                  >
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </button>
+                  {isLogin && (
+                    <div class="absolute -right-6 sm:-right-8 bg-white p-2 border-1 border-secondary-200 rounded-sm w-25">
+                      <ul class="text-secondary-500 flex flex-col gap-1 z-30">
+                        <li
+                          onClick={() => setIsUser(!isUser)}
+                          // 
+                          className="block w-full text-left whitespace-nowrap hover:bg-secondary-100"
+
+                        >
+                          <Link to="/orderhistory">Order History</Link>
+                        </li>
+                        <li
+                          onClick={() => setIsUser(!isUser)}
+                          class="hover:bg-secondary-200 p-1 rounded-sm cursor-pointer"
+                        >
+                          <button
+                            onClick={logout}
+                            className="hover:text-amber-400 block"
+                          >
+                            log out
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div className="relative ">
                   <User
