@@ -53,7 +53,7 @@ export const OrderSummary = () => {
               <div className="flex flex-col justify-items-start">
                 {carts.length > 0 ? (
                   carts.map((item) => (
-                    <OrderList key={item.menuId._id} cart={item} />
+                    <OrderList key={item._id} cart={item} />
                   ))
                 ) : (
                   <Card className="w-full md:p-10 lg:p-24">
