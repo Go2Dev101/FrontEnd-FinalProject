@@ -6,7 +6,7 @@ import { getAllOrdersByUser } from "../services/orderService.js";
 import { formatDate } from "../utils/handle";
 
 export const OrderHistory = () => {
-  const { user } = useAuth;
+  const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,6 +16,7 @@ export const OrderHistory = () => {
       setLoading(true);
       try {
         const respon = await getAllOrdersByUser();
+
         setOrders(respon.ordersHistory);
       } catch (err) {
         console.error(err);
@@ -56,7 +57,7 @@ export const OrderHistory = () => {
                       {formatDate(new Date(order.createdAt))}
                     </td>
                     <td className="w-1/4 px-1 py-2 sm:p-2">
-                      {order.totalItem} items
+                      {order.totalItems} items
                     </td>
                     <td className="w-1/4 px-1 py-2 sm:p-2">
                       {order.grandTotal?.toLocaleString("th-TH") || 0} THB
