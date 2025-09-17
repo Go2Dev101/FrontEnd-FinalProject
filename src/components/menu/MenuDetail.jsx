@@ -119,21 +119,6 @@ export const MenuDetail = ({ path, menu, loading }) => {
                     className="w-auto overflow-hidden p-0"
                     align="start"
                   >
-                    {/* <Calendar
-                      mode="single"
-                      selected={date}
-                      captionLayout="dropdown"
-                      onSelect={(date) => {
-                        setDate(date);
-                        setIsDeliveryDate(false);
-                        setDeliveryDate(
-                          `${formatDate(date)} - ${addDays(
-                            date,
-                            menu.durationDays
-                          )}`
-                        );
-                      }}
-                    /> */}
                     <Calendar
                       mode="single"
                       selected={date}
