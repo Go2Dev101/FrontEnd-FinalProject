@@ -162,8 +162,14 @@ export const MessageProvider = ({ children }) => {
     }
   };
   // Delete cart after press Proceed Payment button
-  const handleDeleteCart = () => {
-    setCarts([]);
+  const handleDeleteCart = async () => {
+    const updateCarts = [];
+    setCarts(updateCarts);
+    try {
+      await handleUpdateCart(updateCarts);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
